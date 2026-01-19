@@ -1,0 +1,142 @@
+% mcgillnotes.sty
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mcgillnotes}[2025/12/17 Custom Package for McGill Math Notes]
+
+%----------------------------------------------------------------------------------------
+%   PACKAGES
+%----------------------------------------------------------------------------------------
+\RequirePackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{mathpazo} % Palatino font
+\RequirePackage[english]{babel}
+\RequirePackage{amsmath,amsfonts,amsthm,amssymb}
+\RequirePackage{pgf,tikz}
+\usetikzlibrary{positioning,matrix,arrows}
+\RequirePackage{float}
+\RequirePackage{tikz-cd}
+\RequirePackage{caption}
+\RequirePackage{stmaryrd}
+\RequirePackage{multicol}
+\RequirePackage{booktabs}
+\RequirePackage{verbatim}
+\RequirePackage{lipsum} 
+\RequirePackage{enumerate}
+\RequirePackage{pythonhighlight}
+\RequirePackage{sectsty} 
+\RequirePackage{fancyhdr}
+\RequirePackage{geometry}
+
+%----------------------------------------------------------------------------------------
+%   LAYOUT & FORMATTING
+%----------------------------------------------------------------------------------------
+% Section Font
+\allsectionsfont{\normalfont \bfseries} 
+
+% Headers and Footers
+\pagestyle{fancyplain}
+\fancyhead{} 
+\fancyfoot[L]{} 
+\fancyfoot[C]{} 
+\fancyfoot[R]{\thepage} 
+\renewcommand{\headrulewidth}{0pt} 
+\renewcommand{\footrulewidth}{0pt} 
+\setlength{\headheight}{13.6pt} 
+
+% Geometry overrides (Be careful, Tufte is sensitive to this)
+\geometry{
+    left=13mm, 
+    textwidth=130mm, 
+    marginparsep=8mm, 
+    marginparwidth=55mm
+}
+
+\allowdisplaybreaks
+
+%----------------------------------------------------------------------------------------
+%   THEOREM ENVIRONMENTS
+%----------------------------------------------------------------------------------------
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{facts}[thm]{Facts}
+\newtheorem{fact}[thm]{Fact}
+\newtheorem{clm}[thm]{Claim}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{quest}[thm]{Question}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{defns}[thm]{Definitions}
+\newtheorem{con}[thm]{Construction}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{exmps}[thm]{Examples}
+\newtheorem{notn}[thm]{Notation}
+\newtheorem{notns}[thm]{Notations}
+\newtheorem{addm}[thm]{Addendum}
+\newtheorem{exer}[thm]{Exercise}
+
+\theoremstyle{remark}
+\newtheorem{rem}[thm]{Remark}
+\newtheorem{rems}[thm]{Remarks}
+\newtheorem{warn}[thm]{Warning}
+\newtheorem{sch}[thm]{Scholium}
+
+%----------------------------------------------------------------------------------------
+%   MATH SHORTCUTS & MACROS
+%----------------------------------------------------------------------------------------
+\newcommand{\bra}[1]{\left(#1\right)}
+\newcommand{\sbra}[1]{\left[#1\right]}
+\newcommand{\Mod}[1]{\ (\text{mod}\ #1)}
+\newcommand{\op}[1]{#1^{\text{op}}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\mZ}{\mathcal{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\bA}{\mathbb{A}}
+\newcommand{\bH}{\mathbb{H}}
+\newcommand{\one}{\mathbb{1}}
+\newcommand{\mC}{\mathcal{C}}
+\newcommand{\mO}{\mathcal{O}}
+\newcommand{\mR}{\mathcal{R}}
+\newcommand{\mS}{\mathcal{S}}
+\newcommand{\lp}{{\mathfrak{p}}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\inp}[2]{\left\langle #1, #2 \right\rangle}
+
+\DeclareMathOperator{\dist}{dist}
+\DeclareMathOperator{\aut}{Aut}
+\DeclareMathOperator{\gal}{Gal}
+\DeclareMathOperator{\var}{\textbf{var}}
+\DeclareMathOperator{\orb}{Orb}
+\DeclareMathOperator{\ff}{Frac}
+\DeclareMathOperator{\stab}{Stab}
+\DeclareMathOperator{\inn}{Inn}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\spn}{Span}
+\DeclareMathOperator{\out}{Out}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\disc}{disc}
+\DeclareMathOperator{\tors}{Tors}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Nat}{Nat}
+\DeclareMathOperator{\spec}{Spec}
+\DeclareMathOperator{\ann}{Ann}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\conjc}{Conj}
+\DeclareMathOperator{\Br}{Br}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Nm}{Nm}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\interior}{Int}
+\DeclareMathOperator{\exterior}{Ext}
