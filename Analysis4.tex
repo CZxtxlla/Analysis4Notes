@@ -189,7 +189,7 @@ $\cap_{k = 1}^{\infty} E_k \neq \emptyset$
 
 \begin{lem}
     Any cauchy sequence \footnote{$\forall \epsilon > 0, \exists N > 0 $ s.t. $\forall m, n > N$,
-    \newline $\| x_n - x_m \| < \epsilon$   }
+    $\| x_n - x_m \| < \epsilon$   }
      converges iff it has a convergent subsequence.
 \end{lem}
 \begin{comment}
@@ -315,13 +315,13 @@ $(C(X), \| . \|_{\infty}) $.
     not uniform on n.  
 
 \end{exmp}
-
+\begin{comment}
 \begin{marginfigure}
     \centering
     \input{fn_graph.tex}
     \caption{The sequence $f_n(x)=x^n$ is not equicontinuous.}
 \end{marginfigure}
-
+\end{comment}
 \begin{defn}[Pointwise, Uniform Boundedness]
     $\left\{ f_n \right\}$ pointwise bounded if $\forall x \in X, 
     \exists M(x) > 0$ such that $\left| f_n(x) \right| \leq M(x) \ \forall n$, and uniformly bounded
@@ -340,6 +340,7 @@ $(C(X), \| . \|_{\infty}) $.
     \leq \omega_x \left| x - y \right|,\; \forall f \in \mathcal{F}$.      
 \end{rem} 
 \begin{prop}[Sufficient Conditions for Uniform Equicontinuity]
+\leavevmode
 \begin{enumerate}
     \item $\mathcal{F} \subseteq C(X)$ is uniformly Lipschitz continuous, i.e. $\exists M > 0$
     s.t. $\left| f(x) - f(y) \right| \leq Mp(x, y) \; \forall f \in \mathcal{F}$;
@@ -821,20 +822,235 @@ so $f$ is continuois at $x_0 \in D$.
 
 
 \subsection{Topological Spaces}
-
+We'll consider topological spaces, where we will define all concepts using open sets,
+and we will generalize what we have learned from Metric Spaces.
 \begin{defn}
     Let $X$ be a non empty set. A \textit{topology} $\mathcal{T}$ on $X$ is a collection of subsets of $X$,
-    called open sets, such that
+    such that
     \begin{itemize}
         \item $X, \emptyset \in \mathcal{T}$;
         \item If $\left\{ E_n \right\} \subseteq \mathcal{T}, \bigcap_{n=1}^{N} E_n \in \mathcal{T}$
         (closed under finite intersections);
-        \item If $\left\{ E_n \right\} \subseteq \mathcal{T}, 
-        \bigcup_{n = 1}^{\infty} E_n \in \mathcal{T}$ (closed under arbitrary unions);
+        \item If $\left\{ E_n \right\}_{\lambda \in \Lambda} \subseteq \mathcal{T}, 
+        \bigcup_{\lambda \in \Lambda} E_\lambda \in \mathcal{T}$ (closed under arbitrary unions).
     \end{itemize}
-    If $x \in X$, a set $E \in \mathcal{T}$ containing x is called a \textit{neighborhood} of $x$.
-    I like pie  
+    We say $(X, \mathcal{T})$ is a \textit{topological space}.  
+    \newline If $E \in \mathcal{T}$, then we call $E$ an open set (with respect to $\mathcal{T}$).  
+    \newline If $x \in X$, a set $E \in \mathcal{T}$ containing x is called a \textit{neighborhood} of $x$.
+
 \end{defn}
+
+\begin{rem}
+    By definition of $\mathcal{T}$, $E \in \mathcal{T}$ iff $\forall x \in E, \exists$ a neighbourhood of $x$,
+    contained in $E$. (consistent with metric space definition of open set)     
+\end{rem} 
+
+\begin{exmp}[Metric topology]
+    Let $(X, p)$ be a metric space. Define 
+    \[
+        \mathcal{T} := \left\{ \text{open sets w.r.t. } p  \right\} .
+    \]
+    Then, $\mathcal{T}$ is a topology on $X$, called the metric topology induced by $p$.
+
+    Given a topology $\mathcal{T}$, if $\exists $ a metric $p$ s.t. $\mathcal{T}$ is the metric topology 
+    induced by $p$, then we say $\mathcal{T}$ is \textit{metrizable}.  
+    
+\end{exmp}
+
+\begin{exmp}[Trivial Topology]
+    Let $X$ be a non empty set. Define 
+    \[
+        \mathcal{T} = \left\{ \emptyset, X \right\} .
+    \]
+    Then, $\mathcal{T}$ is a topology on $X$, called the trivial topology.
+    
+\end{exmp}
+
+\begin{exmp}[Discrete Topology]
+    Let $X$ be a non empty set. Let $p(x, y)$ be the discrete metric on $X$. Define
+    Then $B^p(x_0, r) = \begin{cases}
+        \left\{ x_0 \right\} , & 0 < r \leq 1 \\
+        X, & r > 1
+    \end{cases}$
+    So $\forall E \subseteq X, \forall x \in E, B^p(x, \frac{1}{2}) = \{x\} \subseteq E 
+    \Rightarrow E$ is open. Then, $\mathcal{T} = P(X) = \left\{ \text{All possible subsets of } X \right\}
+     $ is a topology on $X$, called the discrete topology, 
+    and it contains all subsets of $X$.
+    
+\end{exmp}
+
+\begin{exmp}[Relative Topology]
+    Let $(X, \mathcal{T})$ be a topological space. Let $Y \subseteq X$. Then,
+    \[
+        \mathcal{T}_Y := \left\{ U \cap Y : U \in \mathcal{T}  \right\} .
+    \]
+    Then, $\mathcal{T}_Y$ is a topology on $Y$, called the relative topology on $Y$ 
+    induced by $\mathcal{T}$.
+
+    If $X = \R, Y = \N$, then $\mathcal{T}_{\N} = \left\{ U \cap \N : U \subseteq \R \text{ open}\right\}$
+    So $\forall y \in \N, \forall x \in \R, r > 0, $ \[B(x, r) \cap \N = \begin{cases}
+        \left\{ y \right\} , & y \in B(x, r) \\
+        \emptyset, & y \notin B(x, r)
+    \end{cases}\]
+    Thus, $\mathcal{T}_{\N} = P(\N)$, the discrete topology on $\N$.
+    
+    If $X = \R, Y = [0, 1)$, then $\mathcal{T}_{[0, 1)} = \left\{ U \cap [0, 1) : U \subseteq \R 
+    \text{ open}\right\}$
+    So the set $[0, \frac{1}{2}) = [0, 1) \cap (-1, \frac{1}{2}) \in \mathcal{T}_{[0, 1)}$.
+    So $[0, \frac{1}{2})$ is relatively open in $Y = [0, 1)$ (belings to the relative topology on $Y$).
+\end{exmp}
+
+In metric spaces, everything is done using balls. In a generic topological space $(X, \mathcal{T})$,
+what plays the role of balls?
+
+\begin{defn}[base/neighbourhood base]
+    Let $(X, \mathcal{T})$ Topological space. Fix $x \in X$. Let $\mathcal{B}_x$ be a collection of
+    neighborhoods of $x$. We call $\mathcal{B}_x$ a neighbourhood base at $x$ if $\forall$ neighborhood 
+    of $x$ (call it $u$), $\exists B \in \mathcal{B}_x$ such that $B \subseteq u$.  
+    We say $\mathcal{B}$, a collection of open sets, is a base for $\mathcal{T}$ if $\forall x \in X$,
+    $\exists$ a neighbourhood base $\mathcal{B}_x \subseteq \mathcal{B}$ at $x$.    
+
+\end{defn}
+
+\begin{exmp}
+    In $(X, p)$ a metric space, $\forall x \in X$
+    \[
+        \mathcal{B}_x = \left\{ B^p(x, r) : r > 0  \right\} \text{ is a neighbourhood base}
+    \]   
+    $B = \left\{ \text{all balls of all radii} \right\} $ 
+\end{exmp}
+
+\begin{rem}
+    Given a topology, a neighbourood base is not unique.
+    \[
+        \mathcal{B}_x = \{B^p(x, \frac{1}{n})\}_{n=1}^{\infty} 
+    \] 
+    is also a neighbourhood base at $x$ in a metric space.
+\end{rem}
+
+\begin{defn}[first countable/second countable]
+    Let $(X, \mathcal{T})$ be a topological space.
+    \begin{itemize}
+        \item We say $(X, \mathcal{T})$ is \textit{first countable} if there is a countable neigbourhood
+        base at each $x \in X$;
+        \item We say $(X, \mathcal{T})$ is \textit{second countable} if there is a countable base $B$
+        of $\mathcal{T}$. 
+    \end{itemize}
+\end{defn}
+
+\begin{rem}
+    Any metric space is first countable, and any seperable metric space is second countable. 
+\end{rem}
+
+\begin{rem}
+    For a topology $\mathcal{T}$, $\mathcal{B} = \mathcal{T}$ is always a base for $\mathcal{T}$ (so 
+    a base always exists).  
+\end{rem}
+
+\begin{prop}
+    If $(X, \mathcal{T})$ be a topological space. A collection of open sets $\mathcal{B}$ is a base 
+    for $\mathcal{T}$ iff every non-empty open set $u \in \mathcal{T}$ can be written
+    as a union of elements of $\mathcal{B}$.
+\end{prop}
+\begin{proof}
+    ($\Rightarrow$) Suppose $\mathcal{B}$ is a base for $\mathcal{T}$. Let $u \in \mathcal{T}$.
+    Then $\forall x \in u, \exists B_x \in \mathcal{B}_x \subseteq B$ such that
+    \[
+        x \in B_x \subseteq u \Rightarrow \bigcup_{x \in u} B_x \subseteq u 
+    \] 
+    and
+    \[
+        u = \bigcup_{x \in u} \left\{ x \right\} \subseteq \bigcup_{x \in u} B_x \Rightarrow u = \bigcup_{x \in u} B_x.
+    \] 
+
+    ($\Leftarrow$) Suppose every non-empty open set $u \in \mathcal{T}$ can be written as a union of
+    elements of $\mathcal{B}$.. Fix $x \in u$, and let $\mathcal{B}_x := \left\{ B \in \mathcal{B}
+    : x \in B \right\}  = \left\{ B \in \mathcal{B} : \left\{ x \right\} \cap B \neq \emptyset \right\}
+    \subseteq \mathcal{B}$. Since $u = \cup B$, this means $\mathcal{B}_x \neq \emptyset$. So $u$ is
+    a neighbourhood of $x$, and $\exists B \in \mathcal{B}_x$ such that $B \subseteq u$.
+    $\Rightarrow \mathcal{B}_X$ is a neighbourhood base at $x$. Doing that $\forall x \in X$,
+    we get a $\mathcal{B}$ that is a base for $\mathcal{T}$.         
+\end{proof}
+
+Given a collection $\mathcal{B}$, what does it take to be a base for some topology?
+
+\begin{prop}
+    Let $X \neq \emptyset$. Let $\mathcal{B} \subseteq P(X)$ be a collection of sets. Then $\mathcal{B}$
+    is a base for some topology $\mathcal{T}$ iff 
+    \begin{enumerate}
+        \item $X = \bigcup_{B \in \mathcal{B}} B$;
+        \item $\forall B_1, B_2 \in \mathcal{B}$, and $x \in B_1 \cap B_2$,
+        then $\exists B \in \mathcal{B}$ such that $x \in B \subseteq B_1 \cap B_2$.\footnote{
+            For balls, this is true}   
+    \end{enumerate}    
+\end{prop}
+
+\begin{proof}
+    ($\Rightarrow$) $\mathcal{B}$ is a base for a topology $\mathcal{T}$. Then, since $X \in \mathcal{T}$,
+    by the last result, $X = \bigcup_{B \in \mathcal{B}} B$, so (1) holds.
+    Moreover, if $B_1, B_2 \in \mathcal{B} \subseteq \mathcal{T}$, then $B_1 \cap B_2 \in \mathcal{T}$.
+    So for $x \in B_1 \cap B_2$, then $B_1 \cap B_2$ is a neighbourhood of $x$. 
+    Since $\mathcal{B}$ is a base, $\exists B \in \mathcal{B}$ s.t. $x \in B \subseteq B_1 \cap B_2$,
+    so (2) holds.
+
+    ($\Leftarrow$) Suppose (1) and (2) hold. Let
+    \[
+        \mathcal{T} := \left\{ U \subseteq X : \forall x \in U \; \exists B \in \mathcal{B} \text{s.t.}
+        x \in B \subseteq u \right\} 
+    \] 
+    Since $X = \bigcup_{B \in \mathcal{B}} B$, so $\forall x \in X, \exists B \in \mathcal{B}$ s.t.
+    $x \in B \subseteq X$, $\Rightarrow x \in \mathcal{T}$.
+    Similarly, $\emptyset \in \mathcal{T}$ because the condition is empty. 
+    The definition of $\mathcal{T}$ shows us that it is closed under arbitrary unions.
+    Let $U_1, U_2 \in \mathcal{T}$, and assume $U_1 \cap U_2 \neq \emptyset$, so $\forall x \in U_1 
+    \cap U_2$, by definition of $\mathcal{T}$, $\exists B_1 \in \mathcal{B}$ s.t. $x \in B_1 \subseteq U_1$,
+    and $\exists B_2 \in \mathcal{B}$ s.t. $x \in B_2 \subseteq U_2$.
+    $\Rightarrow x \in B_1 \cap B_2$. By (2), $\exists B \in \mathcal{B}$ s.t. $x \in B 
+    \subseteq B_1 \cap B_2 \subseteq U_1 \cap U_2$. Thus, $B_1 \cap B_2 \in \mathcal{T}$. 
+    Inductively, we conclude $\mathcal{T}$ is closed under finite intersections.     
+\end{proof}
+
+Observe that the properties which define $\mathcal{T}$ are closed under intersections. Let 
+$\psi \subseteq P(X)$ be a collection of sets. Then
+\[
+    \mathcal{T}(\psi) = \bigcap \left\{ \text{All topologies containing } \psi \right\} = \text{
+        topology generated by } \psi
+\]   
+
+\begin{defn}[weaker/coarser vs. stronger/finer]
+    Let $\mathcal{T}_1 and \mathcal{T}_2$ be topologies on $X$. If $\mathcal{T}_1 \subsetneq 
+    \mathcal{T}_2$, we say $\mathcal{T}_1$ is a weaker/coarser topology than $\mathcal{T}_2$ (fewer
+    open sets), and $\mathcal{T}_2$ is a stronger/finer topology than $\mathcal{T}_1$ (more open sets).   
+\end{defn}
+
+\begin{exmp}
+    Trivial topology is the weakest topology on $X$ and discrete topology is the strongest topology 
+    on $X$. So $\mathcal{T}(\psi)$ is the weakest topology containing $\psi$.
+\end{exmp}
+
+\begin{prop}
+    Let $\psi \subseteq P(X)$. Then 
+    \[
+        \mathcal{T}(\psi) = \left\{ \emptyset, X, \bigcup \left\{ \text{
+            finite intersections of sets in } \psi \right\}  \right\} 
+    \]  
+\end{prop}
+\begin{proof}
+    \textbf{Claim:} $\mathcal{B} = \left\{ \emptyset, X, \text{ finite intersections of elements of } 
+    \psi \right\} $ form a base.
+    $\mathcal{B}$ satisfies (1) and (2) of the previous proposition, so $\mathcal{B}$ is a base for 
+    some topology 
+
+    \[
+        \mathcal{T} = \left\{ \emptyset, X, \bigcup \left\{ \text{finite intersections of elements of } 
+        \psi \right\}  \right\} 
+    \] 
+    Observe that $\mathcal{T} \subseteq \left\{ \text{any topology which contains } \psi \right\} $ 
+    $\Rightarrow \mathcal{T} \subseteq \mathcal{T}(\psi)$. $\mathcal{T}$ tilda is also a topology,
+    which contains $\psi$. So $\mathcal{T}(\psi) \subseteq \mathcal{T}$. Thus, $\mathcal{T} = 
+    \mathcal{T}(\psi)$.   
+\end{proof}
+
 
 \subsection{Separation, Countability, Separability}
 \subsection{Continuity and Compactness}

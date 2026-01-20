@@ -11,8 +11,6 @@
 \RequirePackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
 \RequirePackage{mathtools,amsmath,amssymb,amsthm,amsfonts}
 \RequirePackage{dsfont,nicefrac}
-\RequirePackage{marginnote,sidenotes}
-\RequirePackage{marginfix} % Helps prevents notes from overlapping vertically
 \RequirePackage{titletoc}
 \RequirePackage[dvipsnames, svgnames, x11names]{xcolor}
 \RequirePackage{tikz,pgfplots}
@@ -39,12 +37,10 @@
 \RequirePackage{geometry}
 \geometry{
     letterpaper,
-    left=13mm,           % Left margin
+    left=25.4mm,           % Left margin (1 inch)
+    right=25.4mm,          % Right margin (1 inch)
     top=25.4mm,            % Top margin
     bottom=25.4mm,         % Bottom margin
-    textwidth=130mm,      % Main text width (Narrower to fit notes)
-    marginparsep=8mm,   % Space between text and notes
-    marginparwidth=55mm, % Wide margin for notes
     heightrounded,
     verbose               % Logs dimensions to ensure fit
 }
@@ -54,32 +50,15 @@
 \renewcommand{\maketitle}{%
   \newgeometry{margin=1in}% Symmetric margins for title page
   \oldmaketitle
-  \restoregeometry% Return to asymmetric layout
+  \restoregeometry% Return to main layout
 }
 
 % Start section numbering at 1 (remove chapter prefix in report class)
 \renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
 
-% 3. FOOTNOTE FIX
-% We use \marginnote for the text so it works inside boxes.
-% The \parbox ensures text wraps within the margin width.
-\makeatletter
-\renewcommand{\footnote}[1]{%
-  \stepcounter{footnote}%
-  \textsuperscript{\thefootnote}%
-  \marginnote{%
-    \parbox[t]{\marginparwidth}{%
-      \footnotesize\raggedright
-      \textsuperscript{\thefootnote}~#1%
-    }%
-  }%
-}
-\makeatother
-
 % Headers and Footers
 \pagestyle{fancy}
-\fancyhfoffset[R]{\marginparsep + \marginparwidth} % Extend header to page edge
 \fancyhead{} 
 \fancyhead[L]{\small \sffamily \color{gray} \rightmark} 
 \fancyhead[R]{\small \bfseries \thepage} 
@@ -88,6 +67,10 @@
 
 % Make \rightmark show section name (not subsection)
 \renewcommand{\sectionmark}[1]{\markright{#1}}
+
+% Use numbers for footnotes (not letters or symbols)
+\renewcommand{\thefootnote}{\arabic{footnote}}
+\renewcommand{\thempfootnote}{\arabic{mpfootnote}}  % For minipages/tcolorboxes
 
 % Section Fonts
 \allsectionsfont{\normalfont\sffamily\bfseries\color{MidnightBlue}} 
@@ -103,34 +86,57 @@
 %----------------------------------------------------------------------------------------
 %   3. COLORS (Castel / Paquette Palette)
 %----------------------------------------------------------------------------------------
-\definecolor{thmBlue}{RGB}{0, 100, 200}
-\definecolor{thmBack}{RGB}{240, 245, 250}
-\definecolor{defGreen}{RGB}{0, 150, 80}
-\definecolor{defBack}{RGB}{240, 250, 240}
-\definecolor{exOrange}{RGB}{220, 100, 0}
-\definecolor{exBack}{RGB}{255, 248, 240}
+\definecolor{thmBlue}{RGB}{142, 100, 140}   % Purple/mauve header
+\definecolor{thmBack}{RGB}{246, 242, 243}   % Light grayish background
+\definecolor{defGreen}{RGB}{203, 156, 86}   % Warm gold/tan for left bar
+\definecolor{defHeader}{RGB}{160, 115, 50}   % Darker gold for header text
+\definecolor{defBack}{RGB}{254, 247, 239}    % Light cream background
+\definecolor{exOrange}{RGB}{203, 155, 91}  % Warm tan/gold
+\definecolor{exBack}{RGB}{254, 247, 239}    % Light cream
 \definecolor{propPurple}{RGB}{130, 0, 150}
-\definecolor{propBack}{RGB}{250, 240, 255}
+\definecolor{propHeader}{RGB}{100, 0, 120}   % Darker purple for header text
+\definecolor{propBack}{RGB}{252, 248, 255}   % Lighter purple tint
 
 %----------------------------------------------------------------------------------------
 %   4. THEOREMS & ENVIRONMENTS (Wrapped in Boxes)
 %----------------------------------------------------------------------------------------
+% Theorem counter (resets per subsection)
+\newcounter{thm}[subsection]
+\renewcommand{\thethm}{\thesubsection.\arabic{thm}}
+
 \theoremstyle{plain}
-\newtheorem{thm}{Theorem}[section]
 \newtheorem{prop}[thm]{Proposition}
-\newtheorem{lem}[thm]{Lemma}
 \newtheorem{cor}[thm]{Corollary}
+
+\theoremstyle{lemma}
+\newtheorem{lem}[thm]{Lemma}
 
 \theoremstyle{definition}
 \newtheorem{defn}[thm]{Definition}
-\newtheorem{exmp}[thm]{Example}
 \newtheorem{rem}[thm]{Remark}
 
-% --- THEOREM BOX ---
-\tcolorboxenvironment{thm}{
+% --- THEOREM BOX (with title bar) ---
+\newtcolorbox{thm}[1][]{
+    enhanced,
+    colframe=thmBlue,
+    colback=thmBack,
+    colbacktitle=thmBlue,
+    coltitle=white,
+    fonttitle=\sffamily,
+    boxrule=2pt,
+    arc=4pt,
+    toptitle=3pt,
+    bottomtitle=3pt,
+    breakable,
+    left=12pt, right=12pt, top=8pt, bottom=10pt,
+    before skip=12pt, after skip=12pt,
+    title={\bfseries Theorem~\refstepcounter{thm}\thethm\ifstrempty{#1}{}{\normalfont\sffamily: #1}}
+}
+
+% --- PROPOSITION BOX ---
+\tcolorboxenvironment{prop}{
     enhanced jigsaw,
-    width=\textwidth,
-    colframe=thmBlue, colback=thmBack,
+    colframe=propPurple, colback=propBack,
     boxrule=0pt, leftrule=3pt,
     sharp corners, breakable,
     left=8pt, right=8pt, top=8pt, bottom=8pt,
@@ -138,10 +144,20 @@
     before skip=12pt, after skip=12pt
 }
 
-% --- PROPOSITION BOX ---
-\tcolorboxenvironment{prop}{
+% --- LEMMA BOX ---
+\tcolorboxenvironment{lem}{
     enhanced jigsaw,
-    width=\textwidth,
+    colframe=propPurple, colback=propBack,
+    boxrule=0pt, leftrule=3pt,
+    sharp corners, breakable,
+    left=8pt, right=8pt, top=8pt, bottom=8pt,
+    parbox=false,
+    before skip=12pt, after skip=12pt
+}
+
+% --- COROLLARY BOX ---
+\tcolorboxenvironment{cor}{
+    enhanced jigsaw,
     colframe=propPurple, colback=propBack,
     boxrule=0pt, leftrule=3pt,
     sharp corners, breakable,
@@ -153,7 +169,6 @@
 % --- DEFINITION BOX ---
 \tcolorboxenvironment{defn}{
     enhanced jigsaw,
-    width=\textwidth,
     colframe=defGreen, colback=defBack,
     boxrule=0pt, leftrule=3pt,
     sharp corners, breakable,
@@ -162,23 +177,28 @@
     before skip=12pt, after skip=12pt
 }
 
-% --- EXAMPLE BOX ---
-\tcolorboxenvironment{exmp}{
-    enhanced jigsaw,
-    width=\textwidth,
-    colframe=exOrange, colback=exBack,
-    boxrule=0pt, leftrule=3pt,
-    sharp corners, breakable,
-    left=8pt, right=8pt, top=8pt, bottom=8pt,
-    parbox=false,
-    before skip=12pt, after skip=12pt
+% --- EXAMPLE BOX (with title bar) ---
+\newtcolorbox{exmp}[1][]{
+    enhanced,
+    colframe=exOrange,
+    colback=exBack,
+    colbacktitle=exOrange,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    boxrule=2pt,
+    arc=4pt,
+    toptitle=3pt,
+    bottomtitle=3pt,
+    breakable,
+    left=12pt, right=12pt, top=8pt, bottom=10pt,
+    before skip=12pt, after skip=12pt,
+    title={\bfseries Example~\refstepcounter{thm}\thethm\ifstrempty{#1}{}{\normalfont\sffamily: #1}}
 }
 
 % --- REMARK BOX ---
 \tcolorboxenvironment{rem}{
     enhanced jigsaw,
-    width=\textwidth,
-    colframe=gray!60, colback=white,
+    colframe=gray!60, colback=gray!8,
     boxrule=0pt, leftrule=2pt,
     sharp corners, breakable,
     left=8pt, right=8pt, top=2pt, bottom=2pt,
@@ -191,18 +211,25 @@
 %----------------------------------------------------------------------------------------
 \makeatletter
 \def\th@plain{%
-  \thm@notefont{\bfseries\sffamily\color{thmBlue}}%  % Note matches header font
-  \itshape
-  \thm@headpunct{:}%
-  \thm@headsep 5\p@ plus\p@ minus\p@
-  \thm@headfont{\bfseries\sffamily\color{thmBlue}} 
-}
-\def\th@definition{%
-  \thm@notefont{\bfseries\sffamily\color{defGreen}}%  % Note matches header font
+  \thm@notefont{\bfseries\sffamily\color{propHeader}}%  % Darker purple for header
   \normalfont
   \thm@headpunct{:}%
   \thm@headsep 5\p@ plus\p@ minus\p@
-  \thm@headfont{\bfseries\sffamily\color{defGreen}} 
+  \thm@headfont{\bfseries\sffamily\color{propHeader}} 
+}
+\def\th@lemma{%
+  \thm@notefont{\bfseries\sffamily\color{propHeader}}%  % Darker purple for lemmas
+  \normalfont
+  \thm@headpunct{:}%
+  \thm@headsep 5\p@ plus\p@ minus\p@
+  \thm@headfont{\bfseries\sffamily\color{propHeader}} 
+}
+\def\th@definition{%
+  \thm@notefont{\bfseries\sffamily\color{defHeader}}%  % Darker gold for header
+  \normalfont
+  \thm@headpunct{:}%
+  \thm@headsep 5\p@ plus\p@ minus\p@
+  \thm@headfont{\bfseries\sffamily\color{defHeader}} 
 }
 \makeatother
 
