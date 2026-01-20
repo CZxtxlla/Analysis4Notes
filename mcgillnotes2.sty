@@ -1,0 +1,221 @@
+% mcgillnotes2.sty
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{mcgillnotes2}[2025/12/17 v13.0 Fixed Margins & Geometry]
+
+%----------------------------------------------------------------------------------------
+%   1. CORE PACKAGES
+%----------------------------------------------------------------------------------------
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{mathpazo} % Palatino Font
+\RequirePackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
+\RequirePackage{mathtools,amsmath,amssymb,amsthm,amsfonts}
+\RequirePackage{dsfont,nicefrac}
+\RequirePackage{marginnote,sidenotes}
+\RequirePackage{marginfix} % Helps prevents notes from overlapping vertically
+\RequirePackage{titletoc}
+\RequirePackage[dvipsnames, svgnames, x11names]{xcolor}
+\RequirePackage{tikz,pgfplots}
+\usepgfplotslibrary{colormaps}
+\RequirePackage[labelfont=bf,textfont=md]{caption}
+\RequirePackage{capt-of}
+\RequirePackage{etoolbox}
+\RequirePackage{lettrine}
+\RequirePackage[explicit,newlinetospace]{titlesec}
+\RequirePackage{tcolorbox}
+\tcbuselibrary{skins, breakable, theorems}
+\RequirePackage{cleveref}
+\RequirePackage{array,tabularx,booktabs}
+\RequirePackage{sectsty} 
+\RequirePackage{fancyhdr}
+\RequirePackage{setspace}
+
+% Line spacing (1.15 is slightly more readable than single-spaced)
+\setstretch{1.15}
+
+%----------------------------------------------------------------------------------------
+%   2. STRICT GEOMETRY (Calculated to fit 8.5" Letter Paper)
+%----------------------------------------------------------------------------------------
+\RequirePackage{geometry}
+\geometry{
+    letterpaper,
+    left=13mm,           % Left margin
+    top=25.4mm,            % Top margin
+    bottom=25.4mm,         % Bottom margin
+    textwidth=130mm,      % Main text width (Narrower to fit notes)
+    marginparsep=8mm,   % Space between text and notes
+    marginparwidth=55mm, % Wide margin for notes
+    heightrounded,
+    verbose               % Logs dimensions to ensure fit
+}
+
+% Redefine \maketitle to use centered geometry for title page
+\let\oldmaketitle\maketitle
+\renewcommand{\maketitle}{%
+  \newgeometry{margin=1in}% Symmetric margins for title page
+  \oldmaketitle
+  \restoregeometry% Return to asymmetric layout
+}
+
+% Start section numbering at 1 (remove chapter prefix in report class)
+\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+
+% 3. FOOTNOTE FIX
+% We use \marginnote for the text so it works inside boxes.
+% The \parbox ensures text wraps within the margin width.
+\makeatletter
+\renewcommand{\footnote}[1]{%
+  \stepcounter{footnote}%
+  \textsuperscript{\thefootnote}%
+  \marginnote{%
+    \parbox[t]{\marginparwidth}{%
+      \footnotesize\raggedright
+      \textsuperscript{\thefootnote}~#1%
+    }%
+  }%
+}
+\makeatother
+
+% Headers and Footers
+\pagestyle{fancy}
+\fancyhfoffset[R]{\marginparsep + \marginparwidth} % Extend header to page edge
+\fancyhead{} 
+\fancyhead[L]{\small \sffamily \color{gray} \rightmark} 
+\fancyhead[R]{\small \bfseries \thepage} 
+\fancyfoot{} 
+\renewcommand{\headrulewidth}{0pt}
+
+% Make \rightmark show section name (not subsection)
+\renewcommand{\sectionmark}[1]{\markright{#1}}
+
+% Section Fonts
+\allsectionsfont{\normalfont\sffamily\bfseries\color{MidnightBlue}} 
+
+%----------------------------------------------------------------------------------------
+%   MATH LINE BREAKING
+%----------------------------------------------------------------------------------------
+\allowdisplaybreaks                    % Allow page breaks in multi-line equations
+\setlength{\emergencystretch}{3em}     % Allow extra stretch to avoid overfull boxes
+\tolerance=1000                        % More flexible line breaking
+\hfuzz=2pt                             % Suppress warnings for small overflows
+
+%----------------------------------------------------------------------------------------
+%   3. COLORS (Castel / Paquette Palette)
+%----------------------------------------------------------------------------------------
+\definecolor{thmBlue}{RGB}{0, 100, 200}
+\definecolor{thmBack}{RGB}{240, 245, 250}
+\definecolor{defGreen}{RGB}{0, 150, 80}
+\definecolor{defBack}{RGB}{240, 250, 240}
+\definecolor{exOrange}{RGB}{220, 100, 0}
+\definecolor{exBack}{RGB}{255, 248, 240}
+\definecolor{propPurple}{RGB}{130, 0, 150}
+\definecolor{propBack}{RGB}{250, 240, 255}
+
+%----------------------------------------------------------------------------------------
+%   4. THEOREMS & ENVIRONMENTS (Wrapped in Boxes)
+%----------------------------------------------------------------------------------------
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{exmp}[thm]{Example}
+\newtheorem{rem}[thm]{Remark}
+
+% --- THEOREM BOX ---
+\tcolorboxenvironment{thm}{
+    enhanced jigsaw,
+    width=\textwidth,
+    colframe=thmBlue, colback=thmBack,
+    boxrule=0pt, leftrule=3pt,
+    sharp corners, breakable,
+    left=8pt, right=8pt, top=8pt, bottom=8pt,
+    parbox=false,
+    before skip=12pt, after skip=12pt
+}
+
+% --- PROPOSITION BOX ---
+\tcolorboxenvironment{prop}{
+    enhanced jigsaw,
+    width=\textwidth,
+    colframe=propPurple, colback=propBack,
+    boxrule=0pt, leftrule=3pt,
+    sharp corners, breakable,
+    left=8pt, right=8pt, top=8pt, bottom=8pt,
+    parbox=false,
+    before skip=12pt, after skip=12pt
+}
+
+% --- DEFINITION BOX ---
+\tcolorboxenvironment{defn}{
+    enhanced jigsaw,
+    width=\textwidth,
+    colframe=defGreen, colback=defBack,
+    boxrule=0pt, leftrule=3pt,
+    sharp corners, breakable,
+    left=8pt, right=8pt, top=8pt, bottom=8pt,
+    parbox=false,
+    before skip=12pt, after skip=12pt
+}
+
+% --- EXAMPLE BOX ---
+\tcolorboxenvironment{exmp}{
+    enhanced jigsaw,
+    width=\textwidth,
+    colframe=exOrange, colback=exBack,
+    boxrule=0pt, leftrule=3pt,
+    sharp corners, breakable,
+    left=8pt, right=8pt, top=8pt, bottom=8pt,
+    parbox=false,
+    before skip=12pt, after skip=12pt
+}
+
+% --- REMARK BOX ---
+\tcolorboxenvironment{rem}{
+    enhanced jigsaw,
+    width=\textwidth,
+    colframe=gray!60, colback=white,
+    boxrule=0pt, leftrule=2pt,
+    sharp corners, breakable,
+    left=8pt, right=8pt, top=2pt, bottom=2pt,
+    parbox=false,
+    before skip=10pt, after skip=10pt
+}
+
+%----------------------------------------------------------------------------------------
+%   5. HEADER STYLING
+%----------------------------------------------------------------------------------------
+\makeatletter
+\def\th@plain{%
+  \thm@notefont{\bfseries\sffamily\color{thmBlue}}%  % Note matches header font
+  \itshape
+  \thm@headpunct{:}%
+  \thm@headsep 5\p@ plus\p@ minus\p@
+  \thm@headfont{\bfseries\sffamily\color{thmBlue}} 
+}
+\def\th@definition{%
+  \thm@notefont{\bfseries\sffamily\color{defGreen}}%  % Note matches header font
+  \normalfont
+  \thm@headpunct{:}%
+  \thm@headsep 5\p@ plus\p@ minus\p@
+  \thm@headfont{\bfseries\sffamily\color{defGreen}} 
+}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%   6. UTILITIES
+%----------------------------------------------------------------------------------------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}} 
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\DeclareMathOperator{\interior}{Int}
+\DeclareMathOperator{\exterior}{Ext}

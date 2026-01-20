@@ -1,10 +1,11 @@
-\documentclass{tufte-handout} 
+%\documentclass{tufte-handout} 
+\documentclass[11pt]{report}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18}
 \usepackage{standalone}
 
 % Load your custom package
-\usepackage{mcgillnotes}
+\usepackage{mcgillnotes2}
 
 %----------------------------------------------------------------------------------------
 %   TITLE SECTION
@@ -21,7 +22,6 @@
 %   DOCUMENT CONTENT
 %----------------------------------------------------------------------------------------
 \begin{document}
-\justifying 
 \maketitle
 \tableofcontents
 
@@ -85,16 +85,16 @@ Throuhgout, assume $X$ is a non empty set.
     \item \textit{convergence} 
 \end{itemize}
 
-\begin{defn}
-    (Convergence): $\left\{ x_n \right\}_{n = 1}^{\infty} \subseteq X $ converges to $x$ in $(X, p)$ if 
+\begin{defn}[Convergence]
+    $\left\{ x_n \right\}_{n = 1}^{\infty} \subseteq X $ converges to $x$ in $(X, p)$ if 
     $\lim_{n \to \infty} p(x_n, x) = 0$  
 \end{defn}
 
 \noindent We have several (equivalent) notions, then, of continuity; via sequences, 
 $\epsilon \ \text{--} \ \delta$ definition, and by pullbacks (inverse images of open sets are open).
 
-\begin{defn}
-    (Uniform Continuity): $f : (X,p) \to (\R, \left| . \right| )$ uniformly continuous if $f$ has a 
+\begin{defn}[Uniform Continuity]
+    $f : (X,p) \to (\R, \left| . \right| )$ uniformly continuous if $f$ has a 
     "modulus of continuity", i.e. there is a continuous function 
     $\omega : [0, \infty) \to [0, \infty)$ such that $\lim_{t \to 0^{+}} \omega(t) = 0 $, and 
     \[
@@ -107,8 +107,8 @@ $\epsilon \ \text{--} \ \delta$ definition, and by pullbacks (inverse images of 
     $C > 0$ such that $\omega(.) = C (.)$. Let $\alpha \in (0,1)$. 
     We say $f$ $\alpha$-Holder continuous if $\omega(.) = C(.)^\alpha$ for some constant $C$.      
 \end{rem}
-\begin{defn}
-    (Completeness): We say $(X, p)$ \textit{complete} if every Cauchy sequence in $(X, p)$ converges
+\begin{defn}[Completeness]
+    We say $(X, p)$ \textit{complete} if every Cauchy sequence in $(X, p)$ converges
     to a point in $X$. 
 \end{defn}
 
@@ -119,9 +119,9 @@ $\epsilon \ \text{--} \ \delta$ definition, and by pullbacks (inverse images of 
 
 \subsection{Compactness, Separability}
 
-\begin{defn}
-    (Open Cover, Compactness): $\left\{ X_\lambda \right\}_{\lambda \in \Lambda} \subseteq 2^X$
-    \marginpar{$2^X$ denotes the power set of $X$, i.e. the set of all subsets of $X$.},
+\begin{defn}[Open Cover, Compactness]
+    $\left\{ X_\lambda \right\}_{\lambda \in \Lambda} \subseteq 2^X$
+    \footnote{$2^X$ denotes the power set of $X$, i.e. the set of all subsets of $X$.},
     where $X_\lambda$ open in $X$ and $\Lambda$ an arbitrary index set, an \textit{open cover} 
     of $X$ if for every $x \in X$, $\exists \lambda \in \Lambda$ such that $x \in X_\lambda$.
     \footnote{A cover is finite if $\left| \Lambda \right| < \infty$ }
@@ -143,8 +143,8 @@ $\epsilon \ \text{--} \ \delta$ definition, and by pullbacks (inverse images of 
 $\left\{ E_k \right\}_{k = 1}^{\infty} \subseteq X$ closed, and $E_{k + 1} \subseteq E_k \forall k$, 
 $\cap_{k = 1}^{\infty} E_k \neq \emptyset$   
 
-\begin{defn}
-    (Totally Bounded, $\epsilon$-nets): $(X, p)$ is \textit{totally bounded} if 
+\begin{defn}[Totally Bounded, $\epsilon$-nets]
+    $(X, p)$ is \textit{totally bounded} if 
     $\forall \epsilon > 0$, there is a finite cover of $X$ of balls with radius $\epsilon > 0$.
     \footnote{Totally bounded implies $(X, p)$ is bounded}
     If $E \subseteq X$, an $\epsilon$-net of $E$ is a collection 
@@ -153,13 +153,13 @@ $\cap_{k = 1}^{\infty} E_k \neq \emptyset$
     (note that $x_i$ need not be in $E$).
 \end{defn}
 
-\begin{defn}
-    (Sequentially Compact): $(X, p)$ \textit{sequentially compact} if every sequence in $X$ has
+\begin{defn}[Sequentially Compact]
+    $(X, p)$ \textit{sequentially compact} if every sequence in $X$ has
     a convergent subsequence whose limit is in $X$. 
 \end{defn}
 
-\begin{defn}
-    (Relatively/Pre-Compact): $E \subseteq X$ \textit{precompact} if $\overline{E}$ compact.   
+\begin{defn}[Relatively/Pre-Compact]
+    $E \subseteq X$ \textit{precompact} if $\overline{E}$ compact.   
 \end{defn}
 
 \begin{thm}
@@ -267,9 +267,9 @@ $\| f \|_{\infty} := \max_{x \in X} \left| f(x) \right| $ the sup norm. Then,
     $(C(X), \| . \|_{\infty} )$ is complete.            
 \end{proof}
 
-\begin{defn}
-    (Density/Separability): A set $D \subseteq X$ is called \textit{dense} in $(X, p)$ if for every
-    \marginpar{If $A$ dense in $X$, then $\overline{A}$ dense in $X$}  
+\begin{defn}[Density/Separability]
+    A set $D \subseteq X$ is called \textit{dense} in $(X, p)$ if for every
+    \footnote{If $A$ dense in $X$, then $\overline{A}$ dense in $X$}  
     nonempty open subset $A \subseteq X$, $D \cap A \neq \emptyset$. We say that $X$ is 
     \textit{separable} if there is a countable dense subset $D \subseteq X$.    
 \end{defn}
@@ -290,8 +290,8 @@ $\| f \|_{\infty} := \max_{x \in X} \left| f(x) \right| $ the sup norm. Then,
 Goal: Find suitable conditions for a sequence to have a convergent subsequence in 
 $(C(X), \| . \|_{\infty}) $.
 
-\begin{defn}
-    (Equicontinuous): A family $\mathcal{F} \subseteq C(X)$ is called \textit{equicontinuous} at
+\begin{defn}[Equicontinuous]
+    A family $\mathcal{F} \subseteq C(X)$ is called \textit{equicontinuous} at
     $x \in X$ if $\forall \epsilon > 0$ there exists a $\delta_x > 0$ such that 
     if $p(x, x') < \delta_x$ then $\left| f(x) - f(x') \right| < \epsilon $ for every $f \in \mathcal{F}$.
     $\mathcal{F}$ is pointwise equicontinuous on $X$ if $\mathcal{F}$ is equicontinuous at
@@ -314,22 +314,22 @@ $(C(X), \| . \|_{\infty}) $.
     at $x = 1$. $f_n(1) = 1 \; \forall n$, but the threshold to be close to $f_n(1)$ is 
     not uniform on n.  
 
-    \begin{marginfigure}
-        \input{fn_graph.tex}
-        \caption{The sequence $f_n(x)=x^n$ is not equicontinuous.}
-    \end{marginfigure}
-
-
 \end{exmp}
 
-\begin{defn}
-    (Pointwise, Uniform Boundedness): $\left\{ f_n \right\}$ pointwise bounded if $\forall x \in X, 
+\begin{marginfigure}
+    \centering
+    \input{fn_graph.tex}
+    \caption{The sequence $f_n(x)=x^n$ is not equicontinuous.}
+\end{marginfigure}
+
+\begin{defn}[Pointwise, Uniform Boundedness]
+    $\left\{ f_n \right\}$ pointwise bounded if $\forall x \in X, 
     \exists M(x) > 0$ such that $\left| f_n(x) \right| \leq M(x) \ \forall n$, and uniformly bounded
     if such an M exists independent of $X$.    
 \end{defn}
 
-\begin{defn}
-    (Uniform Equicontinuous): $\mathcal{F} \subseteq C(X)$ is uniformly equicontinuous on
+\begin{defn}[Uniform Equicontinuous]
+    $\mathcal{F} \subseteq C(X)$ is uniformly equicontinuous on
     $X$ if $\forall \epsilon > 0 \; \exists \delta > 0$ s.t. $\forall x,y \in X$ if $p(x, y) < \delta$,
     then $\left| f(x) - f(y) \right| < \epsilon, \; \forall f \in \mathcal{F}$.      
 \end{defn}
@@ -339,7 +339,7 @@ $(C(X), \| . \|_{\infty}) $.
     continuity at $x$, i.e. $\exists \omega_x$ s.t. $\left| f(x) - f(y) \right| 
     \leq \omega_x \left| x - y \right|,\; \forall f \in \mathcal{F}$.      
 \end{rem} 
-\begin{prop} (Sufficient Conditions for Uniform Equicontinuity):
+\begin{prop}[Sufficient Conditions for Uniform Equicontinuity]
 \begin{enumerate}
     \item $\mathcal{F} \subseteq C(X)$ is uniformly Lipschitz continuous, i.e. $\exists M > 0$
     s.t. $\left| f(x) - f(y) \right| \leq Mp(x, y) \; \forall f \in \mathcal{F}$;
@@ -350,8 +350,8 @@ $(C(X), \| . \|_{\infty}) $.
 \end{enumerate}
 \end{prop}
 
-\begin{lem}
-    (Arzelà-Ascoli Lemma): Let $X$ be separable and let $\{f_{n}\}_{n=1}^{\infty} \subseteq C(X)$
+\begin{lem}[Arzelà-Ascoli Lemma]
+    Let $X$ be separable and let $\{f_{n}\}_{n=1}^{\infty} \subseteq C(X)$
     be pointwise bounded and equicontinuous. Then, there is a function $f \subseteq C(X)$ 
     and a subsequence $\{f_{n_k}\}_{k=1}^{\infty} $ which converges pointwise to $f$ on all of $X$.  
 \end{lem}
@@ -398,8 +398,8 @@ $(C(X), \| . \|_{\infty}) $.
     on $X$ as we aimed to show.    
 \end{proof}
 
-\begin{thm}
-    (Arzelà-Ascoli Theorem): Let $X$ be compact and let $\{f_{n}\}_{n=1}^{\infty} \subseteq C(X)$
+\begin{thm}[Arzelà-Ascoli Theorem]
+    Let $X$ be compact and let $\{f_{n}\}_{n=1}^{\infty} \subseteq C(X)$
     be uniformly bounded and uniformly equiontinuous. Then, $\exists$ subseq 
     $\{f_{n_k}\}_{k=1}^{\infty} $  and $f \in C(X)$ s.t. $f_{n_k} \xrightarrow[k \to \infty]{} f$ 
     in $C(X)$ (i.e. uniformly)    
@@ -531,8 +531,8 @@ uniformly.
 
 \subsection{Baire Category Theorem}
 
-\begin{defn}
-    (Hollow/Nowhere Dense): We say a set $E$ is \textit{hollow} if $\interior(E) = \emptyset$.
+\begin{defn}[Hollow/Nowhere Dense]
+    We say a set $E$ is \textit{hollow} if $\interior(E) = \emptyset$.
     \footnote{i.e. $E$ contains no nontrivial open sets} 
     We say 
     $E \subseteq X$ \textit{nowhere dense} if its closure is hollow, i.e.
@@ -754,7 +754,9 @@ so $f$ is continuois at $x_0 \in D$.
 \end{comment}
 
 \begin{thm}
-    Let $(X, p)$ be complete. Let $\{f_{n}\}_{n=1}^{\infty} \subseteq C(X)$ s.t. $f_n \to f$ pointwise in $X$. Then there is a dense subset $D \subseteq X$ where $\{f_{n}\}_{n=1}^{\infty}$ is pointwise equicontinuous on $D$ and $\forall x_0 \in D$, $f$ is continuous at $x_0$.
+    Let $(X, p)$ be complete. Let $\{f_{n}\}_{n=1}^{\infty} \subseteq C(X)$ s.t. $f_n \to f$ pointwise 
+    in $X$. Then there is a dense subset $D \subseteq X$ where $\{f_{n}\}_{n=1}^{\infty}$ is pointwise 
+    equicontinuous on $D$ and $\forall x_0 \in D$, $f$ is continuous at $x_0$.
 \end{thm}
 
 \begin{proof}
@@ -819,6 +821,20 @@ so $f$ is continuois at $x_0 \in D$.
 
 
 \subsection{Topological Spaces}
+
+\begin{defn}
+    Let $X$ be a non empty set. A \textit{topology} $\mathcal{T}$ on $X$ is a collection of subsets of $X$,
+    called open sets, such that
+    \begin{itemize}
+        \item $X, \emptyset \in \mathcal{T}$;
+        \item If $\left\{ E_n \right\} \subseteq \mathcal{T}, \bigcap_{n=1}^{N} E_n \in \mathcal{T}$
+        (closed under finite intersections);
+        \item If $\left\{ E_n \right\} \subseteq \mathcal{T}, 
+        \bigcup_{n = 1}^{\infty} E_n \in \mathcal{T}$ (closed under arbitrary unions);
+    \end{itemize}
+    If $x \in X$, a set $E \in \mathcal{T}$ containing x is called a \textit{neighborhood} of $x$.
+    I like pie  
+\end{defn}
 
 \subsection{Separation, Countability, Separability}
 \subsection{Continuity and Compactness}
