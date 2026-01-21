@@ -96,6 +96,9 @@
 \definecolor{propPurple}{RGB}{130, 0, 150}
 \definecolor{propHeader}{RGB}{100, 0, 120}   % Darker purple for header text
 \definecolor{propBack}{RGB}{252, 248, 255}   % Lighter purple tint
+\definecolor{goalBlue}{RGB}{70, 130, 180}    % Steel blue for goal box
+\definecolor{goalHeader}{RGB}{50, 100, 150}  % Darker blue for header
+\definecolor{goalBack}{RGB}{240, 248, 255}   % Alice blue background
 
 %----------------------------------------------------------------------------------------
 %   4. THEOREMS & ENVIRONMENTS (Wrapped in Boxes)
@@ -195,6 +198,25 @@
     title={\bfseries Example~\refstepcounter{thm}\thethm\ifstrempty{#1}{}{\normalfont\sffamily: #1}}
 }
 
+% --- GOAL/QUESTION/FACT BOX (with title bar) ---
+% Use \begin{goal} for "Goal", \begin{goal}[question] for "Question", \begin{goal}[fact] for "Fact"
+\newtcolorbox{goal}[1][goal]{
+    enhanced,
+    colframe=goalBlue,
+    colback=goalBack,
+    colbacktitle=goalBlue,
+    coltitle=white,
+    fonttitle=\bfseries\sffamily,
+    boxrule=2pt,
+    arc=4pt,
+    toptitle=3pt,
+    bottomtitle=3pt,
+    breakable,
+    left=12pt, right=12pt, top=8pt, bottom=10pt,
+    before skip=12pt, after skip=12pt,
+    title={\bfseries\ifstrequal{#1}{question}{Question}{\ifstrequal{#1}{fact}{Fact}{Goal}}}
+}
+
 % --- REMARK BOX ---
 \tcolorboxenvironment{rem}{
     enhanced jigsaw,
@@ -230,6 +252,16 @@
   \thm@headpunct{:}%
   \thm@headsep 5\p@ plus\p@ minus\p@
   \thm@headfont{\bfseries\sffamily\color{defHeader}} 
+}
+
+% Restyle proof environment
+\renewenvironment{proof}[1][\proofname]{%
+  \par\pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item[\hskip\labelsep\bfseries\sffamily\color{defHeader}#1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
 }
 \makeatother
 

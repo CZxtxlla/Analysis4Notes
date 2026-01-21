@@ -8,26 +8,45 @@
 \usepackage{mcgillnotes2}
 
 %----------------------------------------------------------------------------------------
-%   TITLE SECTION
-%----------------------------------------------------------------------------------------
-\title{ 
-    \normalfont\normalsize 
-    {McGill University - Winter 2026} \\ [0pt] 
-    \huge Lecture Notes - MATH 455
-}
-\author{Charles Zitella} 
-\date{\vspace{-5pt}\normalsize\today} 
-
-%----------------------------------------------------------------------------------------
 %   DOCUMENT CONTENT
 %----------------------------------------------------------------------------------------
 \begin{document}
-\maketitle
-\tableofcontents
+
+% --- Combined Title Page & Table of Contents ---
+\thispagestyle{empty}
+\vspace*{1cm}
+
+\noindent{\small\sffamily\color{gray} McGill University \,|\, Winter 2026}
+
+\vspace{0.5cm}
+
+\noindent{\Huge\bfseries\sffamily\color{MidnightBlue} MATH 455}\\[0.3cm]
+\noindent{\LARGE\sffamily Lecture Notes}
+
+\vspace{0.8cm}
+
+\noindent{\large Charles Zitella}\\[0.2cm]
+\noindent{\small\color{gray} \today}
+
+\vspace{0.5cm}
+
+\noindent{\small\itshape Based on lectures by Prof.\ Jessica Lin}
+
+\vspace{1cm}
+
+\noindent{\large\bfseries\sffamily\color{MidnightBlue} Contents}
+\vspace{0.3cm}
+
+\noindent\hrule height 0.5pt
+\vspace{0.3cm}
+
+{\small\makeatletter\@starttoc{toc}\makeatother}
+
+\newpage
 
 \section{Abstract Metric and Topological Spaces}
 \subsection{Metric Spaces Review }
-Throuhgout, assume $X$ is a non empty set.
+Throughout, assume $X$ is a non empty set.
 \begin{defn}
     (Metric): $p : X \times X \to \R$ is called a \textit{metric}, and thus 
     $(X, p)$ a metric space, if for all $x,y,z \in X$
@@ -139,9 +158,9 @@ $\epsilon \ \text{--} \ \delta$ definition, and by pullbacks (inverse images of 
     based on the finite intersection property.
 \end{rem}
 
-\noindent Useful consequence: if $(X, p)$ is compact metric space, and 
+One useful consequence of this result is if $(X, p)$ is compact metric space, and 
 $\left\{ E_k \right\}_{k = 1}^{\infty} \subseteq X$ closed, and $E_{k + 1} \subseteq E_k \forall k$, 
-$\cap_{k = 1}^{\infty} E_k \neq \emptyset$   
+$\cap_{k = 1}^{\infty} E_k \neq \emptyset$.  
 
 \begin{defn}[Totally Bounded, $\epsilon$-nets]
     $(X, p)$ is \textit{totally bounded} if 
@@ -286,9 +305,11 @@ $\| f \|_{\infty} := \max_{x \in X} \left| f(x) \right| $ the sup norm. Then,
 \end{proof}
 
 \subsection{Arzelà-Ascoli}
-
-Goal: Find suitable conditions for a sequence to have a convergent subsequence in 
-$(C(X), \| . \|_{\infty}) $.
+\begin{goal}
+    Given a sequence $\left\{ f_n \right\}_{n = 1}^{\infty} \subseteq C(X)$, find suitable conditions
+    for $\left\{ f_n \right\}$ to have a convergent subsequence in 
+    $(C(X), \| . \|_{\infty}) $.
+\end{goal}
 
 \begin{defn}[Equicontinuous]
     A family $\mathcal{F} \subseteq C(X)$ is called \textit{equicontinuous} at
@@ -495,18 +516,21 @@ $(C(X), \| . \|_{\infty}) $.
     of the original sequence. 
 \end{rem} 
 
-\noindent \underline{Fact:} Let $\{f_{n}\}_{n=1}^{\infty} \subseteq C(X)$. If $\exists! \; f$ 
-s.t. for every subsequence, $\exists $ a further subsequence $\{f_{n_{k_j}}\}_{j=1}^{\infty} $ s.t. 
-$f_{n_{k_j}} \xrightarrow[j \to \infty]{} f$ uniformly, then $f_n \xrightarrow[n \to \infty]{} f $ 
-uniformly.     
+\begin{goal}[fact]
+    Let $\{f_{n}\}_{n=1}^{\infty} \subseteq C(X)$. If $\exists! \; f$ 
+    s.t. for every subsequence, $\exists $ a further subsequence $\{f_{n_{k_j}}\}_{j=1}^{\infty} $ s.t. 
+    $f_{n_{k_j}} \xrightarrow[j \to \infty]{} f$ uniformly, then $f_n \xrightarrow[n \to \infty]{} f $ 
+    uniformly.     
+\end{goal}  
 
-\noindent \underline{Typical Application}
-\begin{itemize}
+\begin{exmp}[Typical Applications of Arzelà-Ascoli]
+    \begin{itemize}
     \item Verify $\left\{ f_n \right\} $  satisfies hypothesis of AA;
     \item For every subseq $\left\{ f_{n_k} \right\} $ also satisfies hypothesis of AA; 
     \item Use AA to extract $\{f_{n_{k_j}}\}_{j=1}^{\infty} $ s.t. $f_{n_{k_j}} \to f$ uniformly on $X$.
     \item If you can show $f$ is unique, then $f_n \to f$ in $C(X)$.     
 \end{itemize}
+\end{exmp}
 
 \begin{cor}
     Let $(X, p)$ be a compact metric space. Let $\mathcal{F} \subseteq C(X)$ be uniformly bounded and
@@ -518,13 +542,26 @@ uniformly.
     and $f \in C(X)$ s.t. $f_{n_j} \to f$ in $C(X)$. Note, $f$ may not be in $\mathcal{F}$. So
     $\mathcal{F}$ is precompact.          
 \end{proof}
-
+\begin{comment}
 \begin{exmp}
     Let $M > 0$, $\mathcal{F} = \left\{ f \in C([a, b]) \cap C^1([a,b]) : \| f \|_{\infty} + 
     \| f' \|_{\infty} < M   \right\} $. $\mathcal{F}$ is uniformly bounded and uniformly equicontinuous. 
     So by AA then, for $\left\{ f_n \right\} \subseteq \mathcal{F}, \exists \{f_{n_k}\}_{k=1}^{\infty}$
     s.t. $f_{n_k} \to f$ uniformly. But, $f$ may not be in $C^1([a,b])$. 
     (So, $f$ may not be in $\mathcal{F}$  )    
+\end{exmp}
+\end{comment}
+\begin{exmp}
+    Let $M > 0$, and define
+    \[
+        \mathcal{F} = \left\{ f \in C([a, b]) \cap C^1([a,b]) : \| f \|_{\infty} + \| f' \|_{\infty} < 
+        M \right\}.
+    \]
+    $\mathcal{F}$ is uniformly bounded and uniformly equicontinuous.
+    
+    So by AA then, for $\left\{ f_n \right\} \subseteq \mathcal{F}, \exists \{f_{n_k}\}_{k=1}^{\infty}$
+    s.t. $f_{n_k} \to f$ uniformly. But, $f$ may not be in $C^1([a,b])$. 
+    (So, $f$ may not be in $\mathcal{F}$  )
 \end{exmp}
 
 
@@ -545,11 +582,14 @@ uniformly.
     (\interior (E))^c = \overline{E^c} = X.$  
 \end{rem} 
 
-\underline{Goal:} When can we guarantee that 
-\begin{itemize}
-    \item a union of hollow sets is hollow?
-    \item an intersection of dense sets is dense?
-\end{itemize}
+\begin{goal}
+    When can we guarantee that 
+    \begin{itemize}
+        \item a union of hollow sets is hollow?
+        \item an intersection of dense sets is dense?
+    \end{itemize}
+
+\end{goal}
 
 \begin{comment}
 \begin{thm}
@@ -644,11 +684,9 @@ The main way we will use the Baire Category Theorem is the following:
 
 \end{cor}
 \begin{proof}
-    If $\not\exists n_0$, then $F_n$ is hollow $\forall n$, so by BCT $X = \cup_{n =1}^{\infty} F_n$
+    If $\nexists n_0$, then $F_n$ is hollow $\forall n$, so by BCT $X = \cup_{n =1}^{\infty} F_n$
     is hollow, but this is a contradiction because $X \subseteq X$ is open and nontrivial.     
-\end{proof}
-
-\noindent \underline{Baire Category Theorem Application:}
+\end{proof} 
 
 \begin{thm}
     Let $X \subseteq C(X)$ where $(X, p)$ is complete. Suppose $\mathcal{F}$ is pointwise bounded. 
@@ -657,6 +695,8 @@ The main way we will use the Baire Category Theorem is the following:
         \sup_{f \in \mathcal{F}} \sup_{x \in \mathcal{O}} \left|  f(x) \right| \leq M
     \] 
 \end{thm}
+
+\begin{comment}
 \begin{proof}
     Let $E_n = \left\{ x \in X : \left| f(x) \right| \leq n \forall f \in \mathcal{F} \right\} =
     \bigcap_{f\in \mathcal{F}} \left\{ x \in X : \left| f(x) \right| \leq n  \right\}  $
@@ -668,13 +708,36 @@ The main way we will use the Baire Category Theorem is the following:
     \subseteq E_{n_0}$. Letting $\mathcal{O} = B^p(x_0, r)$, we have 
     $\sup_{x \in \mathcal{O}} \left| f(x) \right| \leq n_0 \quad \forall f \in \mathcal{F}$.  
 \end{proof}
+\end{comment} 
+
+\begin{proof}
+    Let
+    \[
+        E_n = \left\{ x \in X : \left| f(x) \right| \leq n, \; \forall f \in \mathcal{F} \right\} 
+        = \bigcap_{f\in \mathcal{F}} \left\{ x \in X : \left| f(x) \right| \leq n  \right\}.
+    \]
+    $\Rightarrow E_n$ is closed $\forall n$. Since $\mathcal{F}$ is pointwise bounded,
+    \[
+        \forall x \in X, \exists M_x > 0 \text{ s.t. } \sup_{ f \in \mathcal{F}} \left| f(x) \right|
+         \leq M_x.
+    \]
+    Thus, $\forall n$ s.t.\ $M_x \leq n$, then $x \in E_n$ (since $\left| f(x) \right| \leq M_x \leq n$).
+    
+    So, $X = \bigcup_{n=1}^{\infty} E_n$ and $E_n$ is closed. By corollary, $\exists n_0$ s.t.
+    $\interior(E_{n_0}) \neq \emptyset.$
+    So $\exists x_0 \in X, r$ s.t.\ $B^p(x_0, r) \subseteq E_{n_0}$. Letting $\mathcal{O} = 
+    B^p(x_0, r)$, we have
+    \[
+        \sup_{x \in \mathcal{O}} \left| f(x) \right| \leq n_0 \quad \forall f \in \mathcal{F}. \qedhere
+    \]
+\end{proof}
 
 \begin{cor}
     Let $(X, p)$ be a complete metric space. Suppose $\{F_{n}\}_{n=1}^{\infty} $ is a collection
     of closed sets. Then $\bigcup_{n=1}^{\infty} \partial F_n$  is hollow.
 \end{cor}
 \begin{proof}
-    \underline{Claim:} $\partial F_n$ is hollow $\forall n$. Suppose for contradiction that
+    \textbf{Claim:} $\partial F_n$ is hollow $\forall n$. Suppose for contradiction that
     $\exists n$ s.t. $\interior (\partial F_n) \neq \emptyset$. Then $\exists x_0 \in
     \partial F_n, r > 0$ s.t. $B^p(x_0, r) \subseteq \partial F_n$. But then,
     \[
@@ -841,8 +904,8 @@ and we will generalize what we have learned from Metric Spaces.
 \end{defn}
 
 \begin{rem}
-    By definition of $\mathcal{T}$, $E \in \mathcal{T}$ iff $\forall x \in E, \exists$ a neighbourhood of $x$,
-    contained in $E$. (consistent with metric space definition of open set)     
+    By definition of $\mathcal{T}$, $E \in \mathcal{T}$ iff $\forall x \in E, \exists$ a neighbourhood 
+    of $x$, contained in $E$. (consistent with metric space definition of open set)     
 \end{rem} 
 
 \begin{exmp}[Metric topology]
@@ -868,14 +931,13 @@ and we will generalize what we have learned from Metric Spaces.
 
 \begin{exmp}[Discrete Topology]
     Let $X$ be a non empty set. Let $p(x, y)$ be the discrete metric on $X$. Define
-    Then $B^p(x_0, r) = \begin{cases}
+    Then \[ B^p(x_0, r) = \begin{cases}
         \left\{ x_0 \right\} , & 0 < r \leq 1 \\
         X, & r > 1
-    \end{cases}$
+    \end{cases}\]
     So $\forall E \subseteq X, \forall x \in E, B^p(x, \frac{1}{2}) = \{x\} \subseteq E 
-    \Rightarrow E$ is open. Then, $\mathcal{T} = P(X) = \left\{ \text{All possible subsets of } X \right\}
-     $ is a topology on $X$, called the discrete topology, 
-    and it contains all subsets of $X$.
+    \Rightarrow E$ is open. Then, \newline $\mathcal{T} = \mathcal{P}(X) = \left\{ \text{All possible subsets of }
+     X \right\}$ is a topology on $X$, called the discrete topology, and it contains all subsets of $X$.
     
 \end{exmp}
 
@@ -897,7 +959,7 @@ and we will generalize what we have learned from Metric Spaces.
     If $X = \R, Y = [0, 1)$, then $\mathcal{T}_{[0, 1)} = \left\{ U \cap [0, 1) : U \subseteq \R 
     \text{ open}\right\}$
     So the set $[0, \frac{1}{2}) = [0, 1) \cap (-1, \frac{1}{2}) \in \mathcal{T}_{[0, 1)}$.
-    So $[0, \frac{1}{2})$ is relatively open in $Y = [0, 1)$ (belings to the relative topology on $Y$).
+    So $[0, \frac{1}{2})$ is relatively open in $Y = [0, 1)$ (belongs to the relative topology on $Y$).
 \end{exmp}
 
 In metric spaces, everything is done using balls. In a generic topological space $(X, \mathcal{T})$,
@@ -949,34 +1011,62 @@ what plays the role of balls?
 
 \begin{prop}
     If $(X, \mathcal{T})$ be a topological space. A collection of open sets $\mathcal{B}$ is a base 
-    for $\mathcal{T}$ iff every non-empty open set $u \in \mathcal{T}$ can be written
+    for $\mathcal{T}$ iff every non-empty open set $U \in \mathcal{T}$ can be written
     as a union of elements of $\mathcal{B}$.
 \end{prop}
+\begin{comment}
 \begin{proof}
-    ($\Rightarrow$) Suppose $\mathcal{B}$ is a base for $\mathcal{T}$. Let $u \in \mathcal{T}$.
-    Then $\forall x \in u, \exists B_x \in \mathcal{B}_x \subseteq B$ such that
+    ($\Rightarrow$) Suppose $\mathcal{B}$ is a base for $\mathcal{T}$. Let $U \in \mathcal{T}$.
+    Then $\forall x \in U, \exists B_x \in \mathcal{B}_x \subseteq B$ such that
     \[
-        x \in B_x \subseteq u \Rightarrow \bigcup_{x \in u} B_x \subseteq u 
+        x \in B_x \subseteq U \Rightarrow \bigcup_{x \in U} B_x \subseteq U 
     \] 
     and
     \[
-        u = \bigcup_{x \in u} \left\{ x \right\} \subseteq \bigcup_{x \in u} B_x \Rightarrow u = \bigcup_{x \in u} B_x.
+        U = \bigcup_{x \in U} \left\{ x \right\} \subseteq \bigcup_{x \in U} B_x \Rightarrow U 
+        = \bigcup_{x \in U} B_x.
     \] 
 
-    ($\Leftarrow$) Suppose every non-empty open set $u \in \mathcal{T}$ can be written as a union of
-    elements of $\mathcal{B}$.. Fix $x \in u$, and let $\mathcal{B}_x := \left\{ B \in \mathcal{B}
+    ($\Leftarrow$) Suppose every non-empty open set $U \in \mathcal{T}$ can be written as a union of
+    elements of $\mathcal{B}$.. Fix $x \in U$, and let $\mathcal{B}_x := \left\{ B \in \mathcal{B}
     : x \in B \right\}  = \left\{ B \in \mathcal{B} : \left\{ x \right\} \cap B \neq \emptyset \right\}
-    \subseteq \mathcal{B}$. Since $u = \cup B$, this means $\mathcal{B}_x \neq \emptyset$. So $u$ is
+    \subseteq \mathcal{B}$. Since $U= \cup B$, this means $\mathcal{B}_x \neq \emptyset$. So $u$ is
     a neighbourhood of $x$, and $\exists B \in \mathcal{B}_x$ such that $B \subseteq u$.
     $\Rightarrow \mathcal{B}_X$ is a neighbourhood base at $x$. Doing that $\forall x \in X$,
     we get a $\mathcal{B}$ that is a base for $\mathcal{T}$.         
 \end{proof}
+\end{comment}
+\begin{proof} \leavevmode
+    \begin{description}
+        \item[($\Rightarrow$)] Suppose $\mathcal{B}$ is a base for $\mathcal{T}$. Let $U \in \mathcal{T}$.
+        Then $\forall x \in U, \exists B_x \in \mathcal{B}_x \subseteq B$ such that
+        \begin{gather*}
+            x \in B_x \subseteq U \Rightarrow \bigcup_{x \in U} B_x \subseteq U \\
+            \shortintertext{and}
+            U = \bigcup_{x \in U} \left\{ x \right\} \subseteq \bigcup_{x \in U} B_x \Rightarrow 
+            U = \bigcup_{x \in U} B_x.
+        \end{gather*}
 
+        \item[($\Leftarrow$)] Suppose every non-empty open set $U \in \mathcal{T}$ can be written as a union of
+        elements of $\mathcal{B}$. Fix $x \in U$, and let
+        \[
+            \mathcal{B}_x := \left\{ B \in \mathcal{B} : x \in B \right\} 
+            = \left\{ B \in \mathcal{B} : \left\{ x \right\} \cap B \neq \emptyset \right\}
+            \subseteq \mathcal{B}.
+        \]
+        Since $U = \cup B$, this means $\mathcal{B}_x \neq \emptyset$. So $U$ is
+        a neighbourhood of $x$, and $\exists B \in \mathcal{B}_x$ such that $B \subseteq U$.
+        $\Rightarrow \mathcal{B}_X$ is a neighbourhood base at $x$. Doing that $\forall x \in X$,
+        we get a $\mathcal{B}$ that is a base for $\mathcal{T}$. \qedhere
+    \end{description}
+\end{proof}
+
+\begin{goal}[question]
 Given a collection $\mathcal{B}$, what does it take to be a base for some topology?
-
+\end{goal}
 \begin{prop}
-    Let $X \neq \emptyset$. Let $\mathcal{B} \subseteq P(X)$ be a collection of sets. Then $\mathcal{B}$
-    is a base for some topology $\mathcal{T}$ iff 
+    Let $X \neq \emptyset$. Let $\mathcal{B} \subseteq \mathcal{P}(X)$ be a collection of sets. Then 
+    $\mathcal{B}$ is a base for some topology $\mathcal{T}$ iff 
     \begin{enumerate}
         \item $X = \bigcup_{B \in \mathcal{B}} B$;
         \item $\forall B_1, B_2 \in \mathcal{B}$, and $x \in B_1 \cap B_2$,
@@ -984,7 +1074,7 @@ Given a collection $\mathcal{B}$, what does it take to be a base for some topolo
             For balls, this is true}   
     \end{enumerate}    
 \end{prop}
-
+\begin{comment}
 \begin{proof}
     ($\Rightarrow$) $\mathcal{B}$ is a base for a topology $\mathcal{T}$. Then, since $X \in \mathcal{T}$,
     by the last result, $X = \bigcup_{B \in \mathcal{B}} B$, so (1) holds.
@@ -996,64 +1086,95 @@ Given a collection $\mathcal{B}$, what does it take to be a base for some topolo
     ($\Leftarrow$) Suppose (1) and (2) hold. Let
     \[
         \mathcal{T} := \left\{ U \subseteq X : \forall x \in U \; \exists B \in \mathcal{B} \text{s.t.}
-        x \in B \subseteq u \right\} 
+        x \in B \subseteq U \right\} 
     \] 
     Since $X = \bigcup_{B \in \mathcal{B}} B$, so $\forall x \in X, \exists B \in \mathcal{B}$ s.t.
     $x \in B \subseteq X$, $\Rightarrow x \in \mathcal{T}$.
     Similarly, $\emptyset \in \mathcal{T}$ because the condition is empty. 
     The definition of $\mathcal{T}$ shows us that it is closed under arbitrary unions.
+
     Let $U_1, U_2 \in \mathcal{T}$, and assume $U_1 \cap U_2 \neq \emptyset$, so $\forall x \in U_1 
-    \cap U_2$, by definition of $\mathcal{T}$, $\exists B_1 \in \mathcal{B}$ s.t. $x \in B_1 \subseteq U_1$,
-    and $\exists B_2 \in \mathcal{B}$ s.t. $x \in B_2 \subseteq U_2$.
+    \cap U_2$, by definition of $\mathcal{T}$, $\exists B_1 \in \mathcal{B}$ s.t. $x \in B_1 \subseteq 
+    U_1$, and $\exists B_2 \in \mathcal{B}$ s.t. $x \in B_2 \subseteq U_2$.
     $\Rightarrow x \in B_1 \cap B_2$. By (2), $\exists B \in \mathcal{B}$ s.t. $x \in B 
     \subseteq B_1 \cap B_2 \subseteq U_1 \cap U_2$. Thus, $B_1 \cap B_2 \in \mathcal{T}$. 
     Inductively, we conclude $\mathcal{T}$ is closed under finite intersections.     
 \end{proof}
+\end{comment}
+\begin{proof} \leavevmode
+    \begin{description}
+        \item[($\Rightarrow$)] $\mathcal{B}$ is a base for a topology $\mathcal{T}$. Then, since $X \in \mathcal{T}$,
+        by the last result, $X = \bigcup_{B \in \mathcal{B}} B$, so (1) holds.
+        Moreover, if $B_1, B_2 \in \mathcal{B} \subseteq \mathcal{T}$, then $B_1 \cap B_2 \in \mathcal{T}$.
+        So for $x \in B_1 \cap B_2$, then $B_1 \cap B_2$ is a neighbourhood of $x$. 
+        Since $\mathcal{B}$ is a base, $\exists B \in \mathcal{B}$ s.t.\ $x \in B \subseteq B_1 \cap B_2$,
+        so (2) holds.
 
-Observe that the properties which define $\mathcal{T}$ are closed under intersections. Let 
-$\psi \subseteq P(X)$ be a collection of sets. Then
+        \item[($\Leftarrow$)] Suppose (1) and (2) hold. Let
+        \[
+            \mathcal{T} := \left\{ U \subseteq X : \forall x \in U, \; \exists B \in \mathcal{B} \text{ s.t. }
+            x \in B \subseteq U \right\}.
+        \] 
+        Since $X = \bigcup_{B \in \mathcal{B}} B$, so $\forall x \in X, \exists B \in \mathcal{B}$ s.t.\ 
+        $x \in B \subseteq X$, $\Rightarrow x \in \mathcal{T}$.
+        Similarly, $\emptyset \in \mathcal{T}$ because the condition is empty. 
+        The definition of $\mathcal{T}$ shows us that it is closed under arbitrary unions.
+        
+        Let $U_1, U_2 \in \mathcal{T}$, and assume $U_1 \cap U_2 \neq \emptyset$, so $\forall x \in U_1 
+        \cap U_2$, by definition of $\mathcal{T}$, $\exists B_1 \in \mathcal{B}$ s.t.\ $x \in B_1 \subseteq 
+        U_1$, and $\exists B_2 \in \mathcal{B}$ s.t.\ $x \in B_2 \subseteq U_2$.
+        $\Rightarrow x \in B_1 \cap B_2$. By (2), $\exists B \in \mathcal{B}$ s.t.\ $x \in B 
+        \subseteq B_1 \cap B_2 \subseteq U_1 \cap U_2$. Thus, $B_1 \cap B_2 \in \mathcal{T}$. 
+        Inductively, we conclude $\mathcal{T}$ is closed under finite intersections. \qedhere
+    \end{description}
+\end{proof}
+
+\noindent Observe that the properties which define $\mathcal{T}$ are closed under intersections, so we
+may define a $\sigma$-algebra like structure for topologies:  
+\begin{defn}
+Let 
+$\mathcal{E} \subseteq \mathcal{P}(X)$ be a collection of sets. Then
 \[
-    \mathcal{T}(\psi) = \bigcap \left\{ \text{All topologies containing } \psi \right\} = \text{
-        topology generated by } \psi
+    \mathcal{T}(\mathcal{E}) = \bigcap \left\{ \text{All topologies containing } \mathcal{E} \right\} = 
+    \text{topology generated by } \mathcal{E}
 \]   
-
+\end{defn}
 \begin{defn}[weaker/coarser vs. stronger/finer]
-    Let $\mathcal{T}_1 and \mathcal{T}_2$ be topologies on $X$. If $\mathcal{T}_1 \subsetneq 
+    Let $\mathcal{T}_1 $ and $ \mathcal{T}_2$ be topologies on $X$. If $\mathcal{T}_1 \subsetneq 
     \mathcal{T}_2$, we say $\mathcal{T}_1$ is a weaker/coarser topology than $\mathcal{T}_2$ (fewer
     open sets), and $\mathcal{T}_2$ is a stronger/finer topology than $\mathcal{T}_1$ (more open sets).   
 \end{defn}
 
 \begin{exmp}
     Trivial topology is the weakest topology on $X$ and discrete topology is the strongest topology 
-    on $X$. So $\mathcal{T}(\psi)$ is the weakest topology containing $\psi$.
+    on $X$. So $\mathcal{T}(\mathcal{E})$ is the weakest topology containing $\mathcal{E}$.
 \end{exmp}
 
 \begin{prop}
-    Let $\psi \subseteq P(X)$. Then 
+    Let $\mathcal{E} \subseteq \mathcal{P}(X)$. Then 
     \[
-        \mathcal{T}(\psi) = \left\{ \emptyset, X, \bigcup \left\{ \text{
-            finite intersections of sets in } \psi \right\}  \right\} 
+        \mathcal{T}(\mathcal{E}) = \left\{ \emptyset, X, \bigcup \left\{ \text{
+            finite intersections of sets in } \mathcal{E} \right\}  \right\} 
     \]  
 \end{prop}
 \begin{proof}
     \textbf{Claim:} $\mathcal{B} = \left\{ \emptyset, X, \text{ finite intersections of elements of } 
-    \psi \right\} $ form a base.
+    \mathcal{E} \right\} $ forms a base.
     $\mathcal{B}$ satisfies (1) and (2) of the previous proposition, so $\mathcal{B}$ is a base for 
     some topology 
 
     \[
-        \mathcal{T} = \left\{ \emptyset, X, \bigcup \left\{ \text{finite intersections of elements of } 
-        \psi \right\}  \right\} 
+        \tilde{\mathcal{T}} = \left\{ \emptyset, X, \bigcup \left\{ \text{finite intersections of 
+        elements of } \mathcal{E} \right\}  \right\} 
     \] 
-    Observe that $\mathcal{T} \subseteq \left\{ \text{any topology which contains } \psi \right\} $ 
-    $\Rightarrow \mathcal{T} \subseteq \mathcal{T}(\psi)$. $\mathcal{T}$ tilda is also a topology,
-    which contains $\psi$. So $\mathcal{T}(\psi) \subseteq \mathcal{T}$. Thus, $\mathcal{T} = 
-    \mathcal{T}(\psi)$.   
+    Observe that $\tilde{\mathcal{T}} \subseteq \left\{ \text{any topology which contains } \mathcal{E} 
+    \right\} $ $\Rightarrow \tilde{\mathcal{T}} \subseteq \mathcal{T}(\mathcal{E})$. $\tilde{\mathcal{T}}$ 
+    is also a topology, which contains $\mathcal{E}$. So $\mathcal{T}(\mathcal{E}) \subseteq 
+    \tilde{\mathcal{T}}$. Thus, $\tilde{\mathcal{T}} = \mathcal{T}(\mathcal{E})$.   
 \end{proof}
 
 
-\subsection{Separation, Countability, Separability}
-\subsection{Continuity and Compactness}
+
 
 
 
