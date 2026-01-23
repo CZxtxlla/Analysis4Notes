@@ -331,10 +331,19 @@ $\| f \|_{\infty} := \max_{x \in X} \left| f(x) \right| $ the sup norm. Then,
 \end{exmp}
 
 \begin{exmp}
-    Consider $f_n(x) := x^n$ on $[0,1]$. Then $\{f_{n}\}_{n=1}^{\infty} $ is non equicontinuous
-    at $x = 1$. $f_n(1) = 1 \; \forall n$, but the threshold to be close to $f_n(1)$ is 
-    not uniform on n.  
-
+    \begin{minipage}[t]{0.5\textwidth}
+        \vspace{0pt}
+        Consider $f_n(x) := x^n$ on $[0,1]$. Then $\{f_{n}\}_{n=1}^{\infty} $ is non equicontinuous
+        at $x = 1$. $f_n(1) = 1 \; \forall n$, but the threshold to be close to $f_n(1)$ is 
+        not uniform on n.
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[t]{0.4\textwidth}
+        \vspace{0pt}
+        \centering
+        \scalebox{0.8}{\input{fn_graph.tex}}
+        {\footnotesize{\captionof{figure}{The sequence $f_n(x)=x^n$ is not equicontinuous.}}}
+    \end{minipage}
 \end{exmp}
 \begin{comment}
 \begin{marginfigure}
@@ -954,7 +963,7 @@ and we will generalize what we have learned from Metric Spaces.
         \left\{ y \right\} , & y \in B(x, r) \\
         \emptyset, & y \notin B(x, r)
     \end{cases}\]
-    Thus, $\mathcal{T}_{\N} = P(\N)$, the discrete topology on $\N$.
+    Thus, $\mathcal{T}_{\N} = \mathcal{P}(\N)$, the discrete topology on $\N$.
     
     If $X = \R, Y = [0, 1)$, then $\mathcal{T}_{[0, 1)} = \left\{ U \cap [0, 1) : U \subseteq \R 
     \text{ open}\right\}$
@@ -1103,8 +1112,8 @@ Given a collection $\mathcal{B}$, what does it take to be a base for some topolo
 \end{comment}
 \begin{proof} \leavevmode
     \begin{description}
-        \item[($\Rightarrow$)] $\mathcal{B}$ is a base for a topology $\mathcal{T}$. Then, since $X \in \mathcal{T}$,
-        by the last result, $X = \bigcup_{B \in \mathcal{B}} B$, so (1) holds.
+        \item[($\Rightarrow$)] $\mathcal{B}$ is a base for a topology $\mathcal{T}$. Then, since $X \in 
+        \mathcal{T}$, by the last result, $X = \bigcup_{B \in \mathcal{B}} B$, so (1) holds.
         Moreover, if $B_1, B_2 \in \mathcal{B} \subseteq \mathcal{T}$, then $B_1 \cap B_2 \in \mathcal{T}$.
         So for $x \in B_1 \cap B_2$, then $B_1 \cap B_2$ is a neighbourhood of $x$. 
         Since $\mathcal{B}$ is a base, $\exists B \in \mathcal{B}$ s.t.\ $x \in B \subseteq B_1 \cap B_2$,
@@ -1112,8 +1121,8 @@ Given a collection $\mathcal{B}$, what does it take to be a base for some topolo
 
         \item[($\Leftarrow$)] Suppose (1) and (2) hold. Let
         \[
-            \mathcal{T} := \left\{ U \subseteq X : \forall x \in U, \; \exists B \in \mathcal{B} \text{ s.t. }
-            x \in B \subseteq U \right\}.
+            \mathcal{T} := \left\{ U \subseteq X : \forall x \in U, \; \exists B \in \mathcal{B} 
+            \text{ s.t. } x \in B \subseteq U \right\}.
         \] 
         Since $X = \bigcup_{B \in \mathcal{B}} B$, so $\forall x \in X, \exists B \in \mathcal{B}$ s.t.\ 
         $x \in B \subseteq X$, $\Rightarrow x \in \mathcal{T}$.
@@ -1121,8 +1130,8 @@ Given a collection $\mathcal{B}$, what does it take to be a base for some topolo
         The definition of $\mathcal{T}$ shows us that it is closed under arbitrary unions.
         
         Let $U_1, U_2 \in \mathcal{T}$, and assume $U_1 \cap U_2 \neq \emptyset$, so $\forall x \in U_1 
-        \cap U_2$, by definition of $\mathcal{T}$, $\exists B_1 \in \mathcal{B}$ s.t.\ $x \in B_1 \subseteq 
-        U_1$, and $\exists B_2 \in \mathcal{B}$ s.t.\ $x \in B_2 \subseteq U_2$.
+        \cap U_2$, by definition of $\mathcal{T}$, $\exists B_1 \in \mathcal{B}$ s.t.\ $x \in B_1 
+        \subseteq U_1$, and $\exists B_2 \in \mathcal{B}$ s.t.\ $x \in B_2 \subseteq U_2$.
         $\Rightarrow x \in B_1 \cap B_2$. By (2), $\exists B \in \mathcal{B}$ s.t.\ $x \in B 
         \subseteq B_1 \cap B_2 \subseteq U_1 \cap U_2$. Thus, $B_1 \cap B_2 \in \mathcal{T}$. 
         Inductively, we conclude $\mathcal{T}$ is closed under finite intersections. \qedhere
@@ -1173,7 +1182,279 @@ $\mathcal{E} \subseteq \mathcal{P}(X)$ be a collection of sets. Then
     \tilde{\mathcal{T}}$. Thus, $\tilde{\mathcal{T}} = \mathcal{T}(\mathcal{E})$.   
 \end{proof}
 
+\begin{goal}
+    Topologies give us open sets, bases give ball-like sets, now we need a notion for closed sets.
+\end{goal}
 
+\begin{defn}[limit point, closure, closed set]
+    If $E \subseteq X, x \in X$ is a limit point if $\forall $ neighbourhood $U_x$ of $x$,
+    \[
+        U_x \cap E \neq \emptyset.
+    \]
+    We say $\overline{E} = \left\{  \text{All limit points of E } \right\} $, is the closure of $E$.
+    
+    \noindent We say $E$ is closed if $E = \overline{E}$.   
+\end{defn}
+
+\begin{rem}
+    We always have $E \subseteq \overline{E}$, so we just need $\overline{E} \subseteq E$ to show
+    $E$ is closed.  
+\end{rem}
+
+
+\begin{prop}
+    Let $E \subseteq X$.
+    \begin{enumerate}
+        \item $\overline{E}$ is closed;
+        \item $\overline{E}$ is the smallest closed set containing $E$, i.e. if $ \exists F$ closed
+        s.t. $E \subseteq F \Rightarrow \overline{E} \subseteq F$;
+        \item $E$ is open iff $E^c$ is closed.     
+    \end{enumerate} 
+\end{prop}
+\begin{comment}
+\begin{proof} (1) + (2)
+    \textbf{Claim:} $L := \left\{ \text{limit points of } \overline{E} \right\} = 
+    \overline{\overline{E}} \subseteq \overline{E}$ 
+
+    Let $x \in L$, and a neighbourhood $U_x$ of $x$. Then by defn of $L$, we know $\exists x' \in
+    U_x \cap \overline{E}$. This means $x' \in \overline{E}$, and $U_x$ is a neighbourhood of $x'
+    \Rightarrow U_x \cap E \neq \emptyset$. This holds $\forall $ neighbourhood $U_x$ of $x$, so 
+    $x \in \overline{E} \Rightarrow L \subseteq \overline{E} \Rightarrow \overline{E}$ is closed. 
+    
+    Suppose $E \subseteq F$ and $F$ is closed. Let $x \in \overline{E}$, then $\forall$ neighbourhood 
+    $U_x$, $U_x \cap E \neq \emptyset \Rightarrow U_x \cap F \neq \emptyset \Rightarrow 
+    x \in \overline{F}$      
+    $\Rightarrow \overline{E} \subseteq \overline{F} = F$. 
+\end{proof}
+
+\begin{proof} (3)
+    ($\Rightarrow$)  Let $E \subseteq X$ be open. Let $x \in \overline{E^c}$.
+    
+    \textbf{Claim:} $x \in E^c$.
+
+    Suppose not, so $x \in E$. So $\exists $ neighbourhood $U_x$ of $x$ s.t. $U_x \subseteq E$.
+    $\Rightarrow U_x \cap E = \emptyset$. So $x \notin \overline{E^c}$. 
+    So, $x \in \overline{E^c} \Rightarrow x \in E^c \Rightarrow \overline{E^c} \subseteq E^c
+    \Rightarrow E^c closed$.
+    
+    ($\Leftarrow$) Let $E^c$ be closed. Let $x \in E$.
+
+    \textbf{Claim:} $\exists$ neighbourhood $U_x$ s.t. $U_x \subseteq E$.
+    
+    Suppose not, then every neighbourhood $U_x$ we have $U_x \cap E^c \neq \emptyset
+    \Rightarrow x \in \overline{E^c} = E^c$ (contradicts $x \in E$ ).
+    By claim, $E$ is open.  
+    
+\end{proof}
+\end{comment}
+
+
+\begin{proof}[Proof of (1) + (2)] \mbox{} \\
+    \textbf{Claim:} $L := \left\{ \text{limit points of } \overline{E} \right\} = 
+    \overline{\overline{E}} \subseteq \overline{E}$.
+
+    Let $x \in L$, and a neighbourhood $U_x$ of $x$. Then by defn of $L$, we know $\exists x' \in
+    U_x \cap \overline{E}$. This means $x' \in \overline{E}$, and $U_x$ is a neighbourhood of $x'
+    \Rightarrow U_x \cap E \neq \emptyset$. This holds $\forall$ neighbourhood $U_x$ of $x$, so 
+    $x \in \overline{E} \Rightarrow L \subseteq \overline{E} \Rightarrow \overline{E}$ is closed. 
+    
+    Suppose $E \subseteq F$ and $F$ is closed. Let $x \in \overline{E}$, then $\forall$ neighbourhood 
+    $U_x$, $U_x \cap E \neq \emptyset \Rightarrow U_x \cap F \neq \emptyset \Rightarrow 
+    x \in \overline{F} \Rightarrow \overline{E} \subseteq \overline{F} = F$. 
+\end{proof}
+
+\begin{proof}[Proof of (3)] \leavevmode
+    \begin{description}
+        \item[($\Rightarrow$)] Let $E \subseteq X$ be open. Let $x \in \overline{E^c}$.
+    
+        \textbf{Claim:} $x \in E^c$.
+
+        Suppose not, so $x \in E$. So $\exists$ neighbourhood $U_x$ of $x$ s.t. $U_x \subseteq E$.
+        $\Rightarrow U_x \cap E = \emptyset$. So $x \notin \overline{E^c}$. 
+        So, $x \in \overline{E^c} \Rightarrow x \in E^c \Rightarrow \overline{E^c} \subseteq E^c
+        \Rightarrow E^c$ closed.
+        
+        \item[($\Leftarrow$)] Let $E^c$ be closed. Let $x \in E$.
+
+        \textbf{Claim:} $\exists$ neighbourhood $U_x$ s.t. $U_x \subseteq E$.
+        
+        Suppose not, then every neighbourhood $U_x$ we have $U_x \cap E^c \neq \emptyset
+        \Rightarrow x \in \overline{E^c} = E^c$ (contradicts $x \in E$).
+        By claim, $E$ is open.  \qedhere
+    \end{description}
+\end{proof}
+
+\begin{rem}
+    Our proof shows, $A \subseteq B \Rightarrow \overline{A} \subseteq \overline{B}$. 
+\end{rem}
+
+\begin{defn} [Density, Separability]
+    $D \subseteq X$ is dense if $\forall $ non-empty open set $U$, $U \cap D \neq \emptyset$.
+    $\iff \overline{D} = X$.
+    
+    $(X, \mathcal{T})$ is separable iff $X$ contains a countable dense set.  
+    
+\end{defn}
+
+\begin{prop}
+    Every second countable space is separable.
+\end{prop}
+
+\begin{proof}
+    Let $(X, \mathcal{T})$ be second countable, so $\exists $ base $\mathcal{B} = 
+    \{B_{i}\}_{i=1}^{\infty} $. Pick $x_i \in B_i$ (need axiom of choice).
+    Let $D = \{x_{i}\}_{i=1}^{\infty} $. Then $\forall U \subseteq X$ open, since $\mathcal{B}$
+    is a base, $\exists B_i \subseteq U$, 
+    \[
+        D \cap U \supseteq \left\{ x_i \right\} \cap B_i \neq \emptyset 
+    \] 
+    $\Rightarrow D \cap U \neq \emptyset$, so $D$ is dense.  
+\end{proof}
+
+\begin{defn}[Convergence in Topology]
+    Given $(X, \mathcal{T})$ a topological space, let $\{x_{n}\}_{n=1}^{\infty} \subseteq X$.
+    We say $x_n \to x$ in $\mathcal{T}$ if $\forall$ neighbourhood $U_x$ of $x$, $\exists N$ s.t.
+    $\forall n \geq N$, $x_n \in U_x$.        
+    
+\end{defn}
+
+\begin{prop}
+    Suppose $(X, \mathcal{T})$ is first countable, and $E \subseteq X$. Then, $x \in \overline{E}$
+    iff $\exists \left\{ x_n \right\} \subseteq E$ s.t. $x_n \to x$ in $\mathcal{T}$.      
+\end{prop}
+\begin{comment}
+\begin{proof}
+    $(\Rightarrow)$. Let $\mathcal{B}_x = \{B_{j}\}_{j=1}^{\infty} $ be a neighbourhood base at
+    $x \in \overline{E}$. WLOG, can assume $B_{j + 1} \subseteq B_j \quad \forall j$. Since 
+    $x \in \overline{E}$ and $B_j$ is a neighbourhood of $x$, $B_j \cap E \neq \emptyset \quad \forall j$.
+    Let $x_i \in B_i \cap E$. Then, $\forall$ neighbourhood $U_x$ of $x$, $\exists B_J \in \mathcal{B}_x$
+    s.t. $B_J \subseteq U_x$. But since $\left\{ B_j \right\}$ are nested, $\forall j \geq J$, 
+    \[
+        U_x \supseteq B_j \cap U_x = B_j \supseteq B_i \cap E \supseteq \left\{ x_j \right\} 
+    \]           
+    $\Rightarrow x_j \to x$ in $\mathcal{T}$.
+
+    $(\Leftarrow)$ If $\exists \{x_{j}\}_{j=1}^{\infty} \subseteq E$ s.t. $x_j \to x$ in $\mathcal{T}$,
+    suppose $x \notin \overline{E}$. Then $x \in \overline{E}^c$ and $\overline{E}^c$ open, so $
+    \overline{E}^c$ is a neighbourhood of x s.t. $\{x_{j}\}_{j=1}^{\infty} \cap 
+    \overline{E}^c \neq \emptyset$. Therefore $x_j \not{\to} x$ in $\mathcal{T}$.
+\end{proof}
+\end{comment}
+\begin{proof} \leavevmode
+    \begin{description}
+        \item[($\Rightarrow$)] 
+            Let $\mathcal{B}_x = \{B_{j}\}_{j=1}^{\infty} $ be a neighbourhood base at $x \in \overline{E}$. WLOG, can assume $B_{j + 1} \subseteq B_j \quad \forall j$. 
+            Since $x \in \overline{E}$ and $B_j$ is a neighbourhood of $x$, $B_j \cap E \neq \emptyset \quad \forall j$.
+            Let $x_i \in B_i \cap E$. Then, $\forall$ neighbourhood $U_x$ of $x$, $\exists B_J \in \mathcal{B}_x$ s.t. $B_J \subseteq U_x$. 
+            But since $\left\{ B_j \right\}$ are nested, $\forall j \geq J$, 
+            \[
+                U_x \supseteq B_j \cap U_x = B_j \supseteq B_i \cap E \supseteq \left\{ x_j \right\} 
+            \]           
+            $\Rightarrow x_j \to x$ in $\mathcal{T}$.
+
+        \item[($\Leftarrow$)] 
+            If $\exists \{x_{j}\}_{j=1}^{\infty} \subseteq E$ s.t. $x_j \to x$ in $\mathcal{T}$, suppose $x \notin \overline{E}$. 
+            Then $x \in \overline{E}^c$ and $\overline{E}^c$ open, so $\overline{E}^c$ is a neighbourhood of $x$ s.t. $\{x_{j}\}_{j=1}^{\infty} \cap \overline{E}^c \neq \emptyset$. 
+            Therefore $x_j \not\to x$ in $\mathcal{T}$. \qedhere
+    \end{description}
+\end{proof}
+
+While $(X, \mathcal{T})$ allows us to consider a very general framework, weird stuff can happen. 
+
+\subsection{Separation Properties}
+
+\begin{exmp}
+    Let $\mathcal{T} = \left\{ \emptyset, X \right\} $. So the only non-empty neighbourhood is $X$,
+    so any sequence $\{x_{n}\}_{n=1}^{\infty} \subseteq X$ converges to any point $x \in X$.
+   
+\end{exmp} 
+
+We need topologies with more structure.
+
+\begin{defn}[neighbourhood of a set, Separating sets by disjoint neighbourhoods]
+    Let $(X, \mathcal{T})$ be a topological space, and $K, A, B \subseteq X$. A neighbourhood of $K$
+    is an open set $U$ s.t. $K \subseteq U$. We say $A, B$ can be separated by disjoint neighbourhoods 
+    if $\exists U \supseteq A, V \supseteq B$ neighbourhoods s.t. $U \cap V = \emptyset$.
+\end{defn}
+
+\begin{defn} [Separation Notions]
+    Let $(X, \mathcal{T})$ be a topological space. $(X, \mathcal{T})$ is
+    \begin{enumerate}
+        \item Tychonoff (T1) if $\forall x \neq y \in X$, $\exists $ neighbourhood $U_x$ s.t. 
+        $y \notin U_x$, and $\exists $ neighbourhood $U_y$ s.t. $x \notin U_y$;
+        \item Hausdorff (T2) if $\forall x \neq y \in X$, $\left\{ X \right\}, \left\{ y \right\} $,
+        can be separated by disjoint neighbourhoods, i.e. $\exists U_x \supseteq \{x\}, U_y \supseteq \{y\}$
+        s.t. $U_x \cap U_y = \emptyset$;
+        \item Regular (T3) if $(X, \mathcal{T})$ is Tychonoff and $\forall x \in X$, $\forall F \subseteq
+        X$ closed, with $x \notin F$, $\left\{ x \right\} $ and $F$ can be separated by disjoint
+        neighbourhoods;
+        \item Normal (T4) if $(X, \mathcal{T})$ is Tychonoff and $\forall A, B \subseteq X$ closed and
+        disjoint, $A$ and $B$ can be separated by disjoint neighbourhoods.           
+    \end{enumerate}  
+\end{defn}
+
+\begin{exmp}
+    Consider $\R$ and $\mathcal{T} = \left\{ \emptyset, (-\infty, c) \text{ for } c \in \R \right\} $
+    Then, $\forall x \in \R$, a neighbourhood of $x$ is of the form $(-\infty, c)$ for some $c > x$.
+    Let $x \neq y \in \R$, WLOG assume $x < y$. Then $x \in U_y \forall $ neighbourhood $U_y$ of $y$.
+    So $(\R, \mathcal{T})$ is not Tychonoff.   
+\end{exmp}
+
+\begin{exmp}
+    Let $X = \R$. Let $K := \left\{ \frac{1}{n} : n \in \Z \right\} $. Let 
+    $B = \left\{ (a, b) : a < b \right\} \cup \left\{ (a, b)\setminus K : a < b \right\}$.
+    We check 
+    \begin{itemize}
+        \item $\R = \cup_{B \in \mathcal{B}} B$
+        \item if $B_1, B_2 \in \mathcal{B}$ and $B_1 \cap B_2 \neq \emptyset$, 
+        $B_1 = (a_1, b_1)$ or $(a_1, b_1) \setminus K$, $B_2 = (a_2, b_2) or (a_2, b_2) \setminus K$  
+        So $B_1 \cap B_2 \neq \emptyset$, $\Rightarrow a_1 < a_2 < b_1 < b_2 \Rightarrow
+        (a_2, b_1) or (a_2, b_1) \setminus K \subseteq B_1 \cap B_2$.
+        So $\mathcal{B}$ is a base for some topology $\mathcal{T}$ on $\R$ called the K-topology.
+        
+        Suppose $x \neq y$ and $ x < y$. $\exists U_x$ and $U_y \in \mathcal{B}$ s.t.
+        $U_x \cap U_y = \emptyset$. $\Rightarrow (X, \mathcal{T})$ is Hausdorff.
+        But, $K \subseteq X$ is closed because $K^c = \R \setminus K = (-\infty, -2) \cup 
+        (-2, 2) \setminus K \cup (2, \infty)$ is open.  
+        But $0 \notin K$. So $\left\{ 0 \right\}, K$ if $U, V$ are neighbourhoods s.t. 
+        $\left\{ 0 \right\}  \in U, K \subseteq V$, $K \subseteq V = \cup (a,b)$. 
+        $\left\{ 0 \right\} \in U = (c, d) \setminus K \Rightarrow V \cap U \neq \emptyset$.
+        
+        $(X, \mathcal{T})$ is thus Hausdorff but not regular. 
+    \end{itemize} 
+\end{exmp}
+
+\begin{prop}
+    If $(X, \mathcal{T})$ is Hausdorff, then for $x_n \to x$ in $\mathcal{T}$, $x$ is unique.
+\end{prop}
+\begin{proof}
+    If $x_n \to x$ and $x_n \to y$ in $\mathcal{T}$ and $x \neq y$, then $\exists U_x 
+    \supseteq \{x\}, U_y \supseteq \{y\}$ s.t. $U_x \cap U_y \neq \emptyset$. So we cannot have
+    $x_n \in U_x \cap U_y$, $\Rightarrow x = y$      
+\end{proof}
+
+\begin{prop}
+    $(X, \mathcal{T})$ is Tychonoff iff $\forall x \in X$, $\left\{ x \right\} $ is closed.  
+\end{prop}
+\begin{comment}
+\begin{proof}
+    $\left\{ x \right\} $ is closed  $ \iff \left\{ x \right\}^c$ is open $\iff \forall y \in
+    \left\{ x \right\} ^c$, $\exists $ neighbourhood $U_y \subseteq \left\{ x \right\} ^c \iff
+    x \notin U_y$ 
+\end{proof}
+\end{comment}
+\begin{proof}
+    \begin{align*}
+        \left\{ x \right\} \text{ is closed } 
+        & \iff \left\{ x \right\}^c \text{ is open} \\
+        & \iff \forall y \in \left\{ x \right\}^c, \exists \text{ neighbourhood } U_y \subseteq \left\{ x \right\}^c \\
+        & \iff x \notin U_y
+    \end{align*}
+\end{proof}
+
+\begin{rem}
+    so $(X, \mathcal{T})$ normal $\Rightarrow (X, \mathcal{T})$ regular.  
+\end{rem}
 
 
 
