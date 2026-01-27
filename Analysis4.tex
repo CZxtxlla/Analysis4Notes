@@ -5,7 +5,7 @@
 \usepackage{standalone}
 
 % Load your custom package
-\usepackage{mcgillnotes2}
+\usepackage{mcgillnotes3}
 
 %----------------------------------------------------------------------------------------
 %   DOCUMENT CONTENT
@@ -14,25 +14,29 @@
 
 % --- Combined Title Page & Table of Contents ---
 \thispagestyle{empty}
-\vspace*{1cm}
+\newgeometry{margin=1in}
 
-\noindent{\small\sffamily\color{gray} McGill University \,|\, Winter 2026}
+\vspace*{2cm}
 
-\vspace{0.5cm}
-
-\noindent{\Huge\bfseries\sffamily\color{MidnightBlue} MATH 455}\\[0.3cm]
-\noindent{\LARGE\sffamily Lecture Notes}
+\begin{center}
+{\small\sffamily\color{gray} McGill University \,|\, Winter 2026}
 
 \vspace{0.8cm}
 
-\noindent{\large Charles Zitella}\\[0.2cm]
-\noindent{\small\color{gray} \today}
+{\Huge\bfseries\sffamily\color{MidnightBlue} MATH 455}\\[0.4cm]
+{\LARGE\sffamily Lecture Notes}
 
-\vspace{0.5cm}
+\vspace{1.2cm}
 
-\noindent{\small\itshape Based on lectures by Prof.\ Jessica Lin}
+{\large Charles Zitella}\\[0.3cm]
+{\small\color{gray} \today}
 
-\vspace{1cm}
+\vspace{0.8cm}
+
+{\small\itshape Based on lectures by Prof.\ Jessica Lin}
+\end{center}
+
+\vspace{1.5cm}
 
 \noindent{\large\bfseries\sffamily\color{MidnightBlue} Contents}
 \vspace{0.3cm}
@@ -40,15 +44,16 @@
 \noindent\hrule height 0.5pt
 \vspace{0.3cm}
 
-{\small\makeatletter\@starttoc{toc}\makeatother}
+{\small\makeatletter\@starttoc{toc}\makeatother\par}
 
+\restoregeometry
 \newpage
 
 \section{Abstract Metric and Topological Spaces}
 \subsection{Metric Spaces Review }
 Throughout, assume $X$ is a non empty set.
-\begin{defn}
-    (Metric): $p : X \times X \to \R$ is called a \textit{metric}, and thus 
+\begin{defn}[Metric]
+    $p : X \times X \to \R$ is called a \newword{metric}, and thus 
     $(X, p)$ a metric space, if for all $x,y,z \in X$
     \begin{itemize}
         \item $p(x,y) \geq 0$, 
@@ -58,10 +63,10 @@ Throughout, assume $X$ is a non empty set.
     \end{itemize}
 \end{defn}
 
-\begin{defn}
-    (Norm): Let $X$ be a vector space.\footnote{closed under linear combinations} 
+\begin{defn}[Norm]
+    Let $X$ be a vector space.\footnote{closed under linear combinations} 
     A function $\| \cdot \| : X \to [0,\infty)$ 
-    is called a \textit{norm}, and thus $(X, \| . \| )$ a \textit{normed vector space},
+    is called a \newword{norm}, and thus $(X, \| . \| )$ a \newword{normed vector space},
      if for all $u,v \in X$ and $\alpha \in \R$
     \begin{itemize}
         \item $\| u \| = 0 \iff u = 0$,
@@ -90,7 +95,7 @@ Throughout, assume $X$ is a non empty set.
 \end{exmp}
 
 \begin{defn}
-    Given two metrics $p, \sigma$ on $X$, we say they are \textit{equivalent} if
+    Given two metrics $p, \sigma$ on $X$, we say they are \newword{equivalent} if
     $\exists$ a $C > 0$ such that 
     $\frac{1}{C}\sigma(x,y) \leq p(x,y) \leq C\sigma(x,y)$ for every $x,y \in X$.
     A similar definition follows for equivalence of norms.     
@@ -105,7 +110,7 @@ Throughout, assume $X$ is a non empty set.
 \end{itemize}
 
 \begin{defn}[Convergence]
-    $\left\{ x_n \right\}_{n = 1}^{\infty} \subseteq X $ converges to $x$ in $(X, p)$ if 
+    $\left\{ x_n \right\}_{n = 1}^{\infty} \subseteq X $ \newword{converges} to $x$ in $(X, p)$ if 
     $\lim_{n \to \infty} p(x_n, x) = 0$  
 \end{defn}
 
@@ -113,7 +118,7 @@ Throughout, assume $X$ is a non empty set.
 $\epsilon \ \text{--} \ \delta$ definition, and by pullbacks (inverse images of open sets are open).
 
 \begin{defn}[Uniform Continuity]
-    $f : (X,p) \to (\R, \left| . \right| )$ uniformly continuous if $f$ has a 
+    $f : (X,p) \to (\R, \left| . \right| )$ \newword{uniformly continuous} if $f$ has a 
     "modulus of continuity", i.e. there is a continuous function 
     $\omega : [0, \infty) \to [0, \infty)$ such that $\lim_{t \to 0^{+}} \omega(t) = 0 $, and 
     \[
@@ -127,7 +132,7 @@ $\epsilon \ \text{--} \ \delta$ definition, and by pullbacks (inverse images of 
     We say $f$ $\alpha$-Holder continuous if $\omega(.) = C(.)^\alpha$ for some constant $C$.      
 \end{rem}
 \begin{defn}[Completeness]
-    We say $(X, p)$ \textit{complete} if every Cauchy sequence in $(X, p)$ converges
+    We say $(X, p)$ \newword{complete} if every Cauchy sequence in $(X, p)$ converges
     to a point in $X$. 
 \end{defn}
 
@@ -141,10 +146,10 @@ $\epsilon \ \text{--} \ \delta$ definition, and by pullbacks (inverse images of 
 \begin{defn}[Open Cover, Compactness]
     $\left\{ X_\lambda \right\}_{\lambda \in \Lambda} \subseteq 2^X$
     \footnote{$2^X$ denotes the power set of $X$, i.e. the set of all subsets of $X$.},
-    where $X_\lambda$ open in $X$ and $\Lambda$ an arbitrary index set, an \textit{open cover} 
+    where $X_\lambda$ open in $X$ and $\Lambda$ an arbitrary index set, an \newword{open cover} 
     of $X$ if for every $x \in X$, $\exists \lambda \in \Lambda$ such that $x \in X_\lambda$.
     \footnote{A cover is finite if $\left| \Lambda \right| < \infty$ }
-    $X$ is \textit{compact} if every open cover of $X$ admits a finite subcover. 
+    $X$ is \newword{compact} if every open cover of $X$ admits a finite subcover. 
     We say $E \subseteq X$ compact if $(E, p)$ compact.  
 \end{defn}
 
@@ -163,7 +168,7 @@ $\left\{ E_k \right\}_{k = 1}^{\infty} \subseteq X$ closed, and $E_{k + 1} \subs
 $\cap_{k = 1}^{\infty} E_k \neq \emptyset$.  
 
 \begin{defn}[Totally Bounded, $\epsilon$-nets]
-    $(X, p)$ is \textit{totally bounded} if 
+    $(X, p)$ is \newword{totally bounded} if 
     $\forall \epsilon > 0$, there is a finite cover of $X$ of balls with radius $\epsilon > 0$.
     \footnote{Totally bounded implies $(X, p)$ is bounded}
     If $E \subseteq X$, an $\epsilon$-net of $E$ is a collection 
@@ -173,12 +178,12 @@ $\cap_{k = 1}^{\infty} E_k \neq \emptyset$.
 \end{defn}
 
 \begin{defn}[Sequentially Compact]
-    $(X, p)$ \textit{sequentially compact} if every sequence in $X$ has
+    $(X, p)$ \newword{sequentially compact} if every sequence in $X$ has
     a convergent subsequence whose limit is in $X$. 
 \end{defn}
 
 \begin{defn}[Relatively/Pre-Compact]
-    $E \subseteq X$ \textit{precompact} if $\overline{E}$ compact.   
+    $E \subseteq X$ \newword{precompact} if $\overline{E}$ compact.   
 \end{defn}
 
 \begin{thm}
@@ -225,7 +230,7 @@ $\cap_{k = 1}^{\infty} E_k \neq \emptyset$.
     \] 
     Therefore, $\lim_{n \to \infty} x_n = x$.
 \end{proof}
-\end{comment}
+
 \begin{proof} \mbox{}\\
     $\Rightarrow$ 
     If $\{f_{n}\}_{n=1}^{\infty} $ converges, then $\exists f : X \to \R$ s.t. $
@@ -239,6 +244,29 @@ $\cap_{k = 1}^{\infty} E_k \neq \emptyset$.
     _{\infty} -\| f - f_{n_k} \|_{\infty} > \epsilon - \frac{\epsilon}{2} = \frac{\epsilon}{2}\] for k 
     sufficiently large and for $n_k, n_j$ large enough. But this violates $\{f_{n}\}_{n=1}^{\infty} $ 
     being cauchy. (Contradiction), so we must have $f_n \to f$ in $C(X)$.
+\end{proof}
+\end{comment}
+\begin{proof} \leavevmode
+\begin{description}
+    \item[($\Rightarrow$)] 
+    If $\{f_{n}\}_{n=1}^{\infty} $ converges, then $\exists f : X \to \mathbb{R}$ s.t. 
+    $\| f_n - f \|_{\infty} \to 0$, so all subsequences also converge to $f$.
+    
+    \item[($\Leftarrow$)] 
+    Now assume $\exists$ a subsequence $\{f_{n_k}\}_{k=1}^{\infty} \subseteq C(X)$ s.t. 
+    $\lim_{k \to \infty} f_{n_k} = f$ in $C(X) \iff \| f_{n_k} - f \|_{\infty} \to 0$.
+    
+    Suppose for the purpose of contradiction that $f_n \not\to f$. Thus, $\exists \epsilon > 0$, 
+    and a subsequence $\{f_{n_j}\}_{j=1}^{\infty} \subseteq C(X)$ s.t. $\| f_{n_j} -f  \|_{\infty} 
+    > \epsilon$ for every $j \geq 1$. Then, 
+    \[ 
+    \| f_{n_k} - f_{n_j} \|_{\infty} \geq  \| f_{n_j} - f \|_{\infty} -\| f - f_{n_k} 
+    \|_{\infty} > \epsilon - \frac{\epsilon}{2} = \frac{\epsilon}{2}
+    \] 
+    for $k$ sufficiently large and for $n_k, n_j$ large enough. But this violates 
+    $\{f_{n}\}_{n=1}^{\infty} $ being cauchy. (Contradiction), so we must have $f_n \to f$ 
+    in $C(X)$. \qedhere
+\end{description}
 \end{proof}
 
 \noindent Let $C(X) := \left\{ f : X \in \R \mid f \text{ continuous} \right\} $ and 
@@ -287,10 +315,10 @@ $\| f \|_{\infty} := \max_{x \in X} \left| f(x) \right| $ the sup norm. Then,
 \end{proof}
 
 \begin{defn}[Density/Separability]
-    A set $D \subseteq X$ is called \textit{dense} in $(X, p)$ if for every
+    A set $D \subseteq X$ is called \newword{dense} in $(X, p)$ if for every
     \footnote{If $A$ dense in $X$, then $\overline{A}$ dense in $X$}  
     nonempty open subset $A \subseteq X$, $D \cap A \neq \emptyset$. We say that $X$ is 
-    \textit{separable} if there is a countable dense subset $D \subseteq X$.    
+    \newword{separable} if there is a countable dense subset $D \subseteq X$.    
 \end{defn}
 
 \begin{prop}
@@ -312,10 +340,10 @@ $\| f \|_{\infty} := \max_{x \in X} \left| f(x) \right| $ the sup norm. Then,
 \end{goal}
 
 \begin{defn}[Equicontinuous]
-    A family $\mathcal{F} \subseteq C(X)$ is called \textit{equicontinuous} at
+    A family $\mathcal{F} \subseteq C(X)$ is called \newword{equicontinuous} at
     $x \in X$ if $\forall \epsilon > 0$ there exists a $\delta_x > 0$ such that 
     if $p(x, x') < \delta_x$ then $\left| f(x) - f(x') \right| < \epsilon $ for every $f \in \mathcal{F}$.
-    $\mathcal{F}$ is pointwise equicontinuous on $X$ if $\mathcal{F}$ is equicontinuous at
+    $\mathcal{F}$ is \newword{pointwise equicontinuous} on $X$ if $\mathcal{F}$ is equicontinuous at
     every point $x \in X$. \footnote{
         if $\left| \mathcal{F} \right|  < \infty$, then $\mathcal{F}$ is pointwise equicontinuous on $X$.   
     }      
@@ -331,35 +359,25 @@ $\| f \|_{\infty} := \max_{x \in X} \left| f(x) \right| $ the sup norm. Then,
 \end{exmp}
 
 \begin{exmp}
-    \begin{minipage}[t]{0.5\textwidth}
-        \vspace{0pt}
-        Consider $f_n(x) := x^n$ on $[0,1]$. Then $\{f_{n}\}_{n=1}^{\infty} $ is non equicontinuous
-        at $x = 1$. $f_n(1) = 1 \; \forall n$, but the threshold to be close to $f_n(1)$ is 
-        not uniform on n.
-    \end{minipage}%
-    \hfill
-    \begin{minipage}[t]{0.4\textwidth}
-        \vspace{0pt}
+    Consider $f_n(x) := x^n$ on $[0,1]$. Then $\{f_{n}\}_{n=1}^{\infty} $ is non equicontinuous
+    at $x = 1$. $f_n(1) = 1 \; \forall n$, but the threshold to be close to $f_n(1)$ is 
+    not uniform on n.
+    \begin{marginfigure}
         \centering
-        \scalebox{0.8}{\input{fn_graph.tex}}
-        {\footnotesize{\captionof{figure}{The sequence $f_n(x)=x^n$ is not equicontinuous.}}}
-    \end{minipage}
+        \input{fn_graph.tex}
+        \caption{The sequence $f_n(x)=x^n$ is not equicontinuous.}
+    \end{marginfigure}
 \end{exmp}
-\begin{comment}
-\begin{marginfigure}
-    \centering
-    \input{fn_graph.tex}
-    \caption{The sequence $f_n(x)=x^n$ is not equicontinuous.}
-\end{marginfigure}
-\end{comment}
+
+
 \begin{defn}[Pointwise, Uniform Boundedness]
-    $\left\{ f_n \right\}$ pointwise bounded if $\forall x \in X, 
-    \exists M(x) > 0$ such that $\left| f_n(x) \right| \leq M(x) \ \forall n$, and uniformly bounded
-    if such an M exists independent of $X$.    
+    $\left\{ f_n \right\}$ \newword{pointwise bounded} if $\forall x \in X, 
+    \exists M(x) > 0$ such that $\left| f_n(x) \right| \leq M(x) \ \forall n$, and 
+    \newword{uniformly bounded} if such an M exists independent of $X$.    
 \end{defn}
 
 \begin{defn}[Uniform Equicontinuous]
-    $\mathcal{F} \subseteq C(X)$ is uniformly equicontinuous on
+    $\mathcal{F} \subseteq C(X)$ is \newword{uniformly equicontinuous} on
     $X$ if $\forall \epsilon > 0 \; \exists \delta > 0$ s.t. $\forall x,y \in X$ if $p(x, y) < \delta$,
     then $\left| f(x) - f(y) \right| < \epsilon, \; \forall f \in \mathcal{F}$.      
 \end{defn}
@@ -472,7 +490,7 @@ $\| f \|_{\infty} := \max_{x \in X} \left| f(x) \right| $ the sup norm. Then,
 \end{proof}
 \end{comment}
 \begin{proof}
-    Since $(X, p)$ is compact, it is thus separable. Also, uniform bounded/equicontinuous 
+    Since $(X, p)$ is compact, it is thus separable. Also, uniform bounded/\\equicontinuous 
     implies pointwise bounded/equicontinuous. Therefore, by Arzelà-Ascoli lemma, 
     $\exists f: X \to \R$ and $\{f_{n_k}\}_{k=1}^{\infty}$ s.t. $f_{n_k} \to f$ pointwise in $X$.
     
@@ -579,10 +597,10 @@ $\| f \|_{\infty} := \max_{x \in X} \left| f(x) \right| $ the sup norm. Then,
 \subsection{Baire Category Theorem}
 
 \begin{defn}[Hollow/Nowhere Dense]
-    We say a set $E$ is \textit{hollow} if $\interior(E) = \emptyset$.
+    We say a set $E$ is \newword{hollow} if $\interior(E) = \emptyset$.
     \footnote{i.e. $E$ contains no nontrivial open sets} 
     We say 
-    $E \subseteq X$ \textit{nowhere dense} if its closure is hollow, i.e.
+    $E \subseteq X$ \newword{nowhere dense} if its closure is hollow, i.e.
     $\interior(\overline{E}) = \emptyset$. 
 \end{defn}
 
@@ -834,11 +852,17 @@ so $f$ is continuois at $x_0 \in D$.
 
 \begin{proof}
     Let $m, n \in \mathbb{N}$. Define 
-    \[
-    E(m , n) = \left\{ x \in X : \left| f_j(x) - f_k(x) \right| \leq \frac{1}{m} \; \forall j,k 
-    \geq n \right\} = \bigcap_{j, k \geq n} \underbrace{\left\{ x \in X : \left| f_j(x) - f_k(x) 
-    \right| \leq \frac{1}{m} \right\} }_{\text{closed, since }f_k, f_j \in C(X)}.
-    \]
+    %\[
+    %E(m , n) = \left\{ x \in X : \left| f_j(x) - f_k(x) \right| \leq \frac{1}{m} \; \forall j,k 
+    %\geq n \right\} = \bigcap_{j, k \geq n} \underbrace{\left\{ x \in X : \left| f_j(x) - f_k(x) 
+    %\right| \leq \frac{1}{m} \right\} }_{\text{closed, since }f_k, f_j \in C(X)}.
+    %\]
+    \begin{align*}
+        E(m , n) &= \left\{ x \in X : \left| f_j(x) - f_k(x) \right| \leq \frac{1}{m} \; \forall j,k 
+        \geq n \right\} \\
+                &= \bigcap_{j, k \geq n} \underbrace{\left\{ x \in X : \left| f_j(x) - f_k(x) \right| 
+                \leq \frac{1}{m} \right\} }_{\text{closed, since }f_k, f_j \in C(X)}.
+    \end{align*}
     So $E(m ,n)$ is closed $\forall m, n$. Thus, by the corollary, $\bigcup_{m, n \in \mathbb{N}} 
     \partial E(m ,n)$ is hollow. This implies that
     \[
@@ -881,7 +905,7 @@ so $f$ is continuois at $x_0 \in D$.
     So $\forall j \geq N, \forall x \in B^p(x_0, \delta_{x_0})$,
     \begin{align*}
         \left| f_j(x) - f_j(x_0) \right| &\leq \left| f_j(x) - f_N(x) \right| + 
-        \left| f_N(x) - f_N(x_0) \right| + \left| f_N(x_0) - f_j(x_0) \right| \leq \frac{3}{m} 
+        \left| f_N(x) - f_N(x_0) \right| + \left| f_N(x_0) - f_j(x_0) \right| \\ &\leq \frac{3}{m} 
         \leq \frac{3\epsilon}{4}.
     \end{align*}
     Since this holds $\forall j \geq N$, this implies that $\{f_{n}\}_{n=1}^{\infty}$ is 
@@ -897,7 +921,7 @@ so $f$ is continuois at $x_0 \in D$.
 We'll consider topological spaces, where we will define all concepts using open sets,
 and we will generalize what we have learned from Metric Spaces.
 \begin{defn}
-    Let $X$ be a non empty set. A \textit{topology} $\mathcal{T}$ on $X$ is a collection of subsets of $X$,
+    Let $X$ be a non empty set. A \newword{topology} $\mathcal{T}$ on $X$ is a collection of subsets of $X$,
     such that
     \begin{itemize}
         \item $X, \emptyset \in \mathcal{T}$;
@@ -906,9 +930,10 @@ and we will generalize what we have learned from Metric Spaces.
         \item If $\left\{ E_n \right\}_{\lambda \in \Lambda} \subseteq \mathcal{T}, 
         \bigcup_{\lambda \in \Lambda} E_\lambda \in \mathcal{T}$ (closed under arbitrary unions).
     \end{itemize}
-    We say $(X, \mathcal{T})$ is a \textit{topological space}.  
+    We say $(X, \mathcal{T})$ is a \newword{topological space}.  
     \newline If $E \in \mathcal{T}$, then we call $E$ an open set (with respect to $\mathcal{T}$).  
-    \newline If $x \in X$, a set $E \in \mathcal{T}$ containing x is called a \textit{neighborhood} of $x$.
+    \newline If $x \in X$, a set $E \in \mathcal{T}$ containing x is called a 
+    \newword{neighborhood} of $x$.
 
 \end{defn}
 
@@ -976,10 +1001,11 @@ what plays the role of balls?
 
 \begin{defn}[base/neighbourhood base]
     Let $(X, \mathcal{T})$ Topological space. Fix $x \in X$. Let $\mathcal{B}_x$ be a collection of
-    neighborhoods of $x$. We call $\mathcal{B}_x$ a neighbourhood base at $x$ if $\forall$ neighborhood 
-    of $x$ (call it $u$), $\exists B \in \mathcal{B}_x$ such that $B \subseteq u$.  
-    We say $\mathcal{B}$, a collection of open sets, is a base for $\mathcal{T}$ if $\forall x \in X$,
-    $\exists$ a neighbourhood base $\mathcal{B}_x \subseteq \mathcal{B}$ at $x$.    
+    neighborhoods of $x$. We call $\mathcal{B}_x$ a \newword{neighbourhood base} at $x$ if 
+    $\forall$ neighborhood of $x$ (call it $U_x$), $\exists B \in \mathcal{B}_x$ such that $B 
+    \subseteq U_x$. We say $\mathcal{B}$, a collection of open sets, is a \newword{base} for 
+    $\mathcal{T}$ if 
+    $\forall x \in X$, $\exists$ a neighbourhood base $\mathcal{B}_x \subseteq \mathcal{B}$ at $x$.    
 
 \end{defn}
 
@@ -1002,9 +1028,9 @@ what plays the role of balls?
 \begin{defn}[first countable/second countable]
     Let $(X, \mathcal{T})$ be a topological space.
     \begin{itemize}
-        \item We say $(X, \mathcal{T})$ is \textit{first countable} if there is a countable neigbourhood
+        \item We say $(X, \mathcal{T})$ is \newword{first countable} if there is a countable neigbourhood
         base at each $x \in X$;
-        \item We say $(X, \mathcal{T})$ is \textit{second countable} if there is a countable base $B$
+        \item We say $(X, \mathcal{T})$ is \newword{second countable} if there is a countable base $B$
         of $\mathcal{T}$. 
     \end{itemize}
 \end{defn}
@@ -1150,8 +1176,9 @@ $\mathcal{E} \subseteq \mathcal{P}(X)$ be a collection of sets. Then
 \end{defn}
 \begin{defn}[weaker/coarser vs. stronger/finer]
     Let $\mathcal{T}_1 $ and $ \mathcal{T}_2$ be topologies on $X$. If $\mathcal{T}_1 \subsetneq 
-    \mathcal{T}_2$, we say $\mathcal{T}_1$ is a weaker/coarser topology than $\mathcal{T}_2$ (fewer
-    open sets), and $\mathcal{T}_2$ is a stronger/finer topology than $\mathcal{T}_1$ (more open sets).   
+    \mathcal{T}_2$, we say $\mathcal{T}_1$ is a \newword{weaker/coarser} topology than $\mathcal{T}_2$ 
+    (fewer open sets), and $\mathcal{T}_2$ is a \newword{stronger/finer} topology than $\mathcal{T}_1$ 
+    (more open sets).   
 \end{defn}
 
 \begin{exmp}
@@ -1187,13 +1214,14 @@ $\mathcal{E} \subseteq \mathcal{P}(X)$ be a collection of sets. Then
 \end{goal}
 
 \begin{defn}[limit point, closure, closed set]
-    If $E \subseteq X, x \in X$ is a limit point if $\forall $ neighbourhood $U_x$ of $x$,
+    If $E \subseteq X, x \in X$ is a \newword{limit point} if $\forall $ neighbourhood $U_x$ of $x$,
     \[
         U_x \cap E \neq \emptyset.
     \]
-    We say $\overline{E} = \left\{  \text{All limit points of E } \right\} $, is the closure of $E$.
+    We say $\overline{E} = \left\{  \text{All limit points of E } \right\} $, is the \newword{closure} 
+    of $E$.
     
-    \noindent We say $E$ is closed if $E = \overline{E}$.   
+    \noindent We say $E$ is \newword{closed} if $E = \overline{E}$.   
 \end{defn}
 
 \begin{rem}
@@ -1289,10 +1317,10 @@ $\mathcal{E} \subseteq \mathcal{P}(X)$ be a collection of sets. Then
 \end{rem}
 
 \begin{defn} [Density, Separability]
-    $D \subseteq X$ is dense if $\forall $ non-empty open set $U$, $U \cap D \neq \emptyset$.
+    $D \subseteq X$ is \newword{dense} if $\forall $ non-empty open set $U$, $U \cap D \neq \emptyset$.
     $\iff \overline{D} = X$.
     
-    $(X, \mathcal{T})$ is separable iff $X$ contains a countable dense set.  
+    $(X, \mathcal{T})$ is \newword{separable} iff $X$ contains a countable dense set.  
     
 \end{defn}
 
@@ -1359,9 +1387,11 @@ $\mathcal{E} \subseteq \mathcal{P}(X)$ be a collection of sets. Then
     \end{description}
 \end{proof}
 
-While $(X, \mathcal{T})$ allows us to consider a very general framework, weird stuff can happen. 
 
 \subsection{Separation Properties}
+
+While $(X, \mathcal{T})$ allows us to consider a very general framework, weird stuff can happen 
+because of it, for example: 
 
 \begin{exmp}
     Let $\mathcal{T} = \left\{ \emptyset, X \right\} $. So the only non-empty neighbourhood is $X$,
@@ -1369,7 +1399,7 @@ While $(X, \mathcal{T})$ allows us to consider a very general framework, weird s
    
 \end{exmp} 
 
-We need topologies with more structure.
+\noindent To avoid cases like this, we require topologies with more structure. 
 
 \begin{defn}[neighbourhood of a set, Separating sets by disjoint neighbourhoods]
     Let $(X, \mathcal{T})$ be a topological space, and $K, A, B \subseteq X$. A neighbourhood of $K$
@@ -1380,18 +1410,23 @@ We need topologies with more structure.
 \begin{defn} [Separation Notions]
     Let $(X, \mathcal{T})$ be a topological space. $(X, \mathcal{T})$ is
     \begin{enumerate}
-        \item Tychonoff (T1) if $\forall x \neq y \in X$, $\exists $ neighbourhood $U_x$ s.t. 
+        \item \newword{Tychonoff} (T1) if $\forall x \neq y \in X$, $\exists $ neighbourhood $U_x$ s.t. 
         $y \notin U_x$, and $\exists $ neighbourhood $U_y$ s.t. $x \notin U_y$;
-        \item Hausdorff (T2) if $\forall x \neq y \in X$, $\left\{ X \right\}, \left\{ y \right\} $,
+        \item \newword{Hausdorff} (T2) if $\forall x \neq y \in X$, $\left\{ x \right\}, \left\{ y \right\} $,
         can be separated by disjoint neighbourhoods, i.e. $\exists U_x \supseteq \{x\}, U_y \supseteq \{y\}$
         s.t. $U_x \cap U_y = \emptyset$;
-        \item Regular (T3) if $(X, \mathcal{T})$ is Tychonoff and $\forall x \in X$, $\forall F \subseteq
+        \item \newword{Regular} (T3) if $(X, \mathcal{T})$ is Tychonoff and $\forall x \in X$, $\forall F \subseteq
         X$ closed, with $x \notin F$, $\left\{ x \right\} $ and $F$ can be separated by disjoint
         neighbourhoods;
-        \item Normal (T4) if $(X, \mathcal{T})$ is Tychonoff and $\forall A, B \subseteq X$ closed and
+        \item \newword{Normal} (T4) if $(X, \mathcal{T})$ is Tychonoff and $\forall A, B \subseteq X$ closed and
         disjoint, $A$ and $B$ can be separated by disjoint neighbourhoods.           
     \end{enumerate}  
 \end{defn}
+
+\begin{rem}
+    Metric $\subseteq$ Normal $\subseteq$ Regular $\subseteq$ Hausdorff $\subseteq$ Tychonoff.  
+\end{rem} 
+
 
 \begin{exmp}
     Consider $\R$ and $\mathcal{T} = \left\{ \emptyset, (-\infty, c) \text{ for } c \in \R \right\} $
@@ -1399,10 +1434,10 @@ We need topologies with more structure.
     Let $x \neq y \in \R$, WLOG assume $x < y$. Then $x \in U_y \forall $ neighbourhood $U_y$ of $y$.
     So $(\R, \mathcal{T})$ is not Tychonoff.   
 \end{exmp}
-
+\begin{comment}
 \begin{exmp}
     Let $X = \R$. Let $K := \left\{ \frac{1}{n} : n \in \Z \right\} $. Let 
-    $B = \left\{ (a, b) : a < b \right\} \cup \left\{ (a, b)\setminus K : a < b \right\}$.
+    $\mathcal{B} = \left\{ (a, b) : a < b \right\} \cup \left\{ (a, b)\setminus K : a < b \right\}$.
     We check 
     \begin{itemize}
         \item $\R = \cup_{B \in \mathcal{B}} B$
@@ -1422,6 +1457,42 @@ We need topologies with more structure.
         
         $(X, \mathcal{T})$ is thus Hausdorff but not regular. 
     \end{itemize} 
+\end{exmp}
+\end{comment}
+\begin{exmp}
+    Let $X = \R$ and let $K := \{ \frac{1}{n} : n \in \Z \}$. 
+    Define the collection $\mathcal{B}$ as:
+    \[
+        \mathcal{B} = \{ (a, b) : a < b \} \cup \{ (a, b) \setminus K : a < b \}.
+    \]
+    We verify the properties of this space:
+    \begin{enumerate}
+        \item \textbf{Basis Check:} 
+        Clearly, $\mathbb{R} = \bigcup_{B \in \mathcal{B}} B$. 
+        Now, suppose $B_1, B_2 \in \mathcal{B}$ and $x \in B_1 \cap B_2$. 
+        Since $B_1$ and $B_2$ are intersections of standard intervals with either $\mathbb{R}$ or $\mathbb{R} \setminus K$, their intersection is also of the form $(a, b)$ or $(a, b) \setminus K$. 
+        Thus, there exists a $B_3 \in \mathcal{B}$ such that $x \in B_3 \subseteq B_1 \cap B_2$. 
+        Therefore, $\mathcal{B}$ is a basis for a topology $\mathcal{T}$ on $\mathbb{R}$, called the \textbf{K-topology}.
+
+        \item \textbf{Hausdorff ($T_2$):} 
+        Suppose $x, y \in X$ with $x \neq y$. 
+        Since the standard topology is Hausdorff, there exist standard disjoint intervals $(a, b)$ and $(c, d)$ separating $x$ and $y$. 
+        These intervals are also in $\mathcal{B}$. 
+        Thus, $U_x \cap U_y = \emptyset \implies (X, \mathcal{T})$ is Hausdorff.
+
+        \item \textbf{Not Regular ($T_3$):} 
+        The set $K$ is closed in $X$ because its complement $K^c = \mathbb{R} \setminus K$ is open (every point in $K^c$, including $0$, has a neighborhood disjoint from $K$).
+        
+        However, observe that $0 \notin K$. We claim $0$ and $K$ cannot be separated.
+        Suppose $U$ and $V$ are disjoint open neighborhoods such that $0 \in U$ and $K \subseteq V$.
+        \begin{itemize}
+            \item Since $0 \in U$, there exists a basis element $(-\delta, \delta) \setminus K \subseteq U$.
+            \item Since $K \subseteq V$, for each $n$, there exists an interval $(a_n, b_n)$ containing $\frac{1}{n}$ such that $(a_n, b_n) \subseteq V$.
+        \end{itemize}
+        For sufficiently large $n$, we have $\frac{1}{n} \in (-\delta, \delta)$. The interval $(a_n, b_n)$ around $\frac{1}{n}$ necessarily contains points strictly between terms of $K$. These points are present in $(-\delta, \delta) \setminus K$.
+        
+        Therefore, $U \cap V \neq \emptyset$. Thus $(X, \mathcal{T})$ is Hausdorff but not regular.
+    \end{enumerate}
 \end{exmp}
 
 \begin{prop}
@@ -1447,16 +1518,216 @@ We need topologies with more structure.
     \begin{align*}
         \left\{ x \right\} \text{ is closed } 
         & \iff \left\{ x \right\}^c \text{ is open} \\
-        & \iff \forall y \in \left\{ x \right\}^c, \exists \text{ neighbourhood } U_y \subseteq \left\{ x \right\}^c \\
-        & \iff x \notin U_y
-    \end{align*}
+        & \iff \forall y \in \left\{ x \right\}^c, \exists \text{ neighbourhood } U_y \subseteq 
+        \left\{ x \right\}^c \\
+        & \iff x \notin U_y 
+    \end{align*} \qedhere
 \end{proof}
 
 \begin{rem}
-    so $(X, \mathcal{T})$ normal $\Rightarrow (X, \mathcal{T})$ regular.  
+    $(X, \mathcal{T})$ normal $\Rightarrow (X, \mathcal{T})$ regular.  
 \end{rem}
 
+\begin{prop}[Nested neighbourhood property]
+    Let $(X, \mathcal{T})$ be Tychonoff. Then $X$ is normal iff $\forall F \subseteq X$ closed,
+    $\forall U$ neighbourhood of $F$, $\exists O \subseteq X$ open s.t. 
+    $F \subseteq O \subseteq \overline{O} \subseteq U$.    
+\end{prop}
+
+\begin{proof} \leavevmode
+    \begin{description}
+        \item[($\Rightarrow$)] Suppose $X$ is normal. Consider $F, U^c$ are two closed disjoint sets. 
+        By normality, $\exists O, V$ open s.t. $F \subseteq O$, $U^c \subseteq V$ and 
+        $O \cap V = \emptyset$. $\Rightarrow V^c \subseteq U$ and $\Rightarrow O \subseteq V^c$.
+        \[
+            \Rightarrow F \subseteq O \subseteq V^c \subseteq U
+        \]   
+        Since $O \subseteq V^c \Rightarrow \overline{O} \subseteq \overline{V^c} = V^c$ 
+        because $V$ is open, $\Rightarrow F \subseteq O \subseteq \overline{O} \subseteq V^c \subseteq U$
+        \item[($\Leftarrow$)] Suppose the nested neighbourhood property holds. Let $A, B \subseteq X$ be
+        closed, $A \cap B = \emptyset$.  $\Rightarrow A \subseteq B^c$ and $B^c$ open.
+        By assumption, $\exists O$ open s.t. $A \subseteq O \subseteq \overline{O} \subseteq B^c$,
+        $\Rightarrow B \subseteq \overline{O}^c$. $A \subseteq O, B \subseteq \overline{O}$ and
+        $O \cap \overline{O}^c = \emptyset$.      
+    \end{description}
+\end{proof}
+
+\begin{cor}
+    Every metric space $(X, p)$ is normal. 
+\end{cor}
+
+\begin{proof}
+    By last result, just need to prove the nested neighbourhood property. Let $F \subseteq X$ closed,
+    $U \subseteq X$ open s.t. $F \subseteq U \Rightarrow F \cap U^c = \emptyset$, $U^c$ closed.
+    Let \[
+    dist(F, U^c) = \inf_{x \in F} dist(x, U^c) = \inf_{x \in F} \inf_{y \in U^c} p(x, y) 
+    \]
+    
+    \noindent Observe, 
+    \[
+        dist(x, U^c) = \begin{cases}
+            0 & x \in U^c \\
+            > 0 & x \notin U^c
+        \end{cases}
+    \] 
+
+    \noindent For $x \notin U^c$, $\forall \epsilon > 0, \exists x' \in U^c$ s.t. $dist(x, U^c) + \epsilon \geq
+    p(x, x')$. 
+    
+    So, $\forall y$ s.t. $p(x, y) < \epsilon$, 
+    \[
+        dist(y, U^c) - dist(x, U^c) \leq p(y, x') - p(x, x') - \epsilon \leq p(y, x) - 
+        \epsilon \leq \epsilon
+    \]  
+    
+    A symmetric argument gets that $x \mapsto dist(x, U^c)$ is continuous. 
+
+    \noindent Since $dist(x, U^c) \geq 0$, $\inf_{x \in F} dist(x, U^c) \geq 0$.
+    if $\inf_{x \in F} dist(x, U^c) = 0$, then by continuity and $F$ closed, $F \cap U^c \neq \emptyset$.
+    $\Rightarrow dist(F, U^c) = \epsilon > 0$. Let $O := \bigcup_{x \in F} B^p(x, \frac{\epsilon}{2})$
+    and $\overline{O} = \overline{\bigcup_{x \in F} B^p(x, \frac{\epsilon}{2})} = 
+    \bigcup_{x \in F} \overline{B^p(x, \frac{\epsilon}{2})}$ $\Rightarrow F \subseteq O \subseteq
+    \overline{O} \subseteq U$. \qedhere
+
+\end{proof}
+
+ \subsection{Compact Topological Spaces}
+
+ \begin{defn} [Compact Topological Space]
+    $(X, \mathcal{T})$ is a topological space. 
+    \begin{itemize}
+        \item $\left\{ E \right\}_{\lambda \in \Lambda}$ is an \newword{open cover} if 
+        $X \subseteq \bigcup_{\lambda \in \Lambda} E_\lambda$ and each $E_\lambda$ is open.
+        \item $(X, \mathcal{T})$ is a \newword{compact topological space} if every open cover has a 
+        finite subcover.   
+        \item For $K \subseteq X$, $K$ is \newword{compact} if $(K, \mathcal{T}_k)$ is compact where
+        \[
+            \mathcal{T}_k := \left\{ K \cap U : U \in \mathcal{T} \right\} 
+        \]    
+    \end{itemize} 
+ \end{defn}
+
+ \begin{rem}
+    As before, for $K \subseteq X$, by defn of $\mathcal{T}_k$ , $O \in \mathcal{T}_k$ iff $O = 
+    K \cap U$ for $U \in \mathcal{T}$. Therefore, $K \subseteq X$ compact iff $\forall$ open cover
+    of $K$ (in $X$) has a finite subcover.       
+ \end{rem}
+
+\begin{prop} [properties identical to metric spaces]
+    \begin{enumerate}
+        \item If $F \subseteq X$ closed and $(X, \mathcal{T})$ is compact, then $F$ is compact;
+        \item $(X, \mathcal{T})$ compact $\Rightarrow$ $\forall \{F_{k}\}_{k=1}^{\infty} \subseteq X$
+        closed, nested and non-empty, $\bigcap_{k=1}^{\infty} F_k \neq \emptyset$;   
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    In the lecture notes (exercise).
+\end{proof}
+
+In metric spaces, $K $ compact $\Rightarrow$ $K$ is closed and bounded.
+
+\begin{prop}
+    Let $(X, \mathcal{T})$ be Hausdorff. If $K \subseteq X$ is compact, then $K$ is closed in $X$. 
+\end{prop}
+
+\begin{proof}
+    \textbf{Claim:} $K^c$ is open.
+    \newline \noindent Fix $y \in K^c$. $\forall x \in K$, $\exists U_{xy}, O_{xy}$ open, disjoint
+    s.t. $y \in U_{xy}$ and $x \in O_{xy}$. So $\{O_{xy}\}_{x \in K}$ is an open cover of $K$, but
+    $K $ compact, so 
+    \[
+        K \subseteq \bigcup_{i=1}^{N} O_{x_i y} \Rightarrow 
+        \bigcap_{i=1}^{N} O_{x_i y}^c \subseteq K^c
+    \]         
+    Let $E := \bigcap_{i=1}^N U_{x_i y}$ is open. So $E$ is a neighbourhood of y, and 
+    $E \cap O_{xy} = \emptyset \quad \forall i = 1, \dots, N$. $\Rightarrow E \subseteq O_{x_i y}^c
+    \quad \forall i = 1, \dots, N$, $\Rightarrow E \subseteq \bigcap_{i = 1}^N O_{x_i y}^c \subseteq 
+    K^c$. $\Rightarrow K^c $ is open. \qedhere 
+\end{proof}
+
+\begin{defn} [sequential compactness]
+    $(X, \mathcal{T})$ is \newword{sequentially compact} if every sequence in $X$ has a convergent 
+    subsequence, whose limit is in $X$.    
+\end{defn}
+
+\begin{prop}[equivalence of compactness]
+    Let $(X, \mathcal{T})$ be second countable. Then $X$ compact iff $X$ is sequentially compact.  
+\end{prop}
+
+\begin{proof} \leavevmode
+    \begin{description}
+        \item[($\Rightarrow$)] Let $X$ be compact. Let $\{x_{k}\}_{k=1}^{\infty} \subseteq X$.
+        Let $F_n := \overline{\left\{ x_k : k \geq n \right\} }$. So $F_n$ is closed $\forall n$,
+        and $F_n \supseteq F_{n + 1} \supseteq \dots$, so since $X$ is compact $\exists
+        x_o \in \bigcap_{n=1}^\infty F_n$. Observe $X$ second countable $\Rightarrow$ $X$ first 
+        countable. So let $\mathcal{B}_{x_o} = \{B_j\}_{j=1}^{\infty} $ be a neighbourhood base at $x_0$.
+        WLOG assume $B_{j + 1} \subseteq B_j \quad \forall j$. Since $x_0 \in \bigcap_{n=1}^{\infty} F_n$,
+        and $B_j$ is a neighbourhood of $x_0$, then $B_j \cap F_n \neq \emptyset \quad \forall n$.
+        \newline \noindent\textbf{Claim:} $\exists x_k, (k \geq n)$ s.t. $x_k \in B_j \cap F_n$ 
+        (i.e. $B_j \cap \interior(F_n) \neq \emptyset$ )
+        \newline \noindent We know $B_j \cap F_n \neq \emptyset$, so $\exists y \in B_j \cap F_n$. Then
+        $B_j$ is a neighbourhood of $y$ and $y \in F_n$, so by defn of $F_n$ 
+        \[
+            B_j \cap \left\{ x_k : k \geq n \right\} \neq \emptyset 
+        \]     
+        Let this element be $\{ x_{n_j} \} \in B_j$. So $ 
+        \{x_{n_j}\}_{j=1}^{\infty} \subseteq \{x_{k}\}_{k=1}^{\infty}  $ and $x_{n_j} \in B_j$ with
+        $B_j \supseteq B_{j + 1}$. Thus $\forall $ neighbourhood $U_{x_0}$ of $x_0$, $\exists B_N 
+        \subseteq U_{x_0}$ and if $j \geq N$, $x_{n_j} \in B_j \subseteq B_N \subseteq U_{x_0}$.
+        $\Rightarrow x_{n_j} \to x_0$ in $\mathcal{T}$.        
+
+        \item[($\Leftarrow$)] Let $X$ be sequentially compact. $X$ second countable $\Rightarrow$ every
+        open cover has a countable subcover, ($X = \bigcup_{B \in \mathcal{B}} B$ )
+        \newline \noindent \textbf{Claim:} Every countable cover of $X$ has a finite subcover. 
+        \newline \noindent Let $X \subseteq \bigcup_{j=1}^{\infty} E_j$, $E_j$ open $\forall j$. 
+        Assume there is no finite 
+        subcover. So $\forall n$, $\exists m(n) > n$ s.t. $E_{m(n)} \setminus \bigcup_{j=1}^{n} E_j 
+        \neq \emptyset$. Let $x_n \in E_{m(n)} \setminus \bigcup_{j=1}^{n} E_j$. 
+        $X$ sequentially compact means $\exists \{ x_{n_k} \} $ s.t. $x_{n_k} \to x_o \in X$.
+        Since $x_0 \in X$, $\exists E_N$ s.t. $x_o \in E_N$. But $x_{n_k} \in E_{m(n_k)} \setminus 
+        \bigcup_{j=1}^{n_k} E_j$, so $\forall n_k \geq N$, $x_{n_k} \not{\to} x_0$ contradiction.                
+    \end{description}
+\end{proof}
+
+\begin{thm}
+    A compact Hausdorff space is normal
+\end{thm}
+
+\begin{proof}
+    Let $(X, \mathcal{T})$ be compact Hausdorff. 
+    \newline \noindent \textbf{Claim:} $(X, \mathcal{T})$ is regular.
+    \newline \noindent Let $F \subseteq X$ closed, $x \notin F$. Let $y \in F$. Since $X$ is 
+    Hausdorff, $\exists U_{xy}, O_{xy}$ open, disjoint s.t. $y \in U_{xy}$ and $x \in O_{xy}$.
+    So $\{U_{xy}\}_{y \in F}$ is an open cover of $F$, but $F$ closed $\Rightarrow$ $F$ compact.
+    \footnote{Because closed subsets of compact subspaces are themselves compact} 
+    So $F \subseteq \bigcup_{ i = 1}^N U_{x y_i} =: U$. Let $N := \bigcap_{i = 1}^N O_{x y_i}$,
+    so $N$ is open, $x \in N$ and $U \cap N = \emptyset$. $\Rightarrow$ $(X, \mathcal{T})$ is regular.
+    We just rerun the same argument to get that $(X, \mathcal{T})$ is normal.             
+\end{proof}
+
+\subsection{Continuity and Urysohn's Lemma}
+
+\begin{defn} [continuous map]
+    If $(X, \mathcal{T})$ and $(Y, \mathcal{S})$ are topological spaces, then $f : X \to Y$ continuous
+    at $x_0 \in X$ if $\forall $ neighbourhood $O_{f(x_0)} \subseteq Y$, $\exists $ a neighbourhood
+    $U_{x_0} \subseteq X$ s.t. $f(U_{x_0}) \subseteq O_{f(x_0)}$. We say $f$ is \newword{continuous} if
+    $f$ is continuous at every $x \in X$.        
+\end{defn}
 
 
+% ---------------------------------------------------------
+% This command prints the generated index at the end
+% ---------------------------------------------------------
+\newpage
+% 1. Switch to a symmetric, full-page layout
+\newgeometry{margin=1in} 
+
+% 2. Turn off the fancy headers (which have the side-margin offset)
+%    and just use a simple page number at the bottom.
+\pagestyle{plain}
+
+% 3. Print the index
+\printindex
 
 \end{document} 
