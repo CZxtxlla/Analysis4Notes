@@ -1547,8 +1547,8 @@ because of it, for example:
         \item[($\Leftarrow$)] Suppose the nested neighbourhood property holds. Let $A, B \subseteq X$ be
         closed, $A \cap B = \emptyset$.  $\Rightarrow A \subseteq B^c$ and $B^c$ open.
         By assumption, $\exists O$ open s.t. $A \subseteq O \subseteq \overline{O} \subseteq B^c$,
-        $\Rightarrow B \subseteq \overline{O}^c$. $A \subseteq O, B \subseteq \overline{O}$ and
-        $O \cap \overline{O}^c = \emptyset$.      
+        $\Rightarrow B \subseteq \overline{O}^c$. $A \subseteq O, B \subseteq \overline{O}^c$ and
+        $O \cap \overline{O}^c = \emptyset$. \qedhere
     \end{description}
 \end{proof}
 
@@ -1714,6 +1714,226 @@ In metric spaces, $K $ compact $\Rightarrow$ $K$ is closed and bounded.
     $U_{x_0} \subseteq X$ s.t. $f(U_{x_0}) \subseteq O_{f(x_0)}$. We say $f$ is \newword{continuous} if
     $f$ is continuous at every $x \in X$.        
 \end{defn}
+
+
+\begin{prop}
+    \begin{enumerate}
+        \item $f : X \to Y$ continuous iff $\forall $ open set $O \subseteq Y$, $f^{-1}(O)$ is open in $X$;
+        \item Composition of continuous functions is continuous;
+        \item $X$ is compact and $f$ continuous, then $f(X)$ is compact in $Y$;
+        \item If $f: X \to \R$, $X$ compact, $f$ continuous, then max/min of $f(x)$ are achieved.           
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}[Proof of (1)] \leavevmode
+    \begin{description} 
+        \item[($\Rightarrow$)] Let $O \subseteq Y$ be open, and let $ x \in f^{-1}(O) \Rightarrow 
+        f(x) \in O$. Since $f$ is continuous, and $O$ is a neighbourhood of $f(x)$, $\exists U_x 
+        \subseteq X$ s.t. $f(U_x) \subseteq O$. So $U_x \subseteq f^{-1}(O)$ and thus $f^{-1}(O)$
+        is open in $X$.
+        
+        \item[($\Leftarrow$)] Suppose $O \subseteq Y$ open and $f^{-1}(O)$ is open in $X$.
+        Let $U := f^{-1}(O)$. Then $U $ is open and $f(U) \subseteq O$. So $f$ is continuous. \qedhere       
+    \end{description}
+\end{proof}
+
+\begin{defn}[weak-topology induced by $\mathcal{F}$ ]
+    Let \[\mathcal{F} := \left\{ f_\lambda : X \to X_\lambda \right\}_{\lambda \in \Lambda} \] where $(X_\lambda,
+    \mathcal{T}_\lambda)$ is a topological space $\forall \lambda \in \Lambda$. 
+    Let \[S := \left\{ f_\lambda^{-1}(O_\lambda) : f_\lambda \in \mathcal{F}, O_\lambda \in 
+    \mathcal{T}_\lambda \right\} \] Then $\mathcal{T}(S)$ is called the \newword{weak-topology} 
+    induced by $\mathcal{F}$.
+\end{defn}
+
+\begin{rem}
+    $\mathcal{T}(S) = \bigcap \left\{ \text{topologies containing } S \right\} $ and if 
+    $f_\lambda^{-1}(O_\lambda)$ belongs to the topology, then $f_\lambda $ is continuous $\forall 
+    \lambda \in \Lambda$. Thus this topology makes every $f_\lambda$ continuous.
+\end{rem}
+
+\begin{cor}
+    $\mathcal{T}(S)$ is the weakest topology amongst all topologies on $X$ for which
+    $f_\lambda : X \to X_\lambda$ is continuous $\forall \lambda \in \Lambda$.    
+\end{cor}
+
+\begin{exmp}
+    $\Lambda = \{ 1, 2 \}$. Let $(X_1, \mathcal{T}_1)$ and $(X_2, \mathcal{T}_2)$ be topological spaces. 
+    Consider $X := X_1 \times X_2 = \prod_{i = 1}^2 X_i$.
+    Let 
+    \[
+        \mathcal{F} := \left\{
+            \begin{aligned}
+                \pi_1 : X \to X_1, \quad & \pi_1(x_1, x_2) = x_1 \\
+                \pi_2 : X \to X_2, \quad & \pi_2(x_1, x_2) = x_2
+            \end{aligned}
+        \right\}.
+    \] 
+    Let $S = \{ \pi_i^{-1}(O_i) : O_i \in \mathcal{T}_i \}$. 
+    Then $\mathcal{T}(S)$ is called the product topology.
+    \footnote{This is similar to how the product $\sigma$-algebra is the smallest $\sigma$-algebra 
+    that makes $\pi_i$ measurable. The product topology is the weakest topology that makes $\pi_i$ 
+    continuous.}
+
+    Recall, we have learned that 
+    \[
+        \mathcal{T}(S) = \left\{ \emptyset, X, \bigcup \left\{ \text{finite intersections of elements of } S \right\}  \right\}.
+    \]
+    So, a base for $\mathcal{T}(S)$ is given by 
+    \[
+        \mathcal{B} := \left\{ \bigcap_{i = 1}^2 \pi_i^{-1}(O_i) : O_i \in \mathcal{T}_i \right\} 
+    \]
+    and we note that $\pi_1^{-1}(O_1) \cap \pi_1^{-1}(\tilde{O}_1) = \pi_1^{-1}(O_1 \cap \tilde{O}_1)$.
+
+    Also, since $\pi_1^{-1}(O_1) = O_1 \times X_2$ and $\pi_2^{-1}(O_2) = X_1 \times O_2$, we have
+    \begin{align*}
+        \bigcap_{i =1}^2 \pi_i^{-1}(O_i) &= O_1 \times O_2 \\
+        \implies \mathcal{B} &= \left\{ \prod_{i=1}^2 O_i : O_i \in \mathcal{T}_i \right\}
+    \end{align*}
+    is a base for the product topology.
+\end{exmp}
+\begin{exmp}
+    $\Lambda$ infinite.\footnote{Could even be uncountable} Let $(X_\lambda, \mathcal{T}_\lambda)$ 
+    be a topological space. Let $X = \prod_{\lambda \in \Lambda} X_\lambda$ and let $
+    \pi_\lambda : X \to X_\lambda$ be the projection map. Consider the product topolgoy on $X$,
+    and a base is given by
+    \[
+        \mathcal{B} = \left\{ \bigcap_{j = 1}^n \pi_{\lambda_i}^{-1} (O_{\lambda_i}) :
+        O_{\lambda_i} \in \mathcal{T}_{\lambda_i}, n \in \N \right\}
+    \]  
+    which equals
+    \[
+        = \left\{ \prod_{\lambda \in \Lambda} O_\lambda : O_\lambda = X_\lambda \text{ for all but
+        finitely many } \lambda \right\} 
+    \]   
+
+    So open in the product topology means a base is given by finite products of open sets.
+\end{exmp}
+
+\begin{goal}[motivation]
+    Let $(X, p)$ be a metric space. Let $A, B$ closed and disjoint. Let 
+    \[
+        f(x) := \frac{dist(x, A)}{dist(x, A) + dist(x, B)}
+    \]   
+    Note,
+    \[
+        f(x) = \begin{cases}
+            0 &x \in A \\
+            1 &x \in B \\
+        \end{cases}
+    \] 
+    $0 \leq f(x) \leq 1$. $f$ is continuous because $dist(., A)$ and $dist(., B)$ are
+    continuous, and denominator is non-zero. Urysohn's lemma does this on any normal topological space.   
+\end{goal}
+
+\begin{lem}[Urysohn's Lemma]
+    Let $(X, \mathcal{T})$ be normal. Let $A, B \subseteq X$ closed and disjoint. Then $
+    \exists f : X \to \R$ s.t. 
+    \begin{itemize}
+        \item $f$ is continuous;
+        \item $0 \leq f(x) \leq 1$;
+        \item $f(x) =   \begin{cases}
+                            0 & x \in A \\
+                            1 & x \in B \\
+                        \end{cases} $
+    \end{itemize}  
+\end{lem}
+
+\begin{rem}
+    Infact, we can replace $\left\{ 0, 1 \right\} \to \left\{ \alpha, \beta \right\} \; 
+    \forall \alpha < \beta$ 
+\end{rem}
+
+\begin{defn}[normally ascending]
+    Let $(X, \mathcal{T})$ and $\Lambda \subseteq \R$. We say $\{O_{\lambda}\}_{\lambda \in \Lambda}$
+    with $O_\lambda$ open is \newword{normally ascending} if $\forall \lambda_1, \lambda_2 \in \Lambda$,
+    $\overline{O_{\lambda_1}} \subseteq O_{\lambda_2}$ whenever $\lambda_1 < \lambda_2$.      
+\end{defn}
+
+\begin{lem}
+    Let $(X, \mathcal{T})$ be normal. Let $F \subseteq X$ be closed, $U$ a neighbourhood of $F$.
+    There exists a dense set $\Lambda \subseteq (0, 1)$ and a normally ascending colleciton of open sets
+    $\{O_\lambda\}_{\lambda \in \Lambda}$ such that
+    \[
+        F \subseteq O_\lambda \subseteq \overline{O_\lambda} \subseteq U \quad \forall \lambda \in \Lambda
+    \]       
+\end{lem}
+\begin{proof}
+    Consider $\Lambda := \left\{ \frac{m}{2^n} : m, n \in \N, 1 \leq m \leq 2^n - 1 \right\} $.
+    Clearly, $\Lambda$ is dense in $(0, 1)$.
+    Let
+    \[
+        \Lambda_n := \left\{ \frac{m}{2^n} : m \in \N, 1 \leq m \leq 2^n - 1 \right\} 
+        \Rightarrow \Lambda = \bigcup_{n=1}^\infty \Lambda_n
+    \]   
+    We will define $\{O_\lambda\}_{\lambda \in \Lambda}$ inductively. Since $X$ is normal,
+    by nested neighbourhood property, let $O_{\frac{1}{2}}$ be s.t.
+    \[
+        F \subseteq O_\frac{1}{2} \subseteq \overline{O_\frac{1}{2}} \subseteq U
+    \]    
+    We now define $O_\frac{1}{4}, O_\frac{3}{4}$ by 
+    \[
+        F \subseteq O_\frac{1}{4} \subseteq \overline{O_\frac{1}{4}} \subseteq O_\frac{1}{2}
+        \subseteq \overline{O_\frac{1}{2} } \subseteq O_\frac{3}{4} \subseteq \overline{O_\frac{3}{4}}
+        \subseteq U.
+    \]  
+    We proceed inductively to build $\{O_\lambda\}_{\lambda \in \Lambda}$, which are necessarily
+    normally ascending.
+\end{proof}
+
+\begin{lem}
+    Let $(X, \mathcal{T})$ be a topological space s.t $\exists \Lambda \subseteq (0, 1)$ and a 
+    normally ascending collection of open sets $\{O_\lambda\}_{\lambda \in \Lambda}$.  
+    Let \[
+        f(x) := \begin{cases}
+            1 &\text{if } x \in (\bigcup_{\lambda \in \Lambda}O_\lambda)^c \\
+            \inf \left\{ \lambda \in \Lambda : x \in O_\lambda \right\} & \text{if } x \in 
+            \bigcup_{\lambda \in \Lambda} O_\lambda \\
+        \end{cases}
+    \] 
+    Then $0 \leq f(x) \leq 1$ and $f$ is continuous.  
+\end{lem}
+
+\begin{proof}
+    Notice $0 \leq f \leq 1$ because $\Lambda \subseteq (0, 1)$.
+    Observe \[
+    \mathcal{D} := \left\{ (-\infty, c), (d, \infty) : c, d \in \R \right\} 
+    \]
+    \[
+        \mathcal{B} := \left\{ \text{finite intersections of elements of } \mathcal{D} \right\} 
+    \]  
+    is a base for $(\R, \mathcal{T}_{\left| . \right| })$.
+    So,
+    \[
+        \mathcal{T}_{\left| . \right| } = \left\{ \emptyset, X, \bigcup B : B \in \mathcal{B} \right\} 
+    \] 
+    So if $f^{-1}(-\infty, c)$ and $f^{-1}(d, \infty)$ are open, then $\forall O \subseteq \R$ open,
+    $f^{-1}(O)$ is open.\footnote{because it is just finite intersections and arbitrary unions}    
+    \newline \noindent \textbf{Claim:} $f^{-1}(-\infty, c)$ and $f^{-1}(d, \infty)$ are open 
+    $\forall c,d \in \R$.
+    \newline \noindent $f(x) < c$ iff $x \in O_\lambda $ for $\lambda < c$ iff $x \in 
+    \bigcup_{\lambda < c} O_\lambda$. $f^{-1}((-\infty, c)) = \bigcup_{\lambda < c} O_\lambda$ is open.
+    
+    Similarly, $f(x) > d$ iff $x \notin O_\lambda$ for some $\lambda > d$ iff $
+    x \notin \overline{O}_{\lambda - \epsilon}$ for some $\lambda - \epsilon > d$ iff
+    $x \in \bigcup_{\lambda > d} (\overline{O}_\lambda)^c$.
+    So, $f^{-1}(d, \infty) = \bigcup_{\lambda > d} (\overline{O}_\lambda)^c$ is open.
+    So, by prior argument, $f$ is continuous. \qedhere            
+\end{proof}
+
+\begin{proof}[Proof of Urysohn's Lemma]
+    Let $(X, \mathcal{T})$ be normal, $A, B \subseteq X$ closed and disjoint. Consider 
+    $A \subseteq B^c $ open. By prior lemma, $\exists \Lambda \subseteq (0, 1)$ dense and 
+    $\left\{ O_\lambda \right\}_{\lambda \in \Lambda}$ normally ascending open sets s.t.
+    \[
+        A \subseteq O_\lambda \subseteq \overline{O_\lambda} \subseteq B^c.
+    \]
+    Let $f$ be as in the last lemma, so $0 \leq f \leq 1$ and $f$ is continuous. 
+    If $x \in B$, $\bigcup_{\lambda \in \Lambda} O_\lambda \subseteq B^c \Rightarrow B \subseteq 
+    (\bigcup_{\lambda \in \Lambda} O_\lambda)^c \Rightarrow f(x) = 1$. 
+    Similarly, if $x \in A$, $x \in O_\lambda \; \forall l\lambda \in \Lambda$, so 
+    $f(x) = \inf \left\{ \lambda \in \Lambda \right\} = 0$. \qedhere  
+\end{proof}
+
 
 
 % ---------------------------------------------------------

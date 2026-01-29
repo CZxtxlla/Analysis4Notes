@@ -231,12 +231,16 @@
     fonttitle=\bfseries\color{black}
 }
 
-% --- GOAL/QUESTION/FACT BOX ---
+% --- UPDATED GOAL/QUESTION/FACT/MOTIVATION BOX (Uniform Blue) ---
 \newtcolorbox{goal}[1][goal]{
     hayekstyle,
     colframe=goalBlue,
     colback=goalBack,
-    title={\ifstrequal{#1}{question}{Question}{\ifstrequal{#1}{fact}{Fact}{Goal}}},
+    title={%
+        \ifstrequal{#1}{question}{Question}{%
+        \ifstrequal{#1}{fact}{Fact}{%
+        \ifstrequal{#1}{motivation}{Motivation}{Goal}}}%
+    },
     fonttitle=\bfseries\color{goalBlue}
 }
 
