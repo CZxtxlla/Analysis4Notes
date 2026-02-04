@@ -1090,8 +1090,8 @@ what plays the role of balls?
             \subseteq \mathcal{B}.
         \]
         Since $U = \cup B$, this means $\mathcal{B}_x \neq \emptyset$. So $U$ is
-        a neighbourhood of $x$, and $\exists B \in \mathcal{B}_x$ such that $B \subseteq U$.
-        $\Rightarrow \mathcal{B}_X$ is a neighbourhood base at $x$. Doing that $\forall x \in X$,
+        a neighbourhood of $x$, and $\exists B \in \mathcal{B}_x$ such that $B \subseteq U$
+        $\Rightarrow \mathcal{B}_x$ is a neighbourhood base at $x$. Doing that $\forall x \in X$,
         we get a $\mathcal{B}$ that is a base for $\mathcal{T}$. \qedhere
     \end{description}
 \end{proof}
@@ -1234,7 +1234,7 @@ $\mathcal{E} \subseteq \mathcal{P}(X)$ be a collection of sets. Then
     Let $E \subseteq X$.
     \begin{enumerate}
         \item $\overline{E}$ is closed;
-        \item $\overline{E}$ is the smallest closed set containing $E$, i.e. if $ \exists F$ closed
+        \item $\overline{E}$ is the smallest closed set containing $E$, i.e. if $ \forall F$ closed
         s.t. $E \subseteq F \Rightarrow \overline{E} \subseteq F$;
         \item $E$ is open iff $E^c$ is closed.     
     \end{enumerate} 
@@ -1376,13 +1376,13 @@ $\mathcal{E} \subseteq \mathcal{P}(X)$ be a collection of sets. Then
             Let $x_i \in B_i \cap E$. Then, $\forall$ neighbourhood $U_x$ of $x$, $\exists B_J \in \mathcal{B}_x$ s.t. $B_J \subseteq U_x$. 
             But since $\left\{ B_j \right\}$ are nested, $\forall j \geq J$, 
             \[
-                U_x \supseteq B_j \cap U_x = B_j \supseteq B_i \cap E \supseteq \left\{ x_j \right\} 
+                U_x \supseteq B_j \cap U_x = B_j \supseteq B_j \cap E \supseteq \left\{ x_j \right\} 
             \]           
             $\Rightarrow x_j \to x$ in $\mathcal{T}$.
 
         \item[($\Leftarrow$)] 
             If $\exists \{x_{j}\}_{j=1}^{\infty} \subseteq E$ s.t. $x_j \to x$ in $\mathcal{T}$, suppose $x \notin \overline{E}$. 
-            Then $x \in \overline{E}^c$ and $\overline{E}^c$ open, so $\overline{E}^c$ is a neighbourhood of $x$ s.t. $\{x_{j}\}_{j=1}^{\infty} \cap \overline{E}^c \neq \emptyset$. 
+            Then $x \in \overline{E}^c$ and $\overline{E}^c$ open, so $\overline{E}^c$ is a neighbourhood of $x$ s.t. $\{x_{j}\}_{j=1}^{\infty} \cap \overline{E}^c = \emptyset$. 
             Therefore $x_j \not\to x$ in $\mathcal{T}$. \qedhere
     \end{description}
 \end{proof}
@@ -1794,10 +1794,10 @@ In metric spaces, $K $ compact $\Rightarrow$ $K$ is closed and bounded.
 \begin{exmp}
     $\Lambda$ infinite.\footnote{Could even be uncountable} Let $(X_\lambda, \mathcal{T}_\lambda)$ 
     be a topological space. Let $X = \prod_{\lambda \in \Lambda} X_\lambda$ and let $
-    \pi_\lambda : X \to X_\lambda$ be the projection map. Consider the product topolgoy on $X$,
+    \pi_\lambda : X \to X_\lambda$ be the projection map. Consider the product topology on $X$,
     and a base is given by
     \[
-        \mathcal{B} = \left\{ \bigcap_{j = 1}^n \pi_{\lambda_i}^{-1} (O_{\lambda_i}) :
+        \mathcal{B} = \left\{ \bigcap_{i = 1}^n \pi_{\lambda_i}^{-1} (O_{\lambda_i}) :
         O_{\lambda_i} \in \mathcal{T}_{\lambda_i}, n \in \N \right\}
     \]  
     which equals
@@ -1933,6 +1933,213 @@ In metric spaces, $K $ compact $\Rightarrow$ $K$ is closed and bounded.
     Similarly, if $x \in A$, $x \in O_\lambda \; \forall l\lambda \in \Lambda$, so 
     $f(x) = \inf \left\{ \lambda \in \Lambda \right\} = 0$. \qedhere  
 \end{proof}
+
+
+\subsection{Connected Topological Spaces} 
+
+\begin{defn}[Separating $X$  by open sets]
+    Two (non-empty) open sets $(O_1, O_2)$ \newword{separate} $(X, \mathcal{T})$ if 
+    $X = O_1 \cup O_2$ and $O_1 \cap O_2 = \emptyset$    
+\end{defn}
+
+\begin{defn}[connected]
+    $(X, \mathcal{T})$ is \newword{connected} if $X$ cannot be separated by non-empty open sets.
+\end{defn}
+
+\begin{rem}
+    On $(X, \mathcal{T})$, if $(O_1, O_2)$ open and separate $X$, then $O_1$ and $O_2$ are also closed.
+    \footnote{b/c $X = O_1 \cup O_2$} So $(X, \mathcal{T})$ is connected iff the only "clopen" sets of
+    $X$ are $X, \emptyset$.  
+    
+    As a consequence of this, we also have that if $(O_1, O_2)$ open and separate $X$, 
+    \[
+        O_1 \cap O_2 = \emptyset \Rightarrow O_1 \cap \overline{O_2} = \overline{O_1} \cap O_2 = \emptyset
+    \]   
+\end{rem}
+
+\begin{rem}
+    Recall
+    \[
+        \mathcal{T}_E := \left\{ E \cap U : U \in \mathcal{T} \right\} 
+    \] 
+    So $E \subseteq X$ is connected if $\not{\exists}$ open, non-empty sets $(O_1, O_2)$ s.t. 
+    $O_1 \cap E \neq \emptyset$, $O_2 \cap E \neq \emptyset$, $E \subseteq O_1 \cup O_2$, 
+    $E \cap O_1 \cap O_2 = \emptyset$, $E = (E \cap O_1) \cup (E \cap O_2)$ and 
+    $(E \cap O_1) \cap (E \cap O_2) = \emptyset$         
+\end{rem}
+\marginnote{Connectedness works best with "contradiction". It also works well with continuous maps.}
+\begin{prop}
+    Let $f : X \to Y$ where $(X, \mathcal{T})$ is connected and $f$ is continuous w.r.t. $(X, \mathcal{T})$
+    and $(Y, \mathcal{S})$. Then $f(X)$ is connected in $(Y, \mathcal{S})$.       
+\end{prop}
+\begin{proof}
+    Suppose $f(X)$ is not connected. Then $\exists (O_1, O_2)$ non-empty open sets in $Y$ s.t.
+    $f(X) \cap O_1 \neq \emptyset, f(X) \cap O_2 \neq \emptyset, f(X) \subseteq O_1 \cup O_2, f(X) \cap
+    O_1 \cap O_2 = \emptyset$.
+    Since $f$ is continuous, $f^{-1}(O_1)$ and $f^{-1}(O_2)$ are open in $(X, \mathcal{T})$, and they are
+    non-empty. 
+
+    So we have $X \cap f^{-1}(O_1) \neq \emptyset$, $X \cap f^{-1}(O_2) \neq \emptyset$, $
+    X \subseteq f^{-1}(O_1) \cup f^{-1}(O_2)$ and $X \cap f^{-1}(O_1) \cap f^{-1}(O_2) = \emptyset$.
+    $\Rightarrow$ $(X, \mathcal{T})$ is not connected. \qedhere    
+\end{proof}
+
+\begin{prop}
+    On $\R$, for $E \subseteq \R$, TFAE:
+    \begin{enumerate}
+        \item $E$ is connected
+        \item $E$  is an interval
+        \item $E$  is convex
+    \end{enumerate}  
+\end{prop}
+
+\begin{defn}[Intermediate Value Property (IVP)]
+    $(X, \mathcal{T})$ has the \newword{intermediate value property} provided $\forall f \in C(X)$, 
+    then $f(X) \subseteq \R$   
+\end{defn}
+
+\begin{prop}
+    $X$ has the IVP iff $X$ is connected.  
+\end{prop}
+
+\begin{proof} \leavevmode
+    \begin{description}
+        \item[($\Leftarrow$)] By last result, $X$ is connected, $f \in C(X) \Rightarrow f(X)$ is connected 
+        $\Rightarrow f(X) $ an interval.
+        \item[($\Rightarrow$)] Suppose $X$ not connected. Then $\exists (O_1, O_2)$ open, non-empty 
+        and disjoint s.t. $X = O_1 \cup O_2$. Let $f : X \to \R$ be s.t.
+        \[
+            f(x) = \mathcal{X}_{O_2}(x) = \begin{cases}
+                1 & x \in O_2 \\
+                0 & x \in O_1 \\
+            \end{cases}
+        \]      
+        $\forall A \subseteq \R$,
+        
+        \[
+            f^{-1}(A) = \begin{cases}
+                \emptyset & \{0, 1\} \notin A \\
+                O_1 & 0 \in A, 1 \notin A \\
+                O_2 & 1 \in A, 0 \notin A \\
+                X & \{0, 1\} \in A \\
+            \end{cases}
+        \] 
+        Note these are all open sets, so $f^{-1}(A)$ is open $\forall A \subseteq \R$ open, therefore
+        $f$ is continuous. But $f(X) = \{0, 1\}$ is not an interval, so $X$ does not have the IVP. \qedhere  
+    \end{description}
+     
+\end{proof}
+
+\begin{defn} [path-connectedness/arcwise connectedness]
+    $X$ is \newword{path-connected} if $\forall x, y \in X$, $\exists f : [0, 1] \to X$ continuous
+    s.t. $f(0) = x, f(1) = y$    
+\end{defn}
+
+\begin{prop}
+    $X$ path-connected $\Rightarrow$ $X$ connected.
+\end{prop}
+
+\begin{proof}
+    Suppose $X$ is not connected. Then $\exists (O_1, O_2)$ non-empty, open, disjoint s.t.
+    $X = O_1 \cup O_2$. Suppose $\exists f : [0, 1] \to X$ s.t. $f$ is continuous, and 
+    $f(0) = x, f(1) = y$. So $f^{-1}(O_1)$ and $f^{-1}(O_2)$ open, non-empty, disjoint and
+    $[f^{-1}(O_1) \cup f^{-1}(O_2) = f^{-1}(X) = [0, 1]$. Thus $[0, 1]$ is not connected, contradiction. \qedhere       
+\end{proof}
+
+\subsection{Stone-Weierstrass Theorem}
+\begin{goal}
+    We want to find sufficient conditions for a collection of sets $\mathcal{A} \subseteq C(X)$ to be 
+    dense in $(C(X), \| . \|_{\infty} )$  
+\end{goal}
+
+Stone-Weierstrass is a generalization of the following result, which will be proved in part 3 of the course.
+
+\begin{thm}[Weierstrass Approximation Theorem]
+    Let $[a, b] \subseteq \R$ and let $f \in C([a, b])$. Then $\forall \epsilon > 0$, 
+    $\exists $ a polynomial $p(x)$ s.t. $\| p - f \|_{\infty} = \sup_{x \in [a,b]} |p(x) - f(x)| < \epsilon$.     
+\end{thm}
+
+In the above, $\mathcal{A} = \{ \text{polynomials} \}$, so $\mathcal{A}$ is dense in $C([a, b])$.
+Stone Weierstrass is for the case when $X$ is compact and Hausdorff $\Rightarrow X$ is normal.
+
+\begin{defn}[algebra of functions, separating points]
+    A collection $\mathcal{A} \subseteq C(X)$ is an \newword{algebra} if 
+    \begin{itemize}
+        \item $\mathcal{A}$ is closed under linear combinations;
+        \item $\mathcal{A}$ is closed under products ($f, g \in \mathcal{A} \Rightarrow fg \in \mathcal{A}$).  
+    \end{itemize} 
+
+    A collection $\mathcal{A} \subseteq C(X)$ \newword{separates points} if $\forall x, y \in X$, $x \neq y$, 
+    $\exists f \in \mathcal{A}$ s.t. $f(x) \neq f(y)$. \footnote{Separating points really only makes sense in $X$ is Hausdorff}
+\end{defn}
+
+
+\begin{exmp}
+    If $X = [a, b]$, then $\mathcal{A} = \{ \text{polys} \}$ is an algebra that separates points.
+    \begin{itemize}
+        \item $\mathcal{A}$ is a linear vector space;
+        \item Product of polynomials is a polynomial;
+        \item Let $f(x) = x \in \mathcal{A}$, then $ x \neq y \Rightarrow f(x) \neq f(y)$.   
+    \end{itemize}
+\end{exmp}
+
+\begin{rem}
+    If $X$ is compact and Hausdorff, how do we generally separate points? Use Urysohn's lemma.
+    
+    Let $\{x\}, \{y \}$ closed, $x \neq y \Rightarrow$ disjoint.
+    By Urysohn's lemma, $\exists f \in C(X)$ s.t. $f(x) = 0$, $f(y) = 1$. 
+    
+    So, $C(X)$ is an algebra that separates points. (in any compact Hausdorff space).
+\end{rem}
+
+\begin{thm} [Stone-Weierstrass]
+    Let $X$ be compact and Hausdorff.\footnote{Hausdorff only used in the only if part} 
+    Suppose $\mathcal{A} \subseteq C(X)$ is an algebra that separates 
+    points and contains the constant functions. Then $\mathcal{A}$ is dense in $(C(X), \| . \|_{\infty} )$.    
+\end{thm}
+
+\begin{rem}
+    If $\mathcal{A} = C(X)$ the result holds true.  
+\end{rem}
+
+\begin{rem}
+    In fact, the theorem is an iff.
+\end{rem}
+
+\begin{proof} [Proof Idea]
+Fix $f \in C(X)$. Then $f(X)$ is compact in $\R$, so $f(X)$ is bounded. WLOG assume $0 \leq f \leq 1$.
+We decompose
+\[
+    X = \bigcup_{k = 1}^n \left\{ x : \frac{k-1}{n} \leq f(x) \leq \frac{k}{n} \right\} 
+\]       
+Suppose $\forall 1 \leq k \leq n$, $\exists g_k \in \mathcal{A}$ s.t. 
+\[
+    g_k(x) = \begin{cases}
+        1 & \text{if } f(x) \geq \frac{k}{n} \\
+        0 & \text{if } f(x) \leq \frac{k-1}{n} \\ 
+    \end{cases}
+    = \mathcal{X}_{ \left\{ f \geq \frac{k}{n} \right\} } (x)
+\]   
+We will consider \[g(x) = \frac{1}{n}\sum_{k=1}^n g_k(x)\]
+So if $x \in X$, $\frac{\overline{k} -1}{n} \leq f(x) \leq \frac{\overline{k}}{n}$, then if 
+$\overline{k} - 1 \geq k \Rightarrow g_k(x) = 1$, $\overline{k} \leq k - 1 \Rightarrow g_k(x) = 0$.
+\[
+    \Rightarrow g_k(x) = \begin{cases}
+        1 & k \leq \overline{k} - 1 \\
+        0 & k \geq \overline{k} + 1 \\
+    \end{cases}
+\]      
+\[ \Rightarrow g(x) = \frac{1}{n}\sum_{k=1}^{n} g_k(x) \approx \frac{\overline{k} - 1}{n} \approx f(x) \]
+
+This is how we'll build $g \in \mathcal{A}$ s.t. $g \approx f$.
+The hard part is showing $g_k \in \mathcal{A}$.   
+\end{proof}
+
+
+
+
+
+
 
 
 
