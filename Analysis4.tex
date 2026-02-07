@@ -1394,7 +1394,7 @@ While $(X, \mathcal{T})$ allows us to consider a very general framework, weird s
 because of it, for example: 
 
 \begin{exmp}
-    Let $\mathcal{T} = \left\{ \emptyset, X \right\} $. So the only non-empty neighbourhood is $X$,
+    Let $\mathcal{T} = \left\{ \emptyset, X \right\}$. So the only non-empty neighbourhood is $X$,
     so any sequence $\{x_{n}\}_{n=1}^{\infty} \subseteq X$ converges to any point $x \in X$.
    
 \end{exmp} 
@@ -1403,7 +1403,7 @@ because of it, for example:
 
 \begin{defn}[neighbourhood of a set, Separating sets by disjoint neighbourhoods]
     Let $(X, \mathcal{T})$ be a topological space, and $K, A, B \subseteq X$. A neighbourhood of $K$
-    is an open set $U$ s.t. $K \subseteq U$. We say $A, B$ can be separated by disjoint neighbourhoods 
+    is an open set $U$ s.t. $K \subseteq U$. We say $A, B$ can be \newword{separated by disjoint neighbourhoods} 
     if $\exists U \supseteq A, V \supseteq B$ neighbourhoods s.t. $U \cap V = \emptyset$.
 \end{defn}
 
@@ -1557,38 +1557,42 @@ because of it, for example:
 \end{cor}
 
 \begin{proof}
-    By last result, just need to prove the nested neighbourhood property. Let $F \subseteq X$ closed,
-    $U \subseteq X$ open s.t. $F \subseteq U \Rightarrow F \cap U^c = \emptyset$, $U^c$ closed.
-    Let \[
-    dist(F, U^c) = \inf_{x \in F} dist(x, U^c) = \inf_{x \in F} \inf_{y \in U^c} p(x, y) 
+    By last result, just need to prove the nested neighbourhood property. Let $F \subseteq X$ closed, 
+    $U \subseteq X$ open s.t. $F \subseteq U \implies F \cap U^c = \emptyset$, with $U^c$ closed.
+    Let 
+    \[
+        \dist(F, U^c) = \inf_{x \in F} \dist(x, U^c) = \inf_{x \in F} \inf_{y \in U^c} p(x, y).
     \]
     
     \noindent Observe, 
     \[
-        dist(x, U^c) = \begin{cases}
+        \dist(x, U^c) = \begin{cases}
             0 & x \in U^c \\
-            > 0 & x \notin U^c
+            > 0 & x \notin U^c.
         \end{cases}
     \] 
 
-    \noindent For $x \notin U^c$, $\forall \epsilon > 0, \exists x' \in U^c$ s.t. $dist(x, U^c) + \epsilon \geq
-    p(x, x')$. 
+    \noindent For $x \notin U^c$, $\forall \epsilon > 0$, $\exists x' \in U^c$ s.t. $\dist(x, U^c) + 
+    \frac{\epsilon}{2} \geq p(x, x')$. 
     
-    So, $\forall y$ s.t. $p(x, y) < \epsilon$, 
+    So, $\forall y$ s.t. $p(x, y) < \frac{\epsilon}{2}$, 
     \[
-        dist(y, U^c) - dist(x, U^c) \leq p(y, x') - p(x, x') - \epsilon \leq p(y, x) - 
-        \epsilon \leq \epsilon
+        \dist(y, U^c) - \dist(x, U^c) \leq p(y, x') - p(x, x') + \frac{\epsilon}{2} \leq p(y, x) + 
+        \frac{\epsilon}{2} < \epsilon.
     \]  
     
-    A symmetric argument gets that $x \mapsto dist(x, U^c)$ is continuous. 
+    A symmetric argument gets that $x \mapsto \dist(x, U^c)$ is continuous. 
 
-    \noindent Since $dist(x, U^c) \geq 0$, $\inf_{x \in F} dist(x, U^c) \geq 0$.
-    if $\inf_{x \in F} dist(x, U^c) = 0$, then by continuity and $F$ closed, $F \cap U^c \neq \emptyset$.
-    $\Rightarrow dist(F, U^c) = \epsilon > 0$. Let $O := \bigcup_{x \in F} B^p(x, \frac{\epsilon}{2})$
-    and $\overline{O} = \overline{\bigcup_{x \in F} B^p(x, \frac{\epsilon}{2})} = 
-    \bigcup_{x \in F} \overline{B^p(x, \frac{\epsilon}{2})}$ $\Rightarrow F \subseteq O \subseteq
-    \overline{O} \subseteq U$. \qedhere
-
+    \noindent Since $\dist(x, U^c) \geq 0$, we have $\inf_{x \in F} \dist(x, U^c) \geq 0$.
+    If $\inf_{x \in F} \dist(x, U^c) = 0$, then by continuity and $F$ closed, $F \cap U^c \neq \emptyset$, 
+    which is not possible. Therefore, $\dist(F, U^c) = \epsilon > 0$. 
+    
+    Let $O := \bigcup_{x \in F} B^p\left(x, \frac{\epsilon}{2}\right)$. Then:
+    \begin{align*}
+        \overline{O} &= \overline{\bigcup_{x \in F} B^p\left(x, \frac{\epsilon}{2}\right)} 
+                     = \bigcup_{x \in F} \overline{B^p\left(x, \frac{\epsilon}{2}\right)} \\
+        \implies F &\subseteq O \subseteq \overline{O} \subseteq U. \qedhere
+    \end{align*}
 \end{proof}
 
  \subsection{Compact Topological Spaces}
@@ -1812,7 +1816,7 @@ In metric spaces, $K $ compact $\Rightarrow$ $K$ is closed and bounded.
 \begin{goal}[motivation]
     Let $(X, p)$ be a metric space. Let $A, B$ closed and disjoint. Let 
     \[
-        f(x) := \frac{dist(x, A)}{dist(x, A) + dist(x, B)}
+        f(x) := \frac{\dist(x, A)}{\dist(x, A) + \dist(x, B)}
     \]   
     Note,
     \[
@@ -1821,7 +1825,7 @@ In metric spaces, $K $ compact $\Rightarrow$ $K$ is closed and bounded.
             1 &x \in B \\
         \end{cases}
     \] 
-    $0 \leq f(x) \leq 1$. $f$ is continuous because $dist(., A)$ and $dist(., B)$ are
+    $0 \leq f(x) \leq 1$. $f$ is continuous because $\dist(., A)$ and $\dist(., B)$ are
     continuous, and denominator is non-zero. Urysohn's lemma does this on any normal topological space.   
 \end{goal}
 
@@ -2095,7 +2099,10 @@ Stone Weierstrass is for the case when $X$ is compact and Hausdorff $\Rightarrow
 \begin{thm} [Stone-Weierstrass]
     Let $X$ be compact and Hausdorff.\footnote{Hausdorff only used in the only if part} 
     Suppose $\mathcal{A} \subseteq C(X)$ is an algebra that separates 
-    points and contains the constant functions. Then $\mathcal{A}$ is dense in $(C(X), \| . \|_{\infty} )$.    
+    points and contains the constant functions. Then $\mathcal{A}$ is dense in $(C(X), \| . \|_{\infty} )$.
+    \footnote{This generalizes Weierstrass approximation theorem because if $X = [a, b]$, then 
+    $\mathcal{A} = \{ \text{polys} \}$ is an algebra that separates points and contains the constant 
+    functions.}
 \end{thm}
 
 \begin{rem}
@@ -2103,7 +2110,7 @@ Stone Weierstrass is for the case when $X$ is compact and Hausdorff $\Rightarrow
 \end{rem}
 
 \begin{rem}
-    In fact, the theorem is an iff.
+    In fact, the theorem is an iff. \footnote{The "only if" part is not important for the course, but it is a nice exercise.}
 \end{rem}
 
 \begin{proof} [Proof Idea]
@@ -2135,9 +2142,202 @@ This is how we'll build $g \in \mathcal{A}$ s.t. $g \approx f$.
 The hard part is showing $g_k \in \mathcal{A}$.   
 \end{proof}
 
+\begin{lem}
+    Let $X$ be compact and Hausdorff. Suppose $\mathcal{A} \subseteq C(X)$ is an algebra that separates
+    points and contains constant functions. Then $\forall F \subseteq X$ closed, $x_o \in F^c$,
+    $\exists$ a neighbourhood $U$ of $x_0$ s.t. $U \cap F = \emptyset$, and $\forall \epsilon > 0$,
+    $\exists h \in \mathcal{A}$ s.t. $h < \epsilon$ on $U$, $h > 1 - \epsilon$ on $F$, 
+    and $0 \leq h \leq 1$ on $X$.              
+\end{lem}
+
+\begin{rem}
+    $U$ is independent of $\epsilon$.  
+\end{rem}
+
+\begin{proof} \leavevmode
+    
+    \noindent \textbf{Claim:} $\forall y \in F$, $\exists g_y \in \mathcal{A}$ s.t. $g_y(x_0) = 0$, $g_y(y) >0$, 
+    $0 \leq g_y \leq 1$ on $X$.
+    
+    Since $y \in F$, $x_0 \in F^c$, and $\mathcal{A}$ separates points,
+    $\exists f \in \mathcal{A}$ s.t. $f(y) \neq f(x_0)$\footnote{$f$ is not constant} 
+    Let 
+    \[
+        g_y(x) := \left[\frac{f(x) - f(x_0)}{\| f - f(x_0) \|_{\infty} }\right]^2
+    \] 
+    Since $\mathcal{A}$ is a linear subspace containing constant functions, $f(x) - f(x_0) \in \mathcal{A}$,
+    and since $\mathcal{A}$ is an algebra, $g_y \in \mathcal{A}$. $g_y$ satisfies the properties of the claim. 
+    Since $g_y \in C(X)$, and $g_y(y) > 0$, $\exists $ a neighbourhood $O_y$ of $y$ s.t. 
+    $g_y > 0$ on $O_y$. $g_y(O_y) \subseteq B^p(g_y(y), \frac{g_y(y)}{2})$      
+    
+    Doing this for every $y \in F$, we get \[F \subseteq \bigcup_{y \in F} O_y\]
+
+    Since $F \subseteq X$ is closed, and $X$ is compact, $F$ is compact so $\exists n $ s.t. 
+    \[
+        F \subseteq \bigcup_{k=1}^{n} O_{y_k}
+    \]     
+
+    Let 
+    \[
+        g(x) := \frac{1}{n}\sum_{k=1}^{n} g_{y_k}(x)
+    \]   
+    $g \in \mathcal{A}$ because it is a linear combination of elements of $\mathcal{A}$.
+    Then $g(x_0) = 0$ , $g > 0 $ on $F$, and $0 \leq g \leq 1$ on $X$.
+    
+    Since $F$ is compact and $g$ is continuous, $\exists \eta \in (0, 1)$ s.t. $g \geq \eta$ on $F$.
+    Since $g$ is continuous at $x_0$ and $g(x_0) = 0$, $\exists$ a neighbourhood $U$ of $x_0$ s.t.
+    $0 \leq g|_U < \frac{\eta}{2} \Rightarrow U \cap F = \emptyset$. So we have $g \in \mathcal{A}$ s.t.
+    $g < \frac{\eta}{2}$ on $U$, $g > \eta$ on $F$, $0 \leq g \leq 1$ on $X$.
+    
+    To finish the proof, $\forall \epsilon > 0$, we need to map $(0, \frac{\eta}{2}) \to (0, \epsilon)$
+    and $(\eta, 1) \to (1 - \epsilon, 1)$. We will use Weierstrass approximation.
+    Let $\ell : [0, 1] \to \R$ be piecewise linear. (Look in notes for graph)
+
+    Since $\ell \in C([0, 1])$, by Weierstrass approx, $\exists $ poly p s.t. $\| p - \ell \|_{\infty} <
+    \frac{\epsilon}{4}$. Therefore, $ p|_{[0, \frac{\eta}{2}]} < \epsilon$, $1 - \epsilon \leq
+    p|_{[\eta, 1]} \leq 1$ and $0 \leq p \leq 1$.
+    
+    We now let $h(x) := (p o g)(x)$. Since $p $ is a poly, we get $h \in \mathcal{A}$ and 
+    by construction, $U \cap F \neq \emptyset$ s.t. $h < \epsilon$ on $U$, $h > 1 - \epsilon$ on $F$,
+    $0 \leq h \leq 1$ on $X$. \qedhere        
+\end{proof}
+
+\begin{lem}
+    Let $X$ be compact and Hausdorff. $\mathcal{A} \subseteq C(X)$ as in the previous lemma. Then,
+    $\forall A, B \subseteq X$ closed, disjoint, $\forall \epsilon > 0$, $\exists h \in \mathcal{A}$
+    s.t. $h < \epsilon$ on $A$, $h > 1 - \epsilon$ on $B$, $0 \leq h \leq 1$ on $X$.          
+\end{lem}
+\begin{proof}
+    By last lemma, let $B = F$, and $\forall x \in A$, $\exists$ a neighbourhood $U_x$ of $x$ s.t. 
+    $U_x \cap B = \emptyset$, and $\forall \epsilon > 0 $, $\exists h \in \mathcal{A}$ s.t.
+    $h < \epsilon$ on $U_x$, $h > 1 - \epsilon$ on $B$, and $0 \leq h \leq 1$ on $X$.
+    So, $A \subseteq \bigcup_{x \in A} U_x$, and since $A$ is closed, $A$ is compact.
+    
+    So $\exists N$ s.t. $A \subseteq \bigcup_{i = 1}^N U_{x_i}$ Fix $\epsilon > 0$, and let 
+    $\epsilon_0 < \epsilon$ s.t. $(1 - \frac{\epsilon_0}{N})^N > 1 - \epsilon \Rightarrow 
+    (\frac{\epsilon_0}{N} < \epsilon)$. For every $1 \leq i \leq N$, let $h_i \in \mathcal{A}$ s.t.
+    $h_1 \leq \frac{\epsilon_0}{N}$ on $U_{x_1}$, $H_i > 1 - \frac{\epsilon_0}{N}$ on $B$, 
+    $0 \leq h_i \leq 1$ on $X$. \footnote{This is possible becaise $U_{x_i}$ independent of "$\epsilon$"}
+    
+    Define
+    \[
+        h(x) = \prod_{i = 1}^N h_i(x)
+    \]  
+    $h \in \mathcal{A}$, $0 \leq h \leq 1$ on $X$, and since $h_i > 1 \frac{\epsilon_0}{N}$ on $B$,
+    $h > (1 - \frac{\epsilon_0}{N})^N > 1 - \epsilon$ on $B$.
+    
+    Finally, $\forall x \in A$, $x \in U_{x_i}$ for some $1 \leq i \leq N$, so $h_i(x) < \frac{\epsilon_0}{N}
+    < \epsilon$, and $h_j(x) \leq 1 \quad \forall j \neq i$, so $h(x) < \epsilon$ on $A$. \qedhere       
+\end{proof}
 
 
+\begin{proof}[Proof of Stone-Weierstrass]
+    Let $f \in C(X)$. Let 
+    \[
+        \tilde{f}(x) := \frac{f(x) + \| f \|_{\infty} }{\| f + \| f \|_{\infty}  \|_{\infty} }
+    \]
+    Then $\tilde{f} \in C(X)$ and $0 \leq \tilde{f} \leq 1$. 
+    Consider the statement: 
+    \[
+        \forall \epsilon > 0 \; \exists \tilde{g} \in \mathcal{A} \text{ s.t. }
+        |\tilde{f} - \tilde{g}| < \epsilon \tag{*}
+    \]
+    If (*) holds for $\tilde{f}$, then by the properties of $\mathcal{A}$, $\exists g \in \mathcal{A}$
+    s.t. $\| f - g \|_{\infty} \leq \epsilon$, so $\mathcal{A}$ is dense in $C(X)$. So we prove (*) for $\tilde{f}$.  
+    Fix $n \in \N$ s.t. $\frac{3}{n} < \epsilon$. 
+    Consider a partition $\{ 0, \frac{1}{n}, \frac{2}{n}, \ldots, \frac{n - 1}{n}, 1 \}$ of 
+    $[0, 1]$.
+    
+    For every $1 \leq k \leq n$, let
+    \[
+        A_k := \left\{ x \in X  : \tilde{f}(x) \leq \frac{k - 1}{n} \right\}, \quad
+        B_k := \left\{ x \in X : \tilde{f}(x) > \frac{k}{n} \right\} 
+    \] 
+    Since $\tilde{f} \in C(X)$, $A_k $ and $B_k$ are closed and disjoint. So, by the last lemma,
+    $\exists g_k \in \mathcal{A}$ s.t. $g_k < \frac{1}{n}$ on $A_k$, $g_k > 1 - \frac{1}{n}$ on $B_k$,
+    and $0 \leq g_k \leq 1$ on $X$.
 
+    Let 
+    \[
+        \tilde{g}(x) := \frac{1}{n} \sum_{k = 1}^n g_k(x)
+    \]
+    
+    \noindent \textbf{Claim:} $\| \tilde{f} - \tilde{g} \|_{\infty} < \epsilon$.
+    
+    \noindent Fix $1 \leq \overline{k} \leq n$. If $x \in X$ s.t. 
+    $\tilde{f}(x) \leq \frac{\overline{k}}{n}$, then for $k - 1 \geq \overline{k}$, $x \in A_k$,
+    so
+    \[
+        g_k(x) = \begin{cases}
+            < \frac{1}{n} & \text{if } k - 1 \geq \overline{k} \\
+            \leq 1 & \text{otherwise} \\
+        \end{cases}   
+    \]       
+    $\Rightarrow \tilde{g}(x) = \frac{1}{n}\sum_{k=1}^{n} g_k(x) \leq 
+    \frac{1}{n}[\sum_{k=1}^{\overline{k}}g_k(x) +\sum_{k=\overline{k} + 1}^{n}g_k(x)] $.
+    \[
+        \leq \frac{1}{n} \left[ \overline{k} + \frac{n - \overline{k}}{n} \right] 
+        = \frac{\overline{k}}{n} + \frac{n - \overline{k}}{n^2} \leq \frac{\overline{k} + 1}{n}
+    \]
+    If $x \in X$ s.t. $\tilde{f}(x) \geq \frac{\overline{k} - 1}{n}$, then $\forall k \leq \overline{k} -1$,
+    we have $x \in B_k$, so 
+    \[
+        g_k(x) = \begin{cases}
+            > 1 - \frac{1}{n} & \text{if } k \leq \overline{k} - 1 \\
+            \geq 0 & \text{otherwise}
+        \end{cases}
+    \]   
+
+    Therefore,
+    \[
+        \tilde{g}(x) = \frac{1}{n} \sum_{k=1}^n g_k(x) \geq \frac{1}{n}\sum_{k = 1}^{\overline{k} - 1} g_k(x) \geq \frac{1}{n}(\overline{k} - 1)\left(1 - \frac{1}{n}\right)
+    \]
+    \[
+        > \frac{\overline{k} - 1}{n} - \frac{\overline{k} - 1}{n^2} > 
+        \frac{\overline{k} - 1}{n} - \frac{n - 1}{n^2} > \frac{\overline{k}}{n} - \frac{2}{n}
+    \]
+
+    So if $\frac{\overline{k} - 1}{n} \leq \tilde{f}(x) \leq \frac{\overline{k}}{n}$, then
+    \[
+        \frac{\overline{k}}{n} - \frac{2}{n} \leq \tilde{g}(x) \leq \frac{\overline{k} + 1}{n}
+    \] 
+
+    Therefore, $\| \tilde{f} - \tilde{g} \|_{\infty} < \frac{3}{n} < \epsilon$. \qedhere
+\end{proof}
+
+\noindent In part 3 of the course, we will need a complex version of Stone-Weierstrass, i.e., 
+$f : X \to \mathbb{C}$. So,
+\begin{align*}
+    f(x) &= \real(f) + i\imag(f), \\
+    |f| &= \sqrt{\real(f)^2 + \imag(f)^2}, \\
+    \| f \|_{\infty} &= \sup_{x \in X} |f(x)|.
+\end{align*}
+
+\noindent Complex conjugate $\overline{f(x)} = \real(f) - i\imag(f)$. 
+Note that $f \in C(X, \mathbb{C})$ iff $\real(f), \imag(f) \in C(X, \mathbb{R})$.
+
+\noindent When we define $\mathcal{A}$ as a vector space, it is a vector space over $\mathbb{C}$.
+
+\begin{thm} [Complex Stone-Weierstrass]
+    Let $X$ be compact and Hausdorff. Let $\mathcal{A} \subseteq C(X, \C)$ be an algebra that
+    separates points, contains constant functions, and is closed under complex conjugation. 
+    Then $\mathcal{A}$ is dense in $(C(X, \C), \| . \|_{\infty} )$.  
+    
+\end{thm}
+
+\begin{proof}
+    Since $\real(f) = \frac{f + \overline{f}}{2}$, $\imag(f) = \frac{f - \overline{f}}{2i}$, let
+    \[
+        \mathcal{A}_\R = \left\{ \real|f|, \imag|f| : f \in \mathcal{A} \right\} 
+    \] 
+    Then $\mathcal{A}_\R \subseteq C(X, \R)$ is still an algebra that separates points and contains 
+    constant functions. By real Stone-Weierstrass, $\mathcal{A}_\R$ is dense in 
+    $(C(X, \R), \| . \|_{\infty} )$. Thus $\mathcal{A}$ is dense in $C(X, \C)$ 
+    by definition of the modulus. \qedhere  
+\end{proof}
+
+
+\section{Functional Analysis}
 
 
 
